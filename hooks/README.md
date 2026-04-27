@@ -1,6 +1,6 @@
 # Claude Code Hooks
 
-Eleven production hooks for `~/.claude/settings.json`. Wire them under the `hooks` key:
+Fifteen production hooks for `~/.claude/settings.json`. Wire them under the `hooks` key:
 
 ```json
 {
@@ -18,13 +18,15 @@ Eleven production hooks for `~/.claude/settings.json`. Wire them under the `hook
         "hooks": [
           { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/security-guard.sh" },
           { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/pre-write-secrets-scan.sh" },
-          { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/tdd-guard.sh" }
+          { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/tdd-guard.sh" },
+          { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/gitleaks-guard.sh" }
         ]
       },
       {
         "matcher": "Bash",
         "hooks": [
-          { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/git-safety.sh" }
+          { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/git-safety.sh" },
+          { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/gitleaks-guard.sh" }
         ]
       },
       {
@@ -42,12 +44,20 @@ Eleven production hooks for `~/.claude/settings.json`. Wire them under the `hook
           { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/circuit-breaker.sh" },
           { "type": "command", "command": "node /Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/cost-circuit-breaker.js" }
         ]
+      },
+      {
+        "matcher": "Read|Bash|WebFetch",
+        "hooks": [
+          { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/context-bloat-pruner.sh" }
+        ]
       }
     ],
     "UserPromptSubmit": [
       {
         "hooks": [
-          { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/session-counter.sh" }
+          { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/session-counter.sh" },
+          { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/prompt-completeness-inject.sh" },
+          { "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/quality-gate-inject.sh" }
         ]
       }
     ],
@@ -77,6 +87,10 @@ Eleven production hooks for `~/.claude/settings.json`. Wire them under the `hook
 | `git-safety.sh` | PreToolUse Bash | 2=block | Blocks destructive git ops on main/master/production/prod |
 | `hook-profile-loader.sh` | SessionStart | 0 | Reads `HOOK_PROFILE` env var; writes `~/.claude/.hook-profile-current` |
 | `post-tool-batch.sh` | Stop | 0=advisory | Counts tool calls per turn; warns if >15; appends to `turn-stats.log` |
+| `gitleaks-guard.sh` | PreToolUse Bash/Write | 1=block | Scans staged diff or file content for secrets via gitleaks; logs to `gitleaks-guard.jsonl` |
+| `prompt-completeness-inject.sh` | UserPromptSubmit | 0=advisory | Detects multi-point prompts (≥2 asks) and reminds to use TodoWrite |
+| `quality-gate-inject.sh` | UserPromptSubmit | 0=advisory | Warns when previous assistant turn claimed completion without verification evidence |
+| `context-bloat-pruner.sh` | PostToolUse Read/Bash/WebFetch | 0=advisory | Warns when tool output exceeds 10k/25k chars; logs to `context-bloat.jsonl` |
 
 All logs land in `~/.claude/logs/`.
 
@@ -122,3 +136,102 @@ PROFILE="$(cat "$HOME/.claude/.hook-profile-current" 2>/dev/null || echo standar
 | `GIT_SAFETY_OVERRIDE=1` | `git-safety.sh` | Bypasses block on destructive git ops |
 | `~/.claude/.tdd-guard-disabled` | `tdd-guard.sh` | Silently disables TDD advisory (touch to create) |
 | `~/.claude/.hook-profile-current` | All profile-aware hooks | Written by `hook-profile-loader.sh` on session start |
+| `GITLEAKS_MODE=block\|warn\|off` | `gitleaks-guard.sh` | `block` (default) exits 1 on findings; `warn` advises but allows; `off` disables |
+
+---
+
+## New hooks (2026-04-27)
+
+### `gitleaks-guard.sh`
+
+Fires on PreToolUse for `Bash` (when command contains `git commit` or `git push`) and `Write`. Scans staged git diff or proposed file content via the `gitleaks` binary. Blocks (exit 1) on any finding. If `gitleaks` is absent, prints an install hint (`brew install gitleaks`) and exits 0.
+
+**Env var:** `GITLEAKS_MODE=block|warn|off` (default: `block`)
+**Log:** `~/.claude/logs/gitleaks-guard.jsonl`
+**Default state:** inert if `gitleaks` binary not installed or `GITLEAKS_MODE=off`
+
+Wire to settings.json:
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [{ "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/gitleaks-guard.sh" }]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [{ "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/gitleaks-guard.sh" }]
+      }
+    ]
+  }
+}
+```
+
+---
+
+### `prompt-completeness-inject.sh`
+
+Fires on UserPromptSubmit. Detects multi-point prompts by counting numbered list items, markdown bullets, and EN/CZ connectors (and, then, plus, also, také, pak, navíc, potom). If ≥2 distinct asks are detected, emits an advisory to stderr reminding Claude to use TodoWrite and verify all points before claiming done. Never blocks.
+
+**Env var:** none — respects `HOOK_PROFILE=off` to silence
+**Default state:** active once wired; inert only if `HOOK_PROFILE=off`
+
+Wire to settings.json:
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [{ "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/prompt-completeness-inject.sh" }]
+      }
+    ]
+  }
+}
+```
+
+---
+
+### `quality-gate-inject.sh`
+
+Fires on UserPromptSubmit. Reads the tail of the latest session JSONL from `~/.claude/projects/-Users-lukasdlouhy/` to inspect the previous assistant turn. If it contains a completion claim (done, finished, implemented, fixed, hotovo, implementoval, opravil, dokončil) without an evidence pattern (test passed, verified, browser check, git diff shows, npm/bun/yarn test), emits an advisory. Gracefully no-ops if the session file is missing or format has changed. Never blocks.
+
+**Env var:** none — respects `HOOK_PROFILE=off`
+**Default state:** active once wired
+
+Wire to settings.json:
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [{ "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/quality-gate-inject.sh" }]
+      }
+    ]
+  }
+}
+```
+
+---
+
+### `context-bloat-pruner.sh`
+
+Fires on PostToolUse for `Read`, `Bash`, and `WebFetch`. Measures the character length of the tool response. Emits a warning at >10,000 chars and a strong warning at >25,000 chars, suggesting offset+limit or summarization per `context-hygiene.md`. Logs every result >1,000 chars with timestamp, tool name, and size. Never blocks.
+
+**Env var:** none — respects `HOOK_PROFILE=off`
+**Log:** `~/.claude/logs/context-bloat.jsonl`
+**Default state:** active once wired
+
+Wire to settings.json:
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Read|Bash|WebFetch",
+        "hooks": [{ "type": "command", "command": "/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/hooks/context-bloat-pruner.sh" }]
+      }
+    ]
+  }
+}
+```

@@ -1,0 +1,120 @@
+<!-- Adapted from adamkropacek/claude-ecosystem-adam -->
+# CLAUDE.md — [PROJECT NAME]
+
+> Replace every `[PLACEHOLDER]` before using. Delete this instruction line.
+
+## Project Overview
+
+**What this is:** [One sentence — what the project does and who uses it.]
+**Stack:** [e.g. Next.js 14 + TypeScript + Postgres + Vercel]
+**Repo root:** [YOUR_PATH]/[project-dir]
+
+---
+
+## Source-of-Truth Hierarchy
+
+When instructions conflict, this order wins:
+
+1. This CLAUDE.md (project-scoped)
+2. `~/.claude/CLAUDE.md` (user-global)
+3. `~/Desktop/[YOUR_ECOSYSTEM]/rules/*.md` (cross-project rules)
+4. Inline code comments
+5. Your own judgment
+
+If a rule here contradicts a global rule, the project rule wins for this repo.
+
+---
+
+## Daily Commands
+
+```bash
+# Dev
+[YOUR_DEV_COMMAND]          # e.g. npm run dev / bun dev / python manage.py runserver
+
+# Test
+[YOUR_TEST_COMMAND]         # e.g. npm test / pytest / bun test
+
+# Build
+[YOUR_BUILD_COMMAND]        # e.g. npm run build / bun run build
+
+# Lint / type-check
+[YOUR_LINT_COMMAND]         # e.g. npm run lint && tsc --noEmit
+
+# Deploy
+[YOUR_DEPLOY_COMMAND]       # e.g. vercel --prod / fly deploy
+```
+
+---
+
+## File Map
+
+```
+[project-dir]/
+  src/           # [What lives here]
+  [KEY_DIR]/     # [What lives here]
+  [KEY_DIR]/     # [What lives here]
+  CLAUDE.md      # This file
+```
+
+> Only list directories that are non-obvious. Skip src/components if that is self-evident.
+
+---
+
+## Autonomy Grant
+
+Claude Code is permitted to:
+- Read any file in this repo without asking.
+- Run `[YOUR_TEST_COMMAND]` and `[YOUR_LINT_COMMAND]` without asking.
+- Create new files that follow existing patterns without asking.
+- Edit any file in `src/` without asking.
+
+Claude Code must ask before:
+- Deleting files.
+- Changing dependency versions (`package.json`, `pyproject.toml`, etc.).
+- Modifying CI/CD configuration.
+- Touching anything in `[SENSITIVE_DIR]/` (e.g. `migrations/`, `infra/`).
+
+---
+
+## Project-Specific Conventions
+
+> Keep this section under 10 bullets. If it grows longer, extract to a nested CLAUDE.md.
+
+- [CONVENTION 1] — e.g. "Use named exports only, no default exports."
+- [CONVENTION 2] — e.g. "All API routes live in src/app/api/ following Next.js App Router conventions."
+- [CONVENTION 3] — e.g. "Database queries go in src/db/queries.ts, never inline in components."
+- [CONVENTION 4]
+- [CONVENTION 5]
+
+---
+
+## Verification Loop
+
+Before marking any task done:
+1. Run `[YOUR_TEST_COMMAND]` — all tests pass.
+2. Run `[YOUR_LINT_COMMAND]` — no errors.
+3. For UI changes: open `[LOCAL_URL]` and confirm visually.
+4. State which step was run in the completion message.
+
+Skipping verification is only allowed for: typo fixes, comment edits, documentation-only changes.
+
+---
+
+## Personalization Checklist
+
+Before committing this file to the repo, confirm:
+- [ ] All `[PLACEHOLDER]` values replaced.
+- [ ] Daily commands tested — they actually work.
+- [ ] File map accurate for current directory structure.
+- [ ] Autonomy grant matches actual comfort level.
+- [ ] Conventions list reflects actual codebase patterns (not aspirational ones).
+- [ ] Verification loop commands match what CI runs.
+- [ ] This checklist section deleted.
+
+---
+
+## Document Loading
+
+Follow `~/Desktop/[YOUR_ECOSYSTEM]/rules/path-scoped-loading.md` for deciding which project docs to load at task start.
+
+Project docs (if present): `PROJECT.md`, `REQUIREMENTS.md`, `ROADMAP.md`, `STATE.md`, `ACTIVE.md`

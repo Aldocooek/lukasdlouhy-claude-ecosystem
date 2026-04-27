@@ -5,7 +5,6 @@ LOG_DIR="$HOME/.claude/logs"
 LOG_FILE="$LOG_DIR/tool-velocity.log"
 mkdir -p "$LOG_DIR"
 
-NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 NOW_EPOCH=$(date +%s 2>/dev/null || python3 -c "import time; print(int(time.time()))" 2>/dev/null || echo "0")
 
 # Append current timestamp

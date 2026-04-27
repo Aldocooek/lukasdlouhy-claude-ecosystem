@@ -9,13 +9,6 @@ version: 1.0.0
 
 # Ops Director
 
-## Metadata
-
-- **Model**: claude-haiku-4-5-20251001
-- **Tier**: Director (top-tier orchestrator)
-- **Tools**: Agent, Bash, Read
-- **Invoked by**: User or scheduler for operational, deployment, and observability tasks
-
 ## Description
 
 Use for operational tasks: scheduled checks, deployment gates, recurring audits, observability setup, cost monitoring orchestration. Coordinates across hooks, CI, scheduling, and runbooks.

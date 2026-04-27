@@ -1,0 +1,159 @@
+{
+  "run_id": "2026-04-27T120544Z-storyboard",
+  "target": "storyboard",
+  "dataset": "evals/datasets/storyboard.jsonl",
+  "judge_model": "haiku",
+  "timestamp": "2026-04-27T120544Z",
+  "aggregate": {
+    "mean_score": 2.80,
+    "pass_count": 1,
+    "fail_count": 9,
+    "case_count": 10,
+    "pass_rate_pct": 10.0,
+    "baseline_mean": null,
+    "delta": null,
+    "regression": false
+  },
+  "cases": [
+    {
+      "id": "story-001",
+      "score": 2,
+      "status": "FAIL",
+      "summary": "Output is a permission request with a summary of planned storyboard content, not the storyboard itself. The user requested a storyboard artifact (likely a formatted document with 6 numbered scenes, timings, visuals, and captions); the output describes what will be created but does not deliver it. All rubric criteria fail due to missing deliverable.",
+      "pass_fail": {
+        "6 scenes": false,
+        "hook in scene 1": false,
+        "CTA in last scene": false,
+        "duration sums correctly": false,
+        "captions per scene": false
+      },
+      "output_preview": "Permission needed to write the storyboard file. Once approved, the file will be saved to:\n\n`/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/storyboard-glint-60sec-explainer.md`\n\nThe storyboard is ready and validated:\n- **6 scenes, 60 seconds exactly**\n- **Pain hook in Scene 1 (0–5s):** Opens with 11pm deadline stress, unread Slack chaos\n- **Product reveal in Scene 3:** Clean Glint UI loads with \"one click\" message\n- **Proof in Scene 5:** 4.2 hours saved/week, <90 seconds/report, 200+ tea"
+    },
+    {
+      "id": "story-002",
+      "score": 0,
+      "status": "FAIL",
+      "summary": "The output is a file-write permission prompt, not a storyboard. No actual deliverable was produced to evaluate against the rubric.",
+      "pass_fail": {
+        "6 scenes": false,
+        "hook in scene 1": false,
+        "CTA in last scene": false,
+        "duration sums correctly": false,
+        "captions per scene": false
+      },
+      "output_preview": "File write requires permission. Grant approval to write `storyboard-90-second-brand-video-ember-candles.md` to the project root?"
+    },
+    {
+      "id": "story-003",
+      "score": 3,
+      "status": "FAIL",
+      "summary": "Output demonstrates conceptual understanding of storyboard structure (all 3 structural elements: 6 scenes, hook, CTA are present) but fails to deliver a complete, actionable storyboard. Missing per-scene durations and all required captions — two core requirements entirely unmet.",
+      "pass_fail": {
+        "6 scenes": true,
+        "hook in scene 1": true,
+        "CTA in last scene": true,
+        "duration sums correctly": false,
+        "captions per scene": false
+      },
+      "output_preview": "File write requires permission. Please approve the write to create the storyboard file.\n\nOnce approved, the storyboard will be saved to:  \n`/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/storyboard-vaultly-revops-sarah-proposal-time.md`\n\nThe 6-scene breakdown captures Sarah's testimonial arc:\n1. **Problem setup** (2-hour pain point)\n2. **Details of friction** (manual process steps)\n3. **Solution in action** (screen recording of Vaultly, no talking)\n4. **Payoff moment** (15-minute realiz"
+    },
+    {
+      "id": "story-004",
+      "score": 0,
+      "status": "FAIL",
+      "summary": "Output is not a storyboard. It is a meta-statement deferring the actual deliverable pending approval. The rubric requires a complete storyboard with 6 scenes, timings, hooks, CTA, and captions — none of which are present.",
+      "pass_fail": {
+        "6 scenes": false,
+        "hook in scene 1": false,
+        "CTA in last scene": false,
+        "duration sums correctly": false,
+        "captions per scene": false
+      },
+      "output_preview": "Storyboard is ready. Waiting for your approval to write the file."
+    },
+    {
+      "id": "story-005",
+      "score": 2,
+      "status": "FAIL",
+      "summary": "The output is a structural description of a planned storyboard, not the storyboard itself. It fails all five rubric criteria because no actual storyboard artifact—no enumerated scenes with visuals, text, timing, or captions—is delivered. This is a planning statement awaiting file write, not the deliverable.",
+      "pass_fail": {
+        "6 scenes": false,
+        "hook in scene 1": false,
+        "CTA in last scene": false,
+        "duration sums correctly": false,
+        "captions per scene": false
+      },
+      "output_preview": "Done — storyboard is ready. The 30-second structure spans from frustrated hook (Scene 1–2) through the value prop (Scene 3–5) to CTA (Scene 6). Muted-safe throughout: all key messaging in kinetic text, sound effects sparse and intentional, music serves tension→relief arc. Total 30 seconds.\n\n**Waiting for permission to write file.** Once approved, output will be: `/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/storyboard-clipr-linkedin-30-second-paid-social-ad.md`"
+    },
+    {
+      "id": "story-006",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "Output correctly structures 4 of 5 binary criteria but fabricates the fifth—captions are claimed but not provided. The result is a validation summary rather than the actual storyboard document with caption text needed for production.",
+      "pass_fail": {
+        "6 scenes": true,
+        "hook in scene 1": true,
+        "CTA in last scene": true,
+        "duration sums correctly": true,
+        "captions per scene": false
+      },
+      "output_preview": "✓ **Storyboard validated:** 6 scenes, all columns, 120 seconds total, chapters integrated, upgrade CTA included.\n\nPending write permission for:\n`/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/storyboard-how-to-turn-one-interview-into-a-week-of-linkedin-content.md`\n\nThe storyboard is ready—it has:\n- **[Intro] 12s** — Hook on the problem (transcript = 1 week of content)\n- **[Problem] 18s** — Pain point: why creators don't execute on interviews\n- **[Demo — Import] 22s** — Draftly parses tr"
+    },
+    {
+      "id": "story-007",
+      "score": 2,
+      "status": "FAIL",
+      "summary": "The output is a pre-delivery permission request, not the storyboard itself. While the assistant claims to have drafted 6 scenes with correct timing and a CTA, the actual artifact—the storyboard markdown with full visual descriptions and captions—is not provided. The storyboard cannot be evaluated on its merits because it was not delivered.",
+      "pass_fail": {
+        "6 scenes": false,
+        "hook in scene 1": false,
+        "CTA in last scene": true,
+        "duration sums correctly": true,
+        "captions per scene": false
+      },
+      "output_preview": "Storyboard is complete and ready to save. I need your permission to write the file to `/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/storyboard-mosaic-investor-pitch-45sec.md`.\n\nThe storyboard hits your brief exactly:\n- **Scene 1 (5s)**: Problem — manual procurement in 2005.\n- **Scene 2 (8s)**: Solution demo — Mosaic UI, 3 clicks to approval.\n- **Scene 3 (7s)**: Market signal — $850B annual SMB procurement spend, 90% manual.\n- **Scene 4 (8s)**: Traction — 14 customers, $18K ARR in 11 w"
+    },
+    {
+      "id": "story-008",
+      "score": 7,
+      "status": "PASS",
+      "summary": "All rubric criteria pass. The storyboard demonstrates craft in stat selection (month-end close speed, cash recovered, inventory accuracy — all CFO-relevant), hook positioning, and platform awareness (muted-compatible, no talking heads, SFX-driven). Ready for production brief with no revisions.",
+      "pass_fail": {
+        "6 scenes": true,
+        "hook in scene 1": true,
+        "CTA in last scene": true,
+        "duration sums correctly": true,
+        "captions per scene": true
+      },
+      "output_preview": "**Storyboard ready.** The 6-scene breakdown covers:\n\n1. **Open (8s):** Solaris logotype + \"847 manufacturers, 14 countries\" stat — kinetic type on minimal white background.\n2. **Quote 1 (10s):** Month-end close story (\"2 days vs 11\") + 82% reduction badge — word-by-word reveal.\n3. **Quote 2 (10s):** Inventory accuracy jump (71% → 98.4%) + $2.1M recovered costs — left-wipe animation.\n4. **Quote 3 (10s):** Dashboard narrative (\"CFO stopped asking for spreadsheets\") + 9-plant visibility stat — line"
+    },
+    {
+      "id": "story-009",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "Output is a prose summary of storyboard concepts rather than a structured storyboard artifact. It correctly identifies the CTA placement but fails on three quantifiable criteria: missing captions, incomplete duration accounting, and unclear scene enumeration. Delivery format does not match the request.",
+      "pass_fail": {
+        "6 scenes": false,
+        "hook in scene 1": false,
+        "CTA in last scene": true,
+        "duration sums correctly": false,
+        "captions per scene": false
+      },
+      "output_preview": "**Storyboard ready.** The video-director created a 90-second narrative arc with founder-led webcam opens/closes bracketing product screen shares—Confluence integration (12s) and AI templates (18s)—then circles back to reinforce the churn-reduction value prop (20s) and end-to-end flow demo (25s), landing on the NPS CTA (10s).\n\nAwaiting permission to write the file to `/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/storyboard-create-a-storyboard-for-a-90-second-video-email-for-a-produc.md"
+    },
+    {
+      "id": "story-010",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "The output demonstrates partial understanding (6 scenes, hook, CTA present) but fails on execution: duration timing is contradictory, and no scene-by-scene captions are provided. The actual storyboard file is referenced but not shown in the output, leaving the deliverable incomplete.",
+      "pass_fail": {
+        "6 scenes": true,
+        "hook in scene 1": true,
+        "CTA in last scene": true,
+        "duration sums correctly": false,
+        "captions per scene": false
+      },
+      "output_preview": "File written to `/Users/lukasdlouhy/Desktop/lukasdlouhy-claude-ecosystem/storyboard-30-second-tiktok-mechanical-keyboard-asmr-satisfying.md`.\n\n**Storyboard Summary:**\n\nThe 6-scene structure breaks down as:\n- **Scenes 1–2 (0–10s):** ASMR hook — rapid typing burst + full-board reveal, no music yet.\n- **Scenes 3–5 (10–30s):** Visual variety — side angle, macro switch detail, natural typing test. Music layers in with lo-fi instrumental; percussion enters on Scene 5.\n- **Scene 6 (25–30s):** Brand rev"
+    }
+  ]
+}

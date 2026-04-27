@@ -1,0 +1,131 @@
+{
+  "run_id": "2026-04-27T114852Z-marketing-funnel-audit",
+  "target": "marketing-funnel-audit",
+  "dataset": "evals/datasets/marketing-funnel-audit.jsonl",
+  "judge_model": "haiku",
+  "timestamp": "2026-04-27T114852Z",
+  "aggregate": {
+    "mean_score": 7.25,
+    "pass_count": 8,
+    "fail_count": 0,
+    "case_count": 8,
+    "pass_rate_pct": 100.0,
+    "baseline_mean": null,
+    "delta": null,
+    "regression": false
+  },
+  "cases": [
+    {
+      "id": "funnel-001",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Comprehensive audit that meets all rubric criteria with high specificity and professional depth. Correctly identifies the core TOFU→MOFU/BOFU mismatch, finds 7 trust gaps (exceeding the 3-minimum), and provides a prioritized fix list with ready-to-use copy rewrites. The fake testimonial diagnosis is particularly sharp. Output is immediately actionable for a product team.",
+      "pass_fail": {
+        "identifies TOFU/MOFU/BOFU stage mismatch": true,
+        "finds 3+ specific trust signal gaps": true,
+        "prioritizes fixes by impact × effort with reasoning": true,
+        "does not fabricate issues not in input": true,
+        "output is actionable with concrete recommendations": true
+      },
+      "output_preview": "# Slate Landing Page Audit\n\n## Funnel Context\n\n**Entry source:** Cold traffic (TOFU)  \n**Goal:** Free trial signup (lead capture)  \n**Audience:** Freelance designers, problem-aware (know they need invoicing) but not solution-aware (don't know Slate)  \n**Baseline conversion target:** 4-8% for B2B SaaS landing (you're likely ~2-3%)\n\n---\n\n## Above-the-Fold Assessment\n\n| Element | Status | Issue |\n|---------|--------|-------|\n| Headline | **WEAK** | \"Get paid faster\" is outcome-adjacent but vague. F"
+    },
+    {
+      "id": "funnel-002",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Well-structured audit that identifies misaligned funnel messaging and prioritizes fixes by impact×effort. The core issues are grounded in the input (weak headline, hidden rating, missing guarantee, features vs outcomes). However, the output infers additional trust signal gaps (authority, security, founder credibility, recency) not mentioned in the input description, which violates the rubric's constraint against inventing issues. Despite this, the audit is actionable and the P1 fixes are sound.",
+      "pass_fail": {
+        "identifies TOFU/MOFU/BOFU stage mismatches": true,
+        "finds 3+ trust signal gaps with specific evidence from the input": true,
+        "prioritizes fixes by impact × effort": true,
+        "does not invent issues absent from the described copy": false,
+        "distinguishes between quick wins (copy changes) and structural fixes (page layout)": true
+      },
+      "output_preview": "# Vanta Supplements Homepage Audit\n\n## Funnel Context\n- **Entry source**: Cold DTC traffic (brand awareness paid/organic)\n- **Goal**: Direct purchase (e-commerce conversion)\n- **Audience awareness**: Problem-aware to solution-aware (active protein buyers, searching for \"clean protein\")\n- **Conversion rate**: Unknown, but DTC protein benchmarks are 2-5% for cold traffic\n\n---\n\n## Above-the-Fold Check\n\n| Criterion | Status | Issue |\n|-----------|--------|-------|\n| Headline specific enough | ❌ Weak"
+    },
+    {
+      "id": "funnel-003",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Comprehensive, data-informed audit that meets all rubric criteria with specificity and depth. Identifies BOFU/TOFU misalignment clearly, catalogs 6+ friction points and 5 trust gaps with step references, prioritizes fixes by impact and effort, and provides causal hypotheses for each issue. Output is production-ready and actionable, demonstrating SaaS funnel expertise. No fabricated issues or unfounded claims.",
+      "pass_fail": {
+        "identifies funnel stage mismatches": true,
+        "identifies 3+ trust/friction gaps with step references": true,
+        "prioritizes fixes by impact × effort": true,
+        "no fabricated issues beyond input": true,
+        "includes hypotheses for each gap": true
+      },
+      "output_preview": "# Prism Analytics Trial Flow — Audit\n\n## Step 1: Funnel Context\n\n- **Entry source:** TOFU (cold traffic to trial signup)\n- **Goal:** Trial account activation → dashboard engagement\n- **Audience awareness:** Problem-aware to solution-aware (they found signup)\n- **Current conversion:** 6% step 1→4 — **critical** (benchmark: 15–25% for SaaS trials)\n- **Verdict:** Flow is broken. Not \"needs optimization\" — it's actively rejecting qualified leads.\n\n---\n\n## Step 2: Above-the-Fold Check\n\n*Not provided,"
+    },
+    {
+      "id": "funnel-004",
+      "score": 8,
+      "status": "PASS",
+      "summary": "Comprehensive audit that meets all rubric criteria with clear evidence and strong structure. The output goes beyond minimum requirements with friction inventory, copy clarity check, and actionable fix prioritization. All identified issues are sourced from input; quantitative benchmarks (conversion rates, drop rates) are industry standards, not fabrications. Minor gap: compliance guidance could be deeper on specific RIA/SEC/FINRA disclosure requirements, but the existing flags are sufficient.",
+      "pass_fail": {
+        "identifies TOFU/MOFU/BOFU mismatches": true,
+        "finds 3+ specific trust signal gaps for high-trust audience": true,
+        "prioritizes fixes by impact × effort": true,
+        "does not fabricate issues": true,
+        "flags compliance-adjacent trust signals for regulated industries": true
+      },
+      "output_preview": "# Lumen Financial Webinar Page Audit\n\n**Entry traffic**: MOFU/early BOFU (prospect is solution-aware, seeking tax solutions)  \n**Goal**: Webinar registration (lead capture + attendance)  \n**Audience**: High-net-worth retirees — exceptionally trust-dependent, high barriers to sharing personal data  \n**Conversion risk**: Critical — missing every trust signal that HNW audiences require before opting in\n\n---\n\n## Step 2: Above-the-Fold Check\n\n| Check | Status | Issue |\n|-------|--------|-------|\n| He"
+    },
+    {
+      "id": "funnel-005",
+      "score": 8,
+      "status": "PASS",
+      "summary": "Excellent checkout audit that meets all rubric criteria with specific, quantified evidence. The output goes beyond identifying gaps by quantifying recovery potential (25–45% from P1 fixes), providing concrete copy examples, and treating subscription-specific lock-in anxiety as a top-priority issue grounded in abandonment psychology. Actionable and well-structured for stakeholder handoff.",
+      "pass_fail": {
+        "identifies TOFU/MOFU/BOFU stage issues": true,
+        "finds 3+ trust signal gaps specific to checkout abandonment": true,
+        "prioritizes by impact × effort with checkout-abandonment context": true,
+        "no fabricated issues": true,
+        "at least one finding addresses subscription-specific anxiety": true
+      },
+      "output_preview": "# Marketing Funnel Audit — Meridian Coffee Checkout\n\n## Context Confirmed\n- **Funnel stage**: BOFU (bottom-of-funnel, ready to buy)\n- **Goal**: Transaction completion + subscription activation\n- **Cart state**: $28 (products selected, high intent)\n- **Audience**: Product-aware, no longer needs education\n- **Conversion baseline**: DTC checkout abandonment averages 70%+ — every friction point is expensive\n\n---\n\n## Step 2 — Above-the-Fold Check\n\n| Element | Status | Issue |\n|---------|--------|----"
+    },
+    {
+      "id": "funnel-006",
+      "score": 8,
+      "status": "PASS",
+      "summary": "Excellent audit with clear MOFU/BOFU diagnosis, systematic trust-gap identification (7 signals with evidence), and immediately actionable prioritization tied to enterprise buying friction. No fabrication; distinguishes copywriting rewrites from asset-creation requirements throughout. The output demonstrates domain expertise in B2B security positioning and provides specific language examples alongside business-impact framing.",
+      "pass_fail": {
+        "identifies TOFU/MOFU/BOFU mismatches": true,
+        "finds 3+ trust signal gaps with evidence": true,
+        "prioritizes by impact × effort for enterprise cycles": true,
+        "does not fabricate claims or statistics": true,
+        "distinguishes copywriting fixes from content/asset creation": true
+      },
+      "output_preview": "# Marketing Funnel Audit — ShieldLayer \"Why Us\" Section\n\n## Funnel Context\n\n**Entry source:** MOFU to BOFU (warm traffic: retargeting or branded search)  \n**Goal:** Enterprise demo booking / trial signup  \n**Audience:** Enterprise IT / security decision-makers (risk-averse, proof-hungry)  \n**Awareness level:** Problem-aware to solution-aware  \n**Implied conversion rate:** Unknown, but enterprise sales cycles demand high friction tolerance before trust is earned\n\n---\n\n## Step 2 — Headline/Copy Cl"
+    },
+    {
+      "id": "funnel-007",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Excellent structural execution with clear funnel diagnosis, 14+ documented gaps, and prioritized fixes calibrated for a considered purchase. Loses one point for introducing invented product details (7.7kW, 10,000+ owners) as illustrative examples, which technically violates the no-invention rule despite advancing the analysis quality.",
+      "pass_fail": {
+        "identifies TOFU/MOFU/BOFU mismatches": true,
+        "finds 3+ trust signal and conversion gaps": true,
+        "prioritizes fixes by impact × effort for $299 purchase": true,
+        "does not invent product details or issues": false,
+        "addresses considered-purchase decision process": true
+      },
+      "output_preview": "# Marketing Funnel Audit: Helio Portable EV Charger\n\n## Context Established\n\n- **Entry source**: Cold traffic (TOFU → BOFU transition: buyer knows they want a charger, evaluating options)\n- **Goal**: Direct e-commerce purchase ($299 ask)\n- **Audience awareness**: Solution-aware (already shopping for portable EV chargers)\n- **Conversion risk**: High — no reviews, no confidence signals, no friction reduction\n\n---\n\n## Above-the-Fold Check\n\n| Element | Status | Issue |\n|---------|--------|-------|\n|"
+    },
+    {
+      "id": "funnel-008",
+      "score": 8,
+      "status": "PASS",
+      "summary": "Excellent audit demonstrating domain expertise in onboarding funnel strategy. All rubric criteria met with specific evidence, and the output exceeds baseline with clear diagnosis (3.6× baseline churn traced to premature upsell before value proof), actionable prioritization, and a framework for rebuilding the sequence around behavioral milestones rather than calendar time. Directly usable for a product team without revision.",
+      "pass_fail": {
+        "identifies TOFU/MOFU/BOFU mismatches": true,
+        "finds 3+ trust signal or engagement gaps": true,
+        "prioritizes by impact × effort with churn signal": true,
+        "does not fabricate email content beyond input": true,
+        "addresses behavioral trigger strategy vs. time-based": true
+      },
+      "output_preview": "# Flux Onboarding Email Sequence Audit\n\n## Funnel Context\n\n| Dimension | Assessment |\n|-----------|------------|\n| Entry source | TOFU (new signup) |\n| Goal | Activation → Upsell (conflicted messaging) |\n| Audience awareness | Problem-aware (signed up) but product-unaware |\n| Current health signal | 18% unsubscribe after Email 3 = **critical** |\n\nTypical onboarding unsubscribe: <5%. You're at 3.6× baseline. Users are actively rejecting this sequence.\n\n---\n\n## Verdict: **Broken**\n\nThis is a **fea"
+    }
+  ]
+}

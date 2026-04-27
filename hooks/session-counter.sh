@@ -18,7 +18,7 @@ if [[ -f "$COUNTER_FILE" ]]; then
     FILE_MTIME=$(python3 -c "import os,time; print(int(time.time()-os.path.getmtime('$COUNTER_FILE')))" 2>/dev/null || echo "0")
   else
     # macOS stat fallback
-    FILE_MTIME=$(( $(date +%s) - $(stat -f %m "$COUNTER_FILE" 2>/dev/null || echo "$(date +%s)") ))
+    FILE_MTIME=$(( $(date +%s) - $(stat -f %m "$COUNTER_FILE" 2>/dev/null || date +%s) ))
   fi
   if (( FILE_MTIME > 21600 )); then  # 6 hours = 21600 seconds
     RESET=1

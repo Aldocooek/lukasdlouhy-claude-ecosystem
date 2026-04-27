@@ -23,7 +23,7 @@ SESSION_DIR="$HOME/.claude/projects/-Users-lukasdlouhy"
 [[ -d "$SESSION_DIR" ]] || exit 0
 
 # Find most recently modified JSONL session file
-LATEST_JSONL="$(ls -t "$SESSION_DIR"/*.jsonl 2>/dev/null | head -1 || true)"
+LATEST_JSONL="$(find "$SESSION_DIR" -maxdepth 1 -name '*.jsonl' -print0 2>/dev/null | xargs -0 ls -t 2>/dev/null | head -1 || true)"
 [[ -z "$LATEST_JSONL" || ! -f "$LATEST_JSONL" ]] && exit 0
 
 # Extract the last assistant message from the session file (best-effort)

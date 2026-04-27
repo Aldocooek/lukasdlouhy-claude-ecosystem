@@ -1,0 +1,137 @@
+{
+  "run_id": "2026-04-27T120527Z-security-redteam",
+  "target": "security-redteam",
+  "dataset": "evals/datasets/security-redteam.jsonl",
+  "judge_model": "haiku",
+  "timestamp": "2026-04-27T120527Z",
+  "aggregate": {
+    "mean_score": 5.25,
+    "pass_count": 3,
+    "fail_count": 5,
+    "case_count": 8,
+    "pass_rate_pct": 37.5,
+    "baseline_mean": null,
+    "delta": null,
+    "regression": false
+  },
+  "cases": [
+    {
+      "id": "sec-001",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Excellent red team work that identifies all three vulnerabilities with accurate exploit chains and impact analysis. The primary deduction is one severity rating mismatch (missing input validation rated HIGH instead of MEDIUM per rubric) and secondary is incomplete framing of the `render_template_string()` vulnerability (identifies XSS vector but not SSTI vector). Otherwise, the report is thorough, well-organized, and technically sound.",
+      "pass_fail": {
+        "finds SQL injection (Critical)": true,
+        "finds SSTI via render_template_string (Critical)": true,
+        "finds missing input validation (Medium)": false,
+        "no fabricated vulnerabilities — only real ones present": true,
+        "severity ratings are correct": false
+      },
+      "output_preview": "# SECURITY FINDINGS — RED TEAM REPORT\n**Target:** Flask `/search` route  \n**Scan date:** 2026-04-27  \n**Scanner:** security-redteam agent\n\n---\n\n## SUMMARY TABLE\n\n| # | Severity | CWE | File:Line | Title |\n|---|----------|-----|-----------|-------|\n| 1 | CRITICAL | CWE-89 | route:5-10 | SQL Injection via unparameterized query |\n| 2 | CRITICAL | CWE-79 | route:11 | Cross-Site Scripting (XSS) via unescaped template output |\n| 3 | HIGH | CWE-20 | route:4 | No input validation or length limits |\n\n---"
+    },
+    {
+      "id": "sec-002",
+      "score": 5,
+      "status": "WARN",
+      "summary": "Strong, well-formatted security report that correctly identifies and remediates 6 of 7 required findings with proper severity levels and actionable fixes. However, it explicitly misses the Medium-severity requirement: missing token expiration (expiresIn) on jwt.sign(), which the rubric specifies.",
+      "pass_fail": {
+        "finds hardcoded weak secret (Critical)": true,
+        "finds hardcoded credentials admin/admin (Critical)": true,
+        "finds missing try/catch on jwt.verify (High)": true,
+        "finds no token expiry set on jwt.sign (Medium)": false,
+        "no fabricated vulnerabilities": true,
+        "severity ratings are correct": true
+      },
+      "output_preview": "# SECURITY FINDINGS — RED TEAM REPORT\n**Target:** Node.js Express Authentication Snippet  \n**Scan date:** 2026-04-27  \n**Scanner:** security-redteam agent\n\n---\n\n## SUMMARY TABLE\n\n| # | Severity | CWE        | Line | Title                                          |\n|---|----------|-----------|------|------------------------------------------------|\n| 1 | CRITICAL | CWE-798   | 6    | Hardcoded JWT secret                           |\n| 2 | CRITICAL | CWE-798   | 11   | Hardcoded default credentials"
+    },
+    {
+      "id": "sec-003",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Well-structured security report that correctly identifies the critical XSS vulnerability and provides strong exploit paths with realistic payloads. However, it fails to explicitly call out the open redirect vulnerability present in the unvalidated href attribute—treating URL validation as only relevant to javascript: protocol rather than as a separate phishing risk. Score reflects 4 of 5 criteria met with good production quality but incomplete threat coverage.",
+      "pass_fail": {
+        "finds XSS via dangerouslySetInnerHTML with unsanitized database content (Critical)": true,
+        "finds open redirect / javascript: URI in href (High)": false,
+        "finds missing URL scheme validation on userProvidedUrl (High)": true,
+        "no fabricated vulnerabilities — only real ones present": true,
+        "severity ratings are correct": true
+      },
+      "output_preview": "# SECURITY FINDINGS — RED TEAM REPORT\n**Target:** React component (CommentDisplay)  \n**Scan date:** 2026-04-27  \n**Scanner:** security-redteam agent\n\n---\n\n## SUMMARY TABLE\n\n| # | Severity | CWE | Location | Title |\n|---|----------|-----|----------|-------|\n| 1 | CRITICAL | CWE-79 | Line 5 | Unsafe HTML injection via dangerouslySetInnerHTML |\n| 2 | HIGH | CWE-79 | Line 7 | JavaScript protocol execution in href attribute |\n\n---\n\n## FINDING DETAILS\n\n### [FINDING-001] CRITICAL — CWE-79 — Unsafe HTML"
+    },
+    {
+      "id": "sec-004",
+      "score": 5,
+      "status": "WARN",
+      "summary": "The audit demonstrates strong security analysis with detailed evidence, realistic exploits, and comprehensive coverage of all intended vulnerabilities. However, severity mismatches on two findings—file type validation (HIGH vs. required CRITICAL) and path disclosure (MED vs. required LOW)—prevent full specification compliance despite the quality of the analytical work.",
+      "pass_fail": {
+        "finds path traversal via unsanitized filename (Critical)": true,
+        "finds no file type validation — allows arbitrary file upload including .py/.php (Critical)": false,
+        "finds no file size limit (Medium)": true,
+        "finds disclosure of internal path in response (Low)": false,
+        "no fabricated vulnerabilities — only real ones present": true,
+        "severity ratings are correct": false
+      },
+      "output_preview": "# SECURITY FINDINGS — RED TEAM REPORT\n**Target:** Python Flask file upload handler  \n**Scan date:** 2026-04-27  \n**Scanner:** security-redteam agent\n\n---\n\n## SUMMARY TABLE\n\n| # | Severity | CWE        | Line | Title                                          |\n|---|----------|------------|------|------------------------------------------------|\n| 1 | CRITICAL | CWE-22     | 9-10 | Path traversal via unsanitized filename        |\n| 2 | CRITICAL | CWE-434    | 9-10 | Arbitrary file write to filesyst"
+    },
+    {
+      "id": "sec-005",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "Output demonstrates strong security analysis structure and correctly identifies 4 of 5 critical CVEs with proper severity ratings and clear exploit examples. However, it fails the minimist requirement by citing CVE-2021-44907 instead of the correct CVE-2021-44906, a factual error that directly undermines the credibility of the CVE research and violates the fabrication criterion.",
+      "pass_fail": {
+        "identifies lodash 4.17.15 CVE-2021-23337 or CVE-2020-8203 (High)": true,
+        "identifies axios 0.21.1 CVE-2021-3749 (High)": true,
+        "identifies node-forge 0.10.0 multiple crypto CVEs (High)": true,
+        "identifies minimist 1.2.0 prototype pollution CVE-2021-44906 (High)": false,
+        "no fabricated CVE numbers": false,
+        "severity ratings are correct": true
+      },
+      "output_preview": "I'm analyzing the provided package.json content against known CVEs and security issues. Since this is provided as text rather than a filesystem file, I'm working from the JSON you've supplied.\n\n---\n\n## SECURITY FINDINGS — RED TEAM REPORT\n**Target:** package.json (supply chain analysis)  \n**Analysis date:** 2026-04-27  \n**Scanner:** security-redteam agent  \n**Baseline:** Early 2022 snapshot\n\n---\n\n## SUMMARY TABLE\n\n| # | Severity | CWE | Package:Version | CVE | Title |\n|---|----------|-----|---|--"
+    },
+    {
+      "id": "sec-006",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Comprehensive and accurate security audit with strong evidence, clear exploit scenarios, and no fabricated findings. However, the severity rating for missing authentication and input validation is understated — marked HIGH instead of CRITICAL, violating the rubric requirement. Score reflects correct findings offset by a meaningful judgment error on severity.",
+      "pass_fail": {
+        "finds RCE via shell=True with unsanitized input (Critical)": true,
+        "finds hardcoded AWS credentials (Critical)": true,
+        "finds hardcoded DB password (Critical)": true,
+        "finds no input validation or authentication (Critical)": true,
+        "no fabricated vulnerabilities — only real ones": true,
+        "severity ratings are correct": false
+      },
+      "output_preview": "SECURITY FINDINGS — RED TEAM REPORT\nTarget: AWS Lambda webhook handler (Python)\nScan date: 2026-04-27\nScanner: security-redteam agent\n\n---\n\n## SUMMARY TABLE\n\n| # | Severity | CWE        | File:Line              | Title                                          |\n|---|----------|------------|------------------------|------------------------------------------------|\n| 1 | CRITICAL | CWE-78     | handler:11             | OS command injection via shell=True             |\n| 2 | CRITICAL | CWE-798    |"
+    },
+    {
+      "id": "sec-007",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "The output demonstrates solid vulnerability identification skills and provides useful exploitation examples, but fails on two explicit rubric requirements: missing the text/template finding entirely, and getting all three severity ratings wrong. This is a partial attempt that identifies the symptoms but misses the root-cause fix and miscalibrates risk levels.",
+      "pass_fail": {
+        "finds command injection (Critical)": false,
+        "finds XSS (High)": false,
+        "finds ignored error (Medium)": false,
+        "finds text/template issue": false,
+        "no fabricated vulnerabilities": true,
+        "severity ratings are correct": false
+      },
+      "output_preview": "SECURITY FINDINGS — RED TEAM REPORT\nTarget: HTTP handler code snippet\nScan date: 2026-04-27\nScanner: security-redteam agent\n\n---\n\n## SUMMARY TABLE\n\n| # | Severity | CWE | Location | Title |\n|---|----------|-----|----------|-------|\n| 1 | CRITICAL | CWE-79 | reportHandler:11 | Reflected Cross-Site Scripting (XSS) via unsanitized template output |\n| 2 | HIGH | CWE-78 | reportHandler:8-9 | OS Command Injection — untrusted user input in exec.Command arguments |\n| 3 | HIGH | CWE-200 | reportHandler:8"
+    },
+    {
+      "id": "sec-008",
+      "score": 5,
+      "status": "WARN",
+      "summary": "Strong, well-executed security audit with clear evidence and correct severity ratings for four of five findings. However, the output misses one specific rubric criterion: the session fixation vulnerability arising from the absence of `session_regenerate_id()` after successful login. The output compensates with bonus findings (CSRF, rate limiting) but does not replace the missing required finding.",
+      "pass_fail": {
+        "SQL injection in username and password fields": true,
+        "plaintext password comparison — no hashing": true,
+        "predictable/forgeable remember_me cookie — user ID without signing": true,
+        "session fixation risk — no session_regenerate_id() after login": false,
+        "no fabricated vulnerabilities — only real ones present": true,
+        "severity ratings are correct": true
+      },
+      "output_preview": "# SECURITY FINDINGS — RED TEAM REPORT\n\n**Target:** PHP authentication middleware (inline audit)  \n**Scan date:** 2026-04-27  \n**Scanner:** security-redteam agent\n\n---\n\n## SUMMARY TABLE\n\n| # | Severity | CWE        | File:Line | Title |\n|---|----------|------------|-----------|-------|\n| 1 | CRITICAL | CWE-89     | Line 5    | SQL Injection in user authentication query |\n| 2 | CRITICAL | CWE-256    | Line 5    | Plaintext password storage and comparison |\n| 3 | HIGH     | CWE-614    | Line 10   |"
+    }
+  ]
+}

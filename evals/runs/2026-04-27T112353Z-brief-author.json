@@ -1,0 +1,116 @@
+{
+  "run_id": "2026-04-27T112353Z-brief-author",
+  "target": "brief-author",
+  "dataset": "evals/datasets/brief-author.jsonl",
+  "judge_model": "haiku",
+  "timestamp": "2026-04-27T112353Z",
+  "aggregate": {
+    "mean_score": 4.00,
+    "pass_count": 1,
+    "fail_count": 5,
+    "case_count": 6,
+    "pass_rate_pct": 16.6,
+    "baseline_mean": null,
+    "delta": null,
+    "regression": false
+  },
+  "cases": [
+    {
+      "id": "brief-001",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "The output shows judgment in identifying conversion goal as the critical blocker and asks contextually smart follow-ups. However, it fails the core structural requirement (no labeled template) and does not systematically force clarifications on product definition, audience specifics, and full deadline scope as the rubric demands.",
+      "pass_fail": {
+        "forces clarification on product name/function": false,
+        "forces clarification on audience definition": false,
+        "forces clarification on conversion goal": true,
+        "forces clarification on deadline": false,
+        "extracts inferable without fabricating": true,
+        "output matches structured template with labeled fields": false,
+        "does not invent requirements": true
+      },
+      "output_preview": "I have a rough sketch, but this brief is not ready to execute. Before I produce anything, I need to pin down the single most critical gap.\n\n**What I have:**\n- Landing page for a new product\n- Audience: busy professionals\n- Timeline: end of month (~3 days from now)\n- Tone: clean and modern\n- Must work mobile + desktop\n\n**What's missing — and blocking:**\n\nThe biggest one: **what is the conversion action, and what does success actually look like?**\n\n\"Convert well\" is not a number. I need to know:\n\n"
+    },
+    {
+      "id": "brief-002",
+      "score": 8,
+      "status": "PASS",
+      "summary": "Excellent brief-gathering response. Extracts all five hard facts, correctly prioritizes the KPI gap as the lynchpin, and forces clarification on both ambiguities (including the discount offer status via a follow-up question). The structure and reasoning demonstrate judgment beyond mechanical extraction.",
+      "pass_fail": {
+        "extracts goal": true,
+        "extracts audience": true,
+        "extracts budget": true,
+        "extracts constraint": true,
+        "extracts deadline": true,
+        "forces clarification on KPI definition": true,
+        "forces clarification on discount offer (planned vs. contingent)": true,
+        "does not fabricate": true
+      },
+      "output_preview": "I can see the skeleton of a campaign here, but I need to stop before drafting the brief — you're missing the single piece that every decision flows from.\n\n**What I have:**\n- Type: Ad campaign (social + email)\n- Budget: $40k\n- Audience segment: inactive customers (90 days)\n- Intention: reactivation\n- Deadline: Aug 15 (firm)\n- Legal gating: discount offers need approval\n\n**What's blocking the brief:**\n\n**→ Success metric.** \"Drive reactivation\" could mean 50 customers or 5,000. It could measure co"
+    },
+    {
+      "id": "brief-003",
+      "score": 2,
+      "status": "FAIL",
+      "summary": "Output shows strategic thinking but fails to deliver the required artifact: a structured brief template with seven labeled fields. It also fails to force four of four required clarifications (metrics, approval, ownership, deadline) and does not extract known facts. Only 1 of 7 rubric criteria pass.",
+      "pass_fail": {
+        "forces clarification on specific metrics/results": false,
+        "forces clarification on Meridian approval and quote usage": false,
+        "forces clarification on ownership (named person)": false,
+        "forces clarification on deadline and sales cycle": false,
+        "extracts known facts (format, length, use case)": false,
+        "does not invent metrics or fabricate": true,
+        "output template includes Goal, Audience, Metric, Constraint, Deadline, KPIs, Open Questions": false
+      },
+      "output_preview": "I can see the skeleton of a case study brief, but the Slack message is missing the strategic foundation. Before I structure this into a full brief, I need to pin down one critical piece:\n\n**What is the primary business outcome you're measuring?**\n\nIs this case study intended to:\n- **Generate inbound leads** (conversion metric: form fills, content downloads)\n- **Accelerate the sales cycle** (metric: shortened deal length, higher close rate)\n- **Build credibility with a specific buyer persona** (m"
+    },
+    {
+      "id": "brief-004",
+      "score": 3,
+      "status": "FAIL",
+      "summary": "Output correctly identifies and addresses the critical success-metric blocker but treats the response as sequential rather than comprehensive. It fails to address 4 of 5 required clarifications and does not deliver the requested structured template, making it an incomplete partial attempt against the rubric.",
+      "pass_fail": {
+        "flags 'feel more premium' as not measurable": true,
+        "flags 'similar to Notion' is ambiguous": false,
+        "forces clarification on budget": false,
+        "forces clarification on approval process": false,
+        "extracts confirmed constraints": false,
+        "does not invent direction/metric": true,
+        "output template complete with fields": false
+      },
+      "output_preview": "I'm reading a rebrand brief with strong structure on timeline and scope boundaries, but zero ability to verify when it's done. Before I draft a complete brief, I need to solve the blocking question first.\n\n**Critical blocker: Success metric**\n\n\"Make it feel more premium\" is an aesthetic direction, not a measurable outcome. The team will build something, ship it, and then what? How do we know if it succeeded?\n\nI need one concrete answer before proceeding:\n\n**What will change as a result of this r"
+    },
+    {
+      "id": "brief-005",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "Output correctly identifies the primary blocker (variant copy) and avoids inventing data, but punts on forcing clarification for three critical gaps (traffic, metric, stat sig threshold) and abandons the requested template structure entirely. The response shows understanding of what's missing but fails to operationalize the requirement to force all clarifications before proceeding.",
+      "pass_fail": {
+        "forces clarification on variant headline copy": true,
+        "forces clarification on traffic and baseline conversion rate": false,
+        "forces clarification on primary metric": false,
+        "forces clarification on stat sig threshold": false,
+        "extracts confirmed elements": true,
+        "does not invent copy or assume traffic": true,
+        "output template includes Goal/Audience/Metric/Constraint/Deadline/KPIs/Open Questions": false
+      },
+      "output_preview": "I have the core test structure but need the variant copy before I can produce a brief. This is a blocker.\n\n**What I have:**\n- Test duration: 2-3 weeks\n- Control: \"Manage your projects in one place\"\n- Hypothesis: benefit-focused headline → more signups\n- Platform: Optimizely\n- Scope: copy only, no design changes\n- Owner: growth team\n\n**The critical gap:** No variant headline exists yet. \n\nBefore I ask about the secondary gaps (traffic volume, baseline conversion rate, stat sig threshold), I need "
+    },
+    {
+      "id": "brief-006",
+      "score": 3,
+      "status": "FAIL",
+      "summary": "The output shows strategic thinking by deferring to a meta-question about document purpose, and it correctly extracts the three confirmed requirements. However, it fails to deliver four of the rubric's seven core requirements: it does not force clarification on security certifications, integrations, pricing, or timeline; and it does not provide the required template format with blocking/non-blocking marks. This is a partial attempt that misses the prescriptive structure and scope of the brief.",
+      "pass_fail": {
+        "forces clarification on security certifications": false,
+        "forces clarification on integrations": false,
+        "forces clarification on pricing": false,
+        "forces clarification on ASAP timeline": false,
+        "extracts confirmed (PDF, enterprise, SLA/uptime)": true,
+        "does not invent certification/integration/pricing details": true,
+        "output template marks blocking vs. non-blocking": false
+      },
+      "output_preview": "I have the surface request but not the strategy underneath it. Before I write a brief, I need to resolve one critical gap:\n\n**What is this one-pager actually *for*?**\n\nThe email says \"for enterprise deals\" and \"we keep losing to [competitor],\" but that could mean three very different documents:\n\n1. **Competitive win-back** — A deck/document handed to prospects already comparing you head-to-head with the competitor. Goal: prove you're superior on the criteria that matter (security, integrations, "
+    }
+  ]
+}

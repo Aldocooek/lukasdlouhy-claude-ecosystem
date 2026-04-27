@@ -1,0 +1,139 @@
+{
+  "run_id": "2026-04-27T120532Z-video-storyboard",
+  "target": "video-storyboard",
+  "dataset": "evals/datasets/video-storyboard.jsonl",
+  "judge_model": "haiku",
+  "timestamp": "2026-04-27T120532Z",
+  "aggregate": {
+    "mean_score": 6.00,
+    "pass_count": 5,
+    "fail_count": 3,
+    "case_count": 8,
+    "pass_rate_pct": 62.5,
+    "baseline_mean": null,
+    "delta": null,
+    "regression": false
+  },
+  "cases": [
+    {
+      "id": "vstory-001",
+      "score": 8,
+      "status": "PASS",
+      "summary": "Excellent storyboard that decisively meets all 6 rubric criteria with production-ready specificity. Beyond the rubric, the output demonstrates sophisticated audience understanding (addresses construction PM skepticism, job-site viewing context with caption styling for bright sunlight), concrete social proof (Martinez Concrete, 85% time reduction), and detailed production guidance (color grading contrast for problem vs. solution scenes, voiceover pacing, music cues). Ready for video producer handoff.",
+      "pass_fail": {
+        "exactly 6 scenes": true,
+        "scene 1 hook within 5s": true,
+        "final scene CTA with URL": true,
+        "durations sum to 60s ±6s": true,
+        "each scene includes caption/text": true,
+        "each scene includes visual direction": true
+      },
+      "output_preview": "# Video Storyboard: Fieldwork\n\n## Metadata\n- **Product**: Fieldwork (construction project management)\n- **Audience**: Construction project managers (skeptical of software)\n- **Platform**: YouTube / web (16:9 horizontal, 60s total)\n- **Tone**: Practical, no hype, problem-focused\n- **CTA**: Start free trial\n\n---\n\n## Storyboard\n\n| # | Scene | Duration | Visual | Voiceover | Caption | Notes |\n|---|-------|----------|--------|-----------|---------|-------|\n| 1 | Hook | 4s | Construction site. Close-u"
+    },
+    {
+      "id": "vstory-002",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "Well-structured storyboard with strong narrative flow, clear persona targeting, and detailed production notes. However, it fails the hard constraint: 24s delivered vs. 27–33s required. The output is 6 seconds short of the brief's 30-second target. With 3 additional seconds added to existing scenes, this would be a solid 6–7; at 24s, it is incomplete.",
+      "pass_fail": {
+        "exactly 6 scenes": true,
+        "scene 1 hook in first 3s": true,
+        "final scene CTA overlay": true,
+        "duration sum 30s ±3s": false,
+        "text overlays specified per scene": true,
+        "visual composition described per scene": true
+      },
+      "output_preview": "I'll create a 30-second Instagram Reels storyboard for Sela. With no voiceover, visuals and text overlays carry all the weight—I'm compressing to 6 tight scenes and leaning on slow motion, natural light, and minimal typography.\n\n---\n\n## STORYBOARD: SELA — Founder Launch (30s, Instagram Reels)\n\n**Product:** Sela refillable glass skincare system  \n**Audience:** Women 25–38, eco-conscious, clean beauty buyers  \n**Platform:** Instagram Reels (9:16, 30 seconds, sound-off)  \n**Tone:** Minimal, aspirat"
+    },
+    {
+      "id": "vstory-003",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "Well-structured storyboard with strong narrative arc, clear captions, and thoughtful production notes. However, it fails the hard duration constraint: scenes total 76 seconds, 5 seconds below the 81-second minimum (90±9s), and the validation checklist incorrectly claims 90 seconds when the math does not support it. This is a binary failure on a critical specification.",
+      "pass_fail": {
+        "exactly 6 scenes": true,
+        "scene 1 hook within 10s establishes contrast": true,
+        "final scene ends with CTA": true,
+        "scene durations sum to 90s ±9s (81-99s)": false,
+        "each scene notes talking-head or B-roll": true,
+        "each scene includes caption/subtitle direction": true
+      },
+      "output_preview": "# Video Storyboard: Marcus Osei's Tally Founder Story\n\n## Metadata\n\n| Field | Value |\n|-------|-------|\n| **Product** | Tally — payroll software for solopreneurs |\n| **Founder** | Marcus Osei (ex-Salesforce VP) |\n| **Target Audience** | Solopreneurs, indie makers, freelancers (LinkedIn) |\n| **Tone** | Conversational, relatable, matter-of-fact |\n| **Platform** | LinkedIn (16:9, sound-off assumption) |\n| **Total Duration** | 90 seconds |\n| **Format** | Talking-head + B-roll cutaways |\n| **CTA** | "
+    },
+    {
+      "id": "vstory-004",
+      "score": 9,
+      "status": "PASS",
+      "summary": "Excellent execution across all six rubric criteria. The storyboard is structured for maximum impact on short-form platforms, with the pull-apart money shot strategically placed in Scene 1 to arrest scroll and again in Scene 5 as climax. ASMR-adjacent sound design is woven throughout with specificity (crunch, sizzle, clink, hum), and production guidance is comprehensive and actionable. Exceeds requirements with color grading notes, shooting variations, and platform-specific technical detail.",
+      "pass_fail": {
+        "exactly 6 scenes": true,
+        "scene 1 hook within 3s": true,
+        "final scene CTA": true,
+        "durations sum to 45s ±4s": true,
+        "audio direction for each scene": true,
+        "camera angle and subject focus per scene": true
+      },
+      "output_preview": "I'll create a 45-second storyboard for your brown butter tahini cookies recipe video. Since you specified ASMR-adjacent with no voiceover face time, I'll structure this as a silent, visual-first format with ASMR sound design and minimal captions.\n\n---\n\n## STORYBOARD METADATA\n\n| Field | Value |\n|-------|-------|\n| **Product** | Brown Butter Tahini Cookies (recipe content) |\n| **Target Audience** | Food/baking enthusiasts, short-form video viewers (TikTok/Reels mindset) |\n| **Platform** | TikTok /"
+    },
+    {
+      "id": "vstory-005",
+      "score": 5,
+      "status": "WARN",
+      "summary": "The storyboard is structurally sound and addresses 5 of 6 rubric criteria with competent execution: scenes, hook timing, CTA, animations, and captions are all present and well-described. However, it fails the duration constraint—the explicit scene durations sum to 98 seconds, below the 108-second minimum (120±12). The metadata claims 120 seconds total but does not allocate the 22-second transition buffer across scenes in the Duration column, leaving the claim unverified and unreconcilable with the table. This is a critical miss for a video production brief. The extensive production guidance (assets, music cues, voiceover tone) adds value but does not offset the duration violation.",
+      "pass_fail": {
+        "exactly 6 scenes": true,
+        "scene 1 hook names problem within first 10s": true,
+        "final scene contains CTA": true,
+        "scene durations sum to 120s ±12s": false,
+        "each scene specifies animation type or motion graphic description": true,
+        "each scene includes narrator script line or on-screen headline": true
+      },
+      "output_preview": "# Video Storyboard — Canopy Shadow IT Detection\n\n## Metadata\n\n| Property | Value |\n|----------|-------|\n| **Product** | Canopy |\n| **Value Prop** | Auto-detect shadow IT usage across Slack and email |\n| **Audience** | IT security managers (compliance-focused, risk-aware) |\n| **Platform** | YouTube-style explainer (16:9 horizontal) |\n| **Total Duration** | 120 seconds (98s VO + 22s transitions/music moments) |\n| **Tone** | Professional, solution-focused, data-driven |\n| **Visual Style** | Flat 2D"
+    },
+    {
+      "id": "vstory-006",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Output is professionally executed and meets 5 of 6 rubric criteria with strong craft: 6 scenes, effective skip-proof hook, clear CTA, correct duration, and detailed visual briefing. However, it fails to provide explicit audio layer notation for 3 of 6 scenes (Scenes 3, 5, 6) as required by the rubric, despite providing audio guidance elsewhere in the document.",
+      "pass_fail": {
+        "exactly 6 scenes": true,
+        "scene 1 prevents skip (5s hook, visual or statement)": true,
+        "final scene has CTA": true,
+        "scene durations sum to 75s ±7s": true,
+        "each scene describes visuals in detail for videographer": true,
+        "each scene notes audio layer (voiceover, music, or natural sound)": false
+      },
+      "output_preview": "# Video Storyboard: Birchwood Supply Co. — Card Scraper Set\n\n**Product:** Birchwood Supply Co. Premium Card Scraper Set ($130)  \n**Audience:** Serious hobbyist woodworkers (Lie-Nielsen / Veritas buyers)  \n**Platform:** YouTube pre-roll (16:9, skippable at 5s)  \n**Total Duration:** 70s (within 75s target)  \n**Tone:** Premium, technical, respectful of expertise  \n**CTA Goal:** Shop the product\n\n---\n\n## Storyboard\n\n| # | Scene | Duration | Visual | Voiceover | Caption | Notes |\n|---|-------|-------"
+    },
+    {
+      "id": "vstory-007",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Strong production-ready storyboard with excellent structure, emotional clarity, and detailed supporting notes (assets, casting, music direction, accessibility). Fails the duration requirement: scene table totals 51s, which is 9 seconds short of the 54–66s target range. The output attempts to reconcile this in a validation note but does not adjust the actual scene durations to meet the rubric.",
+      "pass_fail": {
+        "exactly 6 scenes": true,
+        "scene 1 hook establishes stakes within 8s": true,
+        "final scene contains CTA": true,
+        "scene durations sum to 60s ±6s": false,
+        "each scene notes emotional beat": true,
+        "each scene describes subjects and setting": true
+      },
+      "output_preview": "I'll build a 60-second Facebook storyboard for Clean Slate Project. That's tight, so each scene must compress without losing emotional weight.\n\n---\n\n## STORYBOARD METADATA\n\n| Field | Value |\n|-------|-------|\n| **Organization** | Clean Slate Project |\n| **Target Audience** | Community advocates & donors, 35–60 |\n| **Platform** | Facebook (16:9 landscape) |\n| **Total Duration** | 60 seconds |\n| **Tone** | Grounded, hopeful, dignified |\n| **Format** | Actor testimonial re-enactment |\n| **Emotional"
+    },
+    {
+      "id": "vstory-008",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Strong execution with well-structured table, comprehensive asset lists, and detailed music/SFX specs. Meets 5 of 6 rubric criteria. Fails the scene 1 hook requirement: congratulates but does not preview the 3 core actions or their value in the opening scene, deferring the value pitch to scene 3 instead.",
+      "pass_fail": {
+        "exactly 6 scenes": true,
+        "scene 1 hook congratulates + previews value": false,
+        "final scene CTA with label & placement": true,
+        "durations sum to 50s ±5s": true,
+        "each scene is screen recording/animated UI": true,
+        "each scene specifies animated callout text": true
+      },
+      "output_preview": "# Heron Onboarding Welcome Storyboard\n\n## Metadata\n\n- **Product:** Heron (personal finance app)\n- **Audience:** New users, first app open post-signup; likely millennials/Gen Z managing personal finances\n- **Platform:** In-app, mobile vertical (9:16)\n- **Total Duration:** 50 seconds\n- **Tone:** Encouraging, clear, modern; motion-driven (no voiceover)\n- **CTA Goal:** Complete 3 onboarding actions (link bank, set goal, read first insight)\n\n---\n\n## Storyboard\n\n| # | Scene | Duration | Visual | Anima"
+    }
+  ]
+}

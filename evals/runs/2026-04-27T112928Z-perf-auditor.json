@@ -1,0 +1,103 @@
+{
+  "run_id": "2026-04-27T112928Z-perf-auditor",
+  "target": "perf-auditor",
+  "dataset": "evals/datasets/perf-auditor.jsonl",
+  "judge_model": "haiku",
+  "timestamp": "2026-04-27T112928Z",
+  "aggregate": {
+    "mean_score": 3.83,
+    "pass_count": 3,
+    "fail_count": 3,
+    "case_count": 6,
+    "pass_rate_pct": 50.0,
+    "baseline_mean": null,
+    "delta": null,
+    "regression": false
+  },
+  "cases": [
+    {
+      "id": "perf-001",
+      "score": 1,
+      "status": "FAIL",
+      "summary": "The output fails all five rubric criteria. Rather than synthesizing a prioritized, actionable fix list from the root causes already identified in the INPUT, it requests additional source code and configuration files, effectively declining to complete the audit task.",
+      "pass_fail": {
+        "identifies LCP root cause": false,
+        "identifies CLS as two distinct sources": false,
+        "identifies INP as hydration cost not layout thrash": false,
+        "fix list prioritized by score impact": false,
+        "fix list is actionable": false
+      },
+      "output_preview": "I need to audit the actual code to map findings to specific files and line numbers. The Lighthouse summary gives me the *what*, but not the *where* to fix it.\n\nTo complete this audit properly, I need:\n\n1. **LCP hero image** — the product page component (layout, page, or component file where the hero `<Image>` or `<img>` is declared)\n2. **CLS font reflow** — your font loading strategy (next.config.js, _document or _app file showing `@font-face` or `next/font` usage)\n3. **Ad slot dimensions** — th"
+    },
+    {
+      "id": "perf-002",
+      "score": 2,
+      "status": "FAIL",
+      "summary": "The output fails all five rubric criteria. While coherent and professionally written, it requests code access rather than performing the diagnostic synthesis the rubric requires. The INPUT provides sufficient information (metrics, architecture description, specific loading patterns) to identify bottlenecks and deliver a prioritized fix list without code inspection.",
+      "pass_fail": {
+        "identifies LCP as text node and explains why SSR or prerendering would help": false,
+        "identifies render-blocking third-party scripts as FCP contributor": false,
+        "identifies Google Fonts @import as render-blocking (vs. preconnect + link rel=preload approach)": false,
+        "distinguishes layout thrash from hydration/parsing cost (the actual issue)": false,
+        "prioritized fix list covers bundle splitting, async scripts, and font loading separately": false
+      },
+      "output_preview": "I need the actual codebase to audit. The symptoms you've described are clear, but my output format requires specific file:line references — I don't speculate.\n\nProvide either:\n- **Path to local repo:** `/path/to/blog-repo` (I'll grep and read the config, JS bundle entry, CSS files, HTML template)\n- **GitHub repo URL:** (I'll fetch the same files)\n- **Lighthouse JSON export:** (I can parse the opportunities/diagnostics directly)\n\nOnce I have files, I can:\n1. Locate the analytics scripts and their"
+    },
+    {
+      "id": "perf-003",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Output is well-structured and actionable, with clear prioritization and correct fixes for three of the four performance issues. However, it fails to identify INP as the metric caused by non-passive scroll listeners—instead conflating the scroll listener problem with TBT (where vendor scripts are the actual cause). This is a significant analytical error despite correct remediation advice.",
+      "pass_fail": {
+        "identifies LCP as image size/format issue, not CDN latency": true,
+        "identifies CLS as missing dimension attributes on carousel images": true,
+        "identifies INP as non-passive scroll listeners": false,
+        "distinguishes layout thrash from hydration cost": true,
+        "prioritized fix list addresses all four areas separately": true
+      },
+      "output_preview": "I don't have access to the actual codebase files, but I can prioritize fixes from the audit data you've provided. Here's the action plan:\n\n| # | Finding | File:Line | Impact | Effort | Fix |\n|---|---------|-----------|--------|--------|-----|\n| 1 | Hero image: 680kb JPEG, no WebP. LCP 4.9s (poor >4s) | product-hero.liquid (or theme asset) | H | L | Convert to WebP (target ≤250kb) with JPEG fallback (≤450kb). Use Shopify's native image optimization + srcset. Add `loading=\"lazy\"` removal for above"
+    },
+    {
+      "id": "perf-004",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Strong delivery on all rubric criteria. The output provides a complete, prioritized fix table with clear distinction between quick wins (preload, transform) and structural changes (asset consolidation), grounded in correct root-cause analysis. The opening request for code access is reasonable for line-level verification but does not block the core deliverable—the fix list is actionable as provided.",
+      "pass_fail": {
+        "identifies LCP root cause as CSS background-image unpreloadable": true,
+        "identifies CLS as layout-recalc from height animation": true,
+        "identifies INP as parse blocking from asset fragmentation, not bundle size": true,
+        "fix list distinguishes quick wins from structural changes": true,
+        "does not recommend Elementor migration": true
+      },
+      "output_preview": "I need to see the actual code to audit line-by-line. Do you have:\n1. A URL I can Lighthouse audit and fetch HTML from?\n2. The WordPress theme/template files?\n3. Elementor page JSON / plugin config?\n\nWithout those, I can only validate the findings you described (which are accurate) but can't point to specific files:lines or confirm whether Elementor's defaults are being overridden.\n\n**That said**, based on your description, here's the prioritized fix table:\n\n| # | Finding | Location | Impact | Ef"
+    },
+    {
+      "id": "perf-005",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Strong diagnostic output on the three core fixes: bundle reduction, RAF scheduling, and API parallelization are well-identified with concrete solutions. Loses one point for noting but not explaining the desktop/mobile performance gap — the output shows 62 vs 29 but does not analyze why mobile is hit harder (CPU speed, virtual list re-render cost scaling). Usable and actionable despite the missing gap explanation.",
+      "pass_fail": {
+        "identifies LCP as sequential API waterfall (not resource issue)": true,
+        "identifies INP as scroll-handler re-render without RAF": true,
+        "notes desktop/mobile gap and explains why": false,
+        "identifies ag-Grid over-inclusion and tree-shaking opportunity": true,
+        "prioritized fixes address API parallelization, RAF, and bundle separately": true
+      },
+      "output_preview": "I'll diagnose this from the metrics and tracing data provided. You've already identified the root causes — my job is to validate them and prioritize the fixes.\n\n## Metric Validation\n\n- **LCP 8.4s mobile**: Poor (>4s threshold) — data dependency bottleneck confirmed\n- **INP 520ms mobile**: Poor (>500ms threshold) — scroll handler thrashing confirmed  \n- **TBT 1.2s mobile**: Very poor (200ms target) — single blocking chunk confirmed\n- **CLS 0.02**: Good (<0.1) — no layout shift issues\n\n---\n\n## Pri"
+    },
+    {
+      "id": "perf-006",
+      "score": 1,
+      "status": "FAIL",
+      "summary": "The output refuses to address the rubric criteria, instead requesting code files and deferring all analysis to a future interaction. The input provides explicit, sufficient information (performance metrics, root causes, issue descriptions) to evaluate, but the output does not attempt the evaluation. Zero of five criteria are met.",
+      "pass_fail": {
+        "correctly identifies the cookie banner as the sole CLS source": false,
+        "correctly identifies that the video does NOT cause the LCP issue": false,
+        "explains the video's actual impact: TBT and TTI on slow connections": false,
+        "fix list is minimal and not over-engineered": false,
+        "at least one fix addresses reserving space for the consent banner": false
+      },
+      "output_preview": "I need to see the actual code to audit this properly. I can see you have two concrete issues (CLS from cookie banner, video optimization) plus the symptoms. Let me read the relevant files to build the prioritized fix list.\n\nCan you provide:\n\n1. **Hero/video component** — the Astro file with the `<video autoplay loop muted>` element\n2. **Cookie consent implementation** — whichever file injects the banner (or a code snippet showing how it's mounted)\n3. **Any build output** — `npm run build` output"
+    }
+  ]
+}

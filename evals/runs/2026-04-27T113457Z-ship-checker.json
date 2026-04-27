@@ -1,0 +1,115 @@
+{
+  "run_id": "2026-04-27T113457Z-ship-checker",
+  "target": "ship-checker",
+  "dataset": "evals/datasets/ship-checker.jsonl",
+  "judge_model": "haiku",
+  "timestamp": "2026-04-27T113457Z",
+  "aggregate": {
+    "mean_score": 5.50,
+    "pass_count": 4,
+    "fail_count": 2,
+    "case_count": 6,
+    "pass_rate_pct": 66.6,
+    "baseline_mean": null,
+    "delta": null,
+    "regression": false
+  },
+  "cases": [
+    {
+      "id": "ship-001",
+      "score": 7,
+      "status": "PASS",
+      "summary": "All rubric criteria are met with strong execution. The output provides a clear NO-GO verdict with specific, location-anchored findings for all four planted issues. Severity is appropriately harsh on credentials, and remediation steps are actionable. Structure and formatting support quick scanning.",
+      "pass_fail": {
+        "verdict is NO-GO": true,
+        "findings are URL-referenced": true,
+        "catches broken link": true,
+        "catches all three missing alt attributes": true,
+        "catches .env leak with critical flag": true,
+        "severity not softened": true,
+        "catches ≥85% of planted issues": true
+      },
+      "output_preview": "```\nVERDICT: NO-GO\n\nFINDINGS:\n\n1. [SECRETS] .env.production committed to repo — STRIPE_SECRET_KEY and DATABASE_URL exposed in public GitHub. \n   → Immediate action: revoke credentials, force-push to remove, rotate all keys.\n\n2. [A11Y] /features — 3 <img> tags missing alt attributes.\n   → Blocks accessibility compliance and SEO image indexing.\n\n3. [BROKEN LINK] /pricing navigation — href points to \"/prcing\" (typo).\n   → Returns 404. Users cannot reach pricing page.\n\n4. [CONSOLE ERROR] Contact for"
+    },
+    {
+      "id": "ship-002",
+      "score": 7,
+      "status": "PASS",
+      "summary": "All rubric criteria are satisfied. The output correctly identifies all four planted issues with supporting detail, does not over-flag clean items, and renders a clear NO-GO verdict. The audit demonstrates professional judgment (e.g., SSL issue correctly framed as UX/conversion risk rather than security failure) and provides actionable remediation paths, making it immediately useful for pre-deployment decision-making.",
+      "pass_fail": {
+        "verdict is NO-GO": true,
+        "catches the tap target accessibility violation (issue 1)": true,
+        "catches the placeholder text in product description (issue 3)": true,
+        "catches the wrong brand name in email (issue 4)": true,
+        "catches the SSL trust signal issue (issue 2)": true,
+        "does not mark passing items as failing": true,
+        "catches ≥85% of the 4 planted issues": true
+      },
+      "output_preview": "```\nVERDICT: NO-GO\n\nFINDINGS:\n\n[A11Y] Mobile — 'Add to Cart' button tap target 28×28px, obscured by sticky cookie banner\n  → WCAG 2.1 Level AAA minimum is 44×44px\n  → Button is functionally inaccessible on mobile — primary conversion point blocked\n  → Fix: Reposition button above banner OR increase tap target + padding OR dismiss banner on interaction\n\n[COPY] Product page (Deluxe SKU) — placeholder text '[INSERT BENEFITS HERE]' visible to customers\n  → User-visible placeholder in product descrip"
+    },
+    {
+      "id": "ship-003",
+      "score": 8,
+      "status": "PASS",
+      "summary": "Excellent pre-launch review. All criteria met with strong, specific evidence. The output demonstrates domain expertise (WCAG standards cited precisely, App Store policy named), uses appropriately firm language throughout, and structures findings clearly by severity category. Includes actionable remediation and a separate CLEARED section, showing thorough analysis.",
+      "pass_fail": {
+        "verdict is NO-GO": true,
+        "catches and explains permission UX issue (issue 1)": true,
+        "catches contrast failure and cites WCAG threshold (issue 2)": true,
+        "catches 404 privacy policy and App Store consequence (issue 3)": true,
+        "catches deep link crash on expired token (issue 4)": true,
+        "does not soften critical language": true,
+        "catches ≥85% of planted issues": true
+      },
+      "output_preview": "```\nVERDICT: NO-GO\n\nFINDINGS:\n\n1. [A11Y — CRITICAL] Onboarding screen 4/5 — white text on #F5F5F5 background \n   Contrast ratio ~1.1:1. WCAG AA requires 4.5:1 for text. \n   Automatic blocker: form element (button) fails accessibility standard.\n\n2. [A11Y — CRITICAL] Permission dialogs (camera, microphone, location) \n   Requested on first launch with no explanation prompt before system dialog.\n   Users see system dialog with zero context. Will trigger deny from privacy-conscious users.\n   This is "
+    },
+    {
+      "id": "ship-004",
+      "score": 1,
+      "status": "FAIL",
+      "summary": "The output fundamentally misunderstands the task. It treats the INPUT brief as incomplete and requests files that have already been provided in abstract form within the brief itself. No audit is performed, no verdict is issued, and all four planted issues go undetected. This is a complete task failure.",
+      "pass_fail": {
+        "verdict is NO-GO": false,
+        "catches REST verb violation and cites convention": false,
+        "catches exposed API key in README and flags CRITICAL": false,
+        "catches rate-limit documentation mismatch": false,
+        "catches misleading /health endpoint": false,
+        "does not fabricate issues not in input": true,
+        "catches ≥85% of 4 planted issues": false
+      },
+      "output_preview": "I need the actual repository or files to audit. The ship-checker checklist requires:\n- Repository path or working directory\n- README file(s) to scan for exposed keys\n- OpenAPI spec file(s) to check endpoint definitions\n- Implementation code to verify rate limiting and health check logic\n- Config/env files for secrets\n\nCould you provide either:\n1. The repo path (if this is a real project on disk), or\n2. The actual file contents (README, OpenAPI spec, implementation) for me to scan?\n\nOnce I have t"
+    },
+    {
+      "id": "ship-005",
+      "score": 2,
+      "status": "FAIL",
+      "summary": "Output requests files instead of conducting the audit and defers all findings. No evidence-based verdict is rendered, and zero of four planted issues are identified. Does not meet pre-launch audit rubric.",
+      "pass_fail": {
+        "verdict is NO-GO": false,
+        "catches the broken form endpoint (issue 1)": false,
+        "catches the local file path in OG tag (issue 2) — flags as will-break-on-share": false,
+        "catches the sitemap exclusion mismatch (issue 3)": false,
+        "catches the missing HTTPS redirect (issue 4)": false,
+        "line-numbers or attribute-level specificity in findings": false,
+        "catches ≥85% of the 4 planted issues": false
+      },
+      "output_preview": "I need actual files to review. Ship-checker doesn't make assumptions — I verify by reading code.\n\n**What I need:**\n\nWhere is the marketing site? Provide either:\n1. The directory path (e.g., `/path/to/marketing-site/`)\n2. The specific HTML files to audit\n3. A git branch or commit containing the site\n\n**What I'll verify against the planted issues you've described:**\n\nOnce I have files, I'll:\n- Locate the contact form and check the `action` attribute (should point to a valid endpoint, not 404)\n- Au"
+    },
+    {
+      "id": "ship-006",
+      "score": 8,
+      "status": "PASS",
+      "summary": "All seven rubric criteria are met with specific evidence and professional craft. The output correctly identifies all four planted security/compliance issues, applies appropriate regulatory citations (GDPR Article 7(4), CAN-SPAM, OWASP), maintains firm tone without softening, and provides actionable fix-order guidance.",
+      "pass_fail": {
+        "verdict is NO-GO": true,
+        "catches pre-checked consent box and cites GDPR affirmative consent requirement": true,
+        "catches password reset token lifetime (issue 2) and cites the security risk": true,
+        "catches the post-deletion email / hard-delete mismatch causing 500 (issue 3)": true,
+        "catches broken unsubscribe link (issue 4) — flags as CAN-SPAM/GDPR violation": true,
+        "does not soften GDPR finding — must be BLOCKING, not 'worth revisiting'": true,
+        "catches ≥85% of the 4 planted issues": true
+      },
+      "output_preview": "```\nVERDICT: NO-GO\n\nFINDINGS:\n\n1. [COMPLIANCE] Signup form — Terms of Service checkbox pre-checked by default\n   SEVERITY: BLOCKING. GDPR requires affirmative user consent (checkbox must be unchecked initially). Current state violates Article 7(4) GDPR. Legal hold until fixed.\n\n2. [SECURITY] Password reset flow — link valid for 72 hours\n   SEVERITY: BLOCKING. OWASP recommends maximum 1 hour token lifetime for account recovery flows to limit takeover window. Current 72-hour window is 72× the reco"
+    }
+  ]
+}

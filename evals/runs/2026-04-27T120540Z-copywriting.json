@@ -1,0 +1,149 @@
+{
+  "run_id": "2026-04-27T120540Z-copywriting",
+  "target": "copywriting",
+  "dataset": "evals/datasets/copywriting.jsonl",
+  "judge_model": "haiku",
+  "timestamp": "2026-04-27T120540Z",
+  "aggregate": {
+    "mean_score": 5.90,
+    "pass_count": 5,
+    "fail_count": 5,
+    "case_count": 10,
+    "pass_rate_pct": 50.0,
+    "baseline_mean": null,
+    "delta": null,
+    "regression": false
+  },
+  "cases": [
+    {
+      "id": "copy-001",
+      "score": 5,
+      "status": "WARN",
+      "summary": "Strong work on persona targeting and psychology levers. Variant 1's headline exceeds 8 words (11 total), violating a hard constraint. Otherwise, the output demonstrates craft and clear strategic thinking. Revision needed.",
+      "pass_fail": {
+        "3 variants minimum": true,
+        "headline ≤8 words": false,
+        "addresses target persona": true,
+        "psychology lever cited": true
+      },
+      "output_preview": "## Hero Copy Variants for Glint\n\n**Variant 1: Reframe Inefficiency**\n- **Headline:** \"Your team's work is in Jira. Why are you rewriting it?\"\n- **Subheadline:** \"Glint pulls actual progress from Jira and Slack, generates polished reports in minutes. Get 3 hours back every week.\"\n\n*Angle: Positions manual reporting as a system flaw, not a management task. Appeals to the efficiency instinct of engineering managers.*\n\n---\n\n**Variant 2: Direct Outcome**\n- **Headline:** \"Stop copying and pasting. Sta"
+    },
+    {
+      "id": "copy-002",
+      "score": 8,
+      "status": "PASS",
+      "summary": "All rubric criteria met with strong execution. The output exceeds requirements by providing strategic commentary that names psychology levers explicitly and demonstrates deep understanding of the target persona's aesthetic affinities (Etsy/CB2). Copy is production-ready and avoids generic marketing language in favor of specificity aligned with the brand positioning ('people who take their home seriously').",
+      "pass_fail": {
+        "3 variants minimum": true,
+        "ad body ≤125 chars": true,
+        "addresses target persona": true,
+        "psychology lever cited": true
+      },
+      "output_preview": "**Variant 1 — Standards & Taste**\n\"A candle that matches your standards. Hand-poured soy, thoughtfully scented for people who don't settle.\" (102 chars)\n\n**Variant 2 — Intentionality**\n\"Your space deserves more than generic. Each candle is made like we'd make it for ourselves.\" (93 chars)\n\n**Variant 3 — Craft & Ritual**\n\"Soy wax, real scent, no shortcuts. Light it and remember why your home matters.\" (80 chars)\n\n---\n\nEach hooks on a different value: the first on taste/self-respect, the second on"
+    },
+    {
+      "id": "copy-003",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Strong execution across all rubric criteria. Five well-differentiated subject lines targeting VP Sales pain points, each under word and character limits, with clear psychological strategy (curiosity + social proof). Output is production-ready without revision.",
+      "pass_fail": {
+        "3 variants minimum": true,
+        "headline ≤8 words": true,
+        "addresses target persona": true,
+        "psychology lever cited": true
+      },
+      "output_preview": "1. **Close deals before Zoom fatigue sets in** (39 chars)\n\n2. **Your reps are losing deals to video engagement** (45 chars)\n\n3. **Async demos that actually close deals** (36 chars)\n\n4. **Cut sales cycle time without hiring reps** (40 chars)\n\n5. **Top sales teams just switched to async** (37 chars)\n\nEach targets a specific pain point for VP Sales (meeting overload, competitive threat, cycle time, headcount constraints, social proof) without revealing the solution in the subject line. This creates"
+    },
+    {
+      "id": "copy-004",
+      "score": 5,
+      "status": "WARN",
+      "summary": "Solid content quality with strong persona targeting and three distinct framings. Fails on a mechanical error (Framing 3 headline at 9 words) and omits explicit identification of the psychology lever driving each framing. Usable with headline trim and one additional pass to name the levers.",
+      "pass_fail": {
+        "3 variants minimum": true,
+        "headline ≤8 words": false,
+        "addresses target persona": true,
+        "psychology lever cited": false
+      },
+      "output_preview": "# Vaultly Growth Plan — 3 Value Framings\n\nI'm writing these as modular sections you can test independently on your pricing page. Each targets the same upgrade decision but from a different angle that resonates with RevOps managers.\n\n---\n\n## Framing 1: The Multiplier (Scale Without Headcount)\n\n**Headline:** Skip the hire. Scale your closes.\n\n**Copy:**\nStarter works for one sales rep or light volume. Growth is when your team stops playing relay with documents. Unlimited templates mean every deal t"
+    },
+    {
+      "id": "copy-005",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "The single email variant is well-crafted and expertly targets the enthusiast persona with sophisticated copy. However, the output delivers 1 of 3 required variants and fails to cite a psychology lever explicitly in the email body, missing two binary requirements despite strong execution on the variants that are present.",
+      "pass_fail": {
+        "3 variants minimum": false,
+        "headline ≤8 words": true,
+        "addresses target persona": true,
+        "psychology lever cited": false
+      },
+      "output_preview": "**Subject:** Your next keystroke\n\n---\n\nYou added a mechanical keyboard to your cart because you know the difference. Two hours of scrolling won't change that.\n\nA $220 board isn't an upgrade—it's the gap between typing *at* your desk and typing *through* your thoughts. Precision engineering. Every switch calibrated. The satisfying feedback that makes you actually *want* to write more code, more messages, more ideas.\n\nNot for everyone. That's the point.\n\nThe board is still in your cart. Waiting fo"
+    },
+    {
+      "id": "copy-006",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Strong execution across all criteria with authentic persona targeting and deliberate psychological framing. The copy avoids motivational platitudes and instead offers permission and acknowledgment—precisely calibrated for skeptical, burned-out users. Would be production-ready with no revisions.",
+      "pass_fail": {
+        "3 variants minimum": true,
+        "headline ≤8 words": true,
+        "addresses target persona": true,
+        "psychology lever cited": true
+      },
+      "output_preview": "**Pair 1**\n**Headline:** Habits that don't hate you\n**Sub:** You've quit three apps already. We built this one differently.\n\n**Pair 2**\n**Headline:** For people who've learned the hard way\n**Sub:** Gentle accountability that actually works. Because streaks don't.\n\n**Pair 3**\n**Headline:** The habit app that lets you sleep\n**Sub:** No daily notifications. No shame spirals. Just the habits you actually want.\n\n---\n\n**Why these work for your audience:**\n\nEach pair opens with acknowledgment, not affi"
+    },
+    {
+      "id": "copy-007",
+      "score": 5,
+      "status": "WARN",
+      "summary": "Output meets structural and persona requirements with competent ad copy that delivers USPs clearly. Fails to cite an explicit psychology lever in the reasoning, which is a material gap for persuasion-focused copywriting evaluation.",
+      "pass_fail": {
+        "3 variants minimum": true,
+        "headline ≤8 words": true,
+        "addresses target persona": true,
+        "psychology lever cited": false
+      },
+      "output_preview": "**Headlines (max 30 chars):**\n1. Accounting for Solo Creators\n2. Invoices in 2 Clicks, Auto Tax\n3. Freelance Accounting, $9/Month\n\n**Descriptions (max 90 chars):**\n1. Solo business accounting. Auto-categorize income. Create invoices in 2 clicks. $9/month.\n2. For freelancers only. Smart bank import categorization. Invoice in 2 clicks. Only $9/mo.\n\n---\n\n**Why this approach:**\n- **Headline 1** leads with positioning—differentiates directly from FreshBooks' agency-centric messaging.\n- **Headlines 2 "
+    },
+    {
+      "id": "copy-008",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Competent output with strong copy quality and helpful, non-pushy tone. Meets all rubric criteria, but criterion 3 (persona) and 4 (psychology lever) are satisfied implicitly or in explanation rather than explicitly in the variants. The output is production-usable but could be strengthened by naming the psychological lever directly in each variant.",
+      "pass_fail": {
+        "3 variants minimum": true,
+        "headline ≤8 words": true,
+        "addresses target persona": true,
+        "psychology lever cited": true
+      },
+      "output_preview": "# 3 Upsell Variants\n\n## Variant 1: The Gentle Nudge\n\"You've got 2 reports left this week — with Pro, you'd have unlimited access whenever insights strike. Plus, export them as CSV to share with your team or dive deeper in Excel.\"\n\n**CTA Button:** Upgrade to Unlimited\n\n---\n\n## Variant 2: The Workflow Angle\n\"Right now you're working within limits; Pro removes the friction so you can analyze whenever you need to. Export reports as CSV and build them into your dashboards or reports in one click.\"\n\n*"
+    },
+    {
+      "id": "copy-009",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "Strong copy quality and precise persona targeting undermined by rubric failures: only 1 variant provided when 3 required, and psychology levers used but not cited as mandated. High-quality execution on wrong specification.",
+      "pass_fail": {
+        "3 variants minimum": false,
+        "headline ≤8 words": true,
+        "addresses target persona": true,
+        "psychology lever cited": false
+      },
+      "output_preview": "**Subject:** Your 4-month wait is over (Draftly is live)\n\n---\n\nYou asked for it. For 120 days, you asked for it—in your replies, your DMs, your waitlist confirmations.\n\nToday, Draftly is finally here.\n\nWe've spent the last four months building the one thing LinkedIn creators kept telling us they needed: an AI writing assistant that actually *gets* your voice. Not generic. Not templates. You.\n\nDraftly is now live for all 8,000 of you.\n\n**What you're getting:**\n\n- **Voice lock** — Feed Draftly 3-5"
+    },
+    {
+      "id": "copy-010",
+      "score": 8,
+      "status": "PASS",
+      "summary": "All rubric criteria met with strong execution. The three variants show strategic differentiation across distinct objection layers (sticker shock, internal buy-in, confidence/risk), and copy quality is high — conversational, direct, and persona-specific language throughout. Character counts are clean (121–130 chars, well under limit). The reasoning demonstrates solid domain knowledge of persuasion tactics applied to manufacturing ERP buyers.",
+      "pass_fail": {
+        "3 variants minimum": true,
+        "headline ≤8 words": true,
+        "addresses target persona": true,
+        "psychology lever cited": true
+      },
+      "output_preview": "**Variant 1 — Payback clarity**\n\"Saw the price? Manufacturers typically recover it in 8–12 months. Free ROI calculator shows your specific payback timeline.\"\n(125 chars)\n\n**Variant 2 — Internal alignment**\n\"Need ammo for your CFO? Our ROI calculator shows exactly where the $2M+ in annual savings come from. Takes 5 minutes.\"\n(121 chars)\n\n**Variant 3 — Low-pressure proof**\n\"Typical outcome: 35% operational savings in 6 months. See your potential ROI risk-free. No demo, no commitment, just answers."
+    }
+  ]
+}

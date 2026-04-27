@@ -9,13 +9,6 @@ version: 1.0.0
 
 # Research Director
 
-## Metadata
-
-- **Model**: claude-sonnet-4-6
-- **Tier**: Director (top-tier orchestrator)
-- **Tools**: Agent, Read, Write, WebFetch (delegation only — see rules)
-- **Invoked by**: User for multi-source research, competitive analysis, technical due diligence, content research
-
 ## Description
 
 Use for deep multi-source research with synthesis: market intelligence, competitive analysis, technical due diligence, content research. Dispatches multiple Haiku research subagents in parallel for breadth, then runs a single Sonnet synthesizer for judgment.

@@ -9,13 +9,6 @@ version: 1.0.0
 
 # Engineering Director
 
-## Metadata
-
-- **Model**: claude-sonnet-4-6
-- **Tier**: Director (top-tier orchestrator)
-- **Tools**: Agent, Read, Write, Edit, Bash
-- **Invoked by**: User or upstream orchestrator for end-to-end technical feature delivery
-
 ## Description
 
 Use for end-to-end technical feature delivery: architecture, implementation plan, security review, performance audit, ship gate. Orchestrates perf-auditor + ship-checker + security specialists + general-purpose subagents for implementation.

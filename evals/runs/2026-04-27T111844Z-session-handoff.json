@@ -1,0 +1,104 @@
+{
+  "run_id": "2026-04-27T111844Z-session-handoff",
+  "target": "session-handoff",
+  "dataset": "evals/datasets/session-handoff.jsonl",
+  "judge_model": "haiku",
+  "timestamp": "2026-04-27T111844Z",
+  "aggregate": {
+    "mean_score": 7.20,
+    "pass_count": 5,
+    "fail_count": 0,
+    "case_count": 5,
+    "pass_rate_pct": 100.0,
+    "baseline_mean": null,
+    "delta": null,
+    "regression": false
+  },
+  "cases": [
+    {
+      "id": "handoff-001",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Strong handoff document that meets all rubric criteria with clear evidence. Output demonstrates judgment beyond mechanical transcription—flagging blocking status on the critical question, calling out the legacy endpoint as a footgun, and inferring prioritized next actions. Structure and formatting are production-ready for /clear or session resumption.",
+      "pass_fail": {
+        "captures core architectural decision": true,
+        "captures reason for NextAuth rejection": true,
+        "captures strategy choice and migration reason": true,
+        "lists open question explicitly": true,
+        "flags critical file paths": true,
+        "flags legacy endpoint risk": true,
+        "paste-ready for /clear": true,
+        "captures ≥90% of decisions and open questions": true
+      },
+      "output_preview": "```\n---\nHANDOFF — 2026-04-27\nSESSION GOAL: Migrate auth flow from NextAuth to custom JWT handler with org-scoped claims\n---\n\nCOMPLETED\n- Implemented new JWT config in src/lib/auth.ts\n- Created custom auth handler at src/app/api/v2/auth/route.ts (replaces NextAuth)\n- Updated src/middleware.ts to use new endpoint matcher\n\nIN PROGRESS\n- Auth migration is functional but legacy /api/auth/[...nextauth] endpoint still exists (NOT removed)\n  - Status: Code paths migrated, but old handler creates ambigui"
+    },
+    {
+      "id": "handoff-002",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Excellent handoff document that meets all criteria with structural craft beyond the minimum. Goes beyond requirements by adding decision reasoning with rejected alternatives, flagging blocking status on Q1, and including a 'CONTEXT TO RESTORE' section that provides Core Web Vitals and device-testing context for the next session. All three file paths are flagged with full paths and purpose annotations, making it immediately actionable.",
+      "pass_fail": {
+        "captures root cause": true,
+        "captures fix applied and its scope": true,
+        "captures the remaining mobile issue": true,
+        "lists the open question": true,
+        "notes that design input is required": true,
+        "flags file paths": true,
+        "output is paste-ready": true,
+        "captures ≥90% of decisions and open questions": true
+      },
+      "output_preview": "```\n---\nHANDOFF — 2026-04-27\nSESSION GOAL: Fix CLS (Cumulative Layout Shift) regression on product page\n---\n\nCOMPLETED\n- Root cause identified: <Suspense> boundary wrapping review carousel resolves after above-fold paint, triggering 140px layout shift\n- Fix implemented: added min-height placeholder inside Suspense fallback\n- Desktop verification: CLS improved from 0.31 → 0.04 (meets target)\n\nIN PROGRESS\n- Mobile CLS optimization: fix works but CLS remains 0.18 (above target)\n  - Status: min-heig"
+    },
+    {
+      "id": "handoff-003",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Complete capture of all rubric criteria. The output structures the informal transcript into a professional handoff document with clear sections for decisions, open questions, next actions with dependencies, and context preservation. All binary criteria are met with explicit evidence; the semantic organization and actionability exceed minimum requirements. Production-ready without revision.",
+      "pass_fail": {
+        "captures all 3 migration phases and their sequencing": true,
+        "captures the dual-write strategy and read cutover timing": true,
+        "captures the Phase 1 ready status (scripted, tested on staging)": true,
+        "captures Phase 2 gate: after 2.4.0 release": true,
+        "captures the backfill performance risk: ~18 min, 22M rows, needs CONCURRENTLY index": true,
+        "lists the open question: who owns Phase 1 prod execution": true,
+        "flags all file paths: three migration SQL files": true,
+        "captures ≥90% of decisions and open questions": true
+      },
+      "output_preview": "```\n---\nHANDOFF — 2026-04-27\nSESSION GOAL: Plan and validate a 3-phase user_id column migration from int to UUID\n---\n\nCOMPLETED\n- Designed 3-phase migration architecture: Phase 1 (add uuid column + backfill) → Phase 2 (dual-write period) → Phase 3 (read cutover + drop int)\n- Scripted and tested Phase 1 against staging snapshot (add_user_uuid.sql, backfill_uuid.sql)\n- Created Phase 1 rollback script (uuid_rollback.sql)\n- Identified and flagged performance risk: backfill on 22M rows takes ~18 min "
+    },
+    {
+      "id": "handoff-004",
+      "score": 7,
+      "status": "PASS",
+      "summary": "All criteria met. The output is well-organized, immediately usable as a handoff document, and preserves every decision and open question from the input. The addition of NEXT ACTIONS and CONTEXT TO RESTORE sections adds practical utility beyond the rubric baseline.",
+      "pass_fail": {
+        "captures all 3 locked decisions with exact constraints": true,
+        "captures open question A: proration vs credit — no decision": true,
+        "captures open question B: cron vs event-driven — leaning event-driven, not final": true,
+        "captures open question C: legacy plan handling — blocked on legal": true,
+        "notes that no files were edited this session": true,
+        "references existing files: src/billing/stripe.ts, src/roles/permissions.ts": true,
+        "output is paste-ready and clearly delineates locked vs. open items": true,
+        "captures ≥90% of decisions and open questions": true
+      },
+      "output_preview": "```\n---\nHANDOFF — 2026-04-27\nSESSION GOAL: Scope billing overhaul feature: dual billing model, payment processing, and access control decisions\n---\n\nCOMPLETED\n- None. This was a scoping/decision session. No code written.\n\nIN PROGRESS\n- Feature scoping for billing overhaul (three decisions locked, three open)\n\nDECISIONS\nD1: Support both seat-based AND usage-based billing simultaneously per organization (not one or the other) — Reason: flexibility for different customer segments — Alternative reje"
+    },
+    {
+      "id": "handoff-005",
+      "score": 8,
+      "status": "PASS",
+      "summary": "Excellent handoff document that meets all rubric criteria with precision and exceeds them through thoughtful additions (CONTEXT TO RESTORE section, decision alternatives, blocking dependency analysis). The structure anticipates what a downstream reader will need without requiring them to revisit the incident thread. This is production-ready as-is.",
+      "pass_fail": {
+        "captures incident summary: cause, timeline, resolution, impact": true,
+        "captures all 3 follow-up tasks with owners and deadlines": true,
+        "flags task 3 as unassigned (TBD)": true,
+        "captures open policy question: PR review for .env.production": true,
+        "flags config/schema.ts as to-be-created": true,
+        "references existing files: workers/queue.ts, infra/datadog-alerts.tf": true,
+        "paste-ready, actionable standalone handoff": true,
+        "captures ≥90% of decisions and open questions": true
+      },
+      "output_preview": "```\n---\nHANDOFF — 2026-04-27\nSESSION GOAL: Post-mortem analysis and follow-up task assignment for 2026-04-27 14:32 UTC worker queue incident\n---\n\nCOMPLETED\n- Incident identified and root cause found: REDIS_MAX_CONNECTIONS=1 in .env.production (copy-paste error from deploy at 14:28 UTC)\n- Config reverted and redeployed at 15:07 UTC\n- Worker queue drained by 15:41 UTC\n- Post-mortem conducted; follow-up tasks agreed and partially assigned\n\nINCIDENT IMPACT\n- Duration: 69 minutes (14:32–15:41 UTC)\n- "
+    }
+  ]
+}

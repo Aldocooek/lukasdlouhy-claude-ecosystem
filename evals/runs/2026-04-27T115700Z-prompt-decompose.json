@@ -1,0 +1,123 @@
+{
+  "run_id": "2026-04-27T115700Z-prompt-decompose",
+  "target": "prompt-decompose",
+  "dataset": "evals/datasets/prompt-decompose.jsonl",
+  "judge_model": "haiku",
+  "timestamp": "2026-04-27T115700Z",
+  "aggregate": {
+    "mean_score": 6.00,
+    "pass_count": 5,
+    "fail_count": 3,
+    "case_count": 8,
+    "pass_rate_pct": 62.5,
+    "baseline_mean": null,
+    "delta": null,
+    "regression": false
+  },
+  "cases": [
+    {
+      "id": "decomp-001",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Excellent task decomposition and dependency analysis with 9 clear, non-hallucinated tasks. However, the output uses a custom classification taxonomy ([DECISION]/[ACTION]/[RESEARCH]/[OUTPUT]) instead of the rubric's specified types (strategy/execution/content/technical), failing one criterion. Functionally solid and actionable, but not a perfect rubric alignment.",
+      "pass_fail": {
+        "extracts all atomic tasks — minimum 6 distinct tasks": true,
+        "classifies each task by type (strategy/execution/content/technical)": false,
+        "no hallucinated tasks not present in the prompt": true,
+        "ordering/dependency between tasks is noted": true
+      },
+      "output_preview": "I'll decompose this multi-part newsletter launch into atomic tasks and surface the decisions that need your input before we proceed.\n\n## DECOMPOSITION\n\n```\nT1 [DECISION] Pick newsletter niche\n  Depends on: none\n  Done when: a specific niche/topic is chosen\n\nT2 [DECISION] Select newsletter platform\n  Depends on: T1 (niche chosen)\n  Done when: platform decided and criteria for the choice documented\n\nT3 [ACTION] Write issue #1\n  Depends on: T1\n  Done when: first issue drafted and ready to send\n\nT4 "
+    },
+    {
+      "id": "decomp-002",
+      "score": 7,
+      "status": "PASS",
+      "summary": "All rubric criteria are met cleanly. The decomposition captures all requested work with clear classification and dependencies. The output exceeds the rubric by surfacing a strategic decision point (freemium tier), framing options with reasoning, and asking clarifying questions — demonstrating thoughtful product decomposition beyond mechanical task-listing.",
+      "pass_fail": {
+        "extracts all atomic tasks (minimum 5)": true,
+        "classifies each task by type": true,
+        "no hallucinated tasks not present in prompt": true,
+        "ordering/dependency between tasks is noted": true
+      },
+      "output_preview": "I'll decompose this compound prompt into atomic tasks so we can work through it systematically.\n\n## Decomposition\n\n**T1 [RESEARCH]** — Understand why 60% of users drop off at step 2  \nDepends on: none  \nDone when: root causes identified with supporting evidence (user feedback, session data, error logs, behavioral patterns)\n\n**T2 [DECISION]** — Freemium tier strategy  \nDepends on: none  \nDone when: decision made and documented  \n⚠️ **Flagged:** This is independent of the onboarding fix but affect"
+    },
+    {
+      "id": "decomp-003",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "The output demonstrates strong decomposition structure and clear dependency mapping (2 of 4 criteria met), but fails on the classification scheme requirement and introduces three tasks (T1, T2, T8) not present in the original prompt. This is partial execution—the decomposition is well-intentioned but does not adhere to the rubric's specifications.",
+      "pass_fail": {
+        "extracts all atomic tasks — minimum 5 distinct tasks": true,
+        "classifies each task by type (materials/financial/research/coaching/hiring)": false,
+        "no hallucinated tasks not present in the prompt": false,
+        "ordering/dependency between tasks is noted": true
+      },
+      "output_preview": "# Series A Preparation — Decomposition\n\nThis is a compound request touching fundraising strategy, financial planning, team decisions, and investor targeting. I'll decompose it into atomic tasks and flag critical decisions before you proceed.\n\n---\n\n## Decomposed Tasks\n\n**T1 [DECISION]** — Establish current state: what exists and what needs building\n  - Done when: user confirms pitch deck status, financial data available, company metrics\n\n**T2 [RESEARCH]** — Map company fundamentals needed for all"
+    },
+    {
+      "id": "decomp-004",
+      "score": 8,
+      "status": "PASS",
+      "summary": "Excellent decomposition meeting all rubric criteria with strong evidence per criterion. Output exceeds scope by providing strategic decision analysis (three migration strategies with pros/cons/recommendations), explicit risk evaluation, and clear escalation gates—transforming a basic task list into actionable guidance for an inexperienced team executing a high-risk operation.",
+      "pass_fail": {
+        "extracts all atomic tasks — minimum 6 distinct tasks": true,
+        "classifies each task by type": true,
+        "no hallucinated tasks not present in the prompt": true,
+        "ordering/dependency between tasks is noted": true
+      },
+      "output_preview": "I'll decompose this migration request. This is high-risk work with multiple blocking decisions and constraints that need to be addressed sequentially.\n\n## COMPLETION CHECKLIST\n\n```\n[ ] T1  [RESEARCH]   — Catalog live migration strategies for 80GB MySQL→PG zero-downtime\n[ ] T2  [DECISION]   — Choose migration strategy (replication vs logical vs blue-green)\n[ ] T3  [RESEARCH]   — Audit codebase for MySQL-specific syntax\n[ ] T4  [ACTION]     — Identify unused tables and cleanup scope\n[ ] T5  [DECIS"
+    },
+    {
+      "id": "decomp-005",
+      "score": 5,
+      "status": "WARN",
+      "summary": "Strong decomposition with 12 well-ordered tasks, clear dependencies, and a useful decision-point structure. Fails the classification taxonomy requirement: uses RESEARCH/DECISION/ACTION/VALIDATE instead of the rubric's profile/content-strategy/execution/distribution/growth. Usable but requires reclassification to match the specified taxonomy.",
+      "pass_fail": {
+        "extracts all atomic tasks — minimum 6 distinct tasks": true,
+        "classifies each task by type (profile/content-strategy/execution/distribution/growth)": false,
+        "no hallucinated tasks not present in the prompt": true,
+        "ordering/dependency between tasks is noted": true
+      },
+      "output_preview": "I'm decomposing your LinkedIn/personal brand request into atomic tasks. This is a multi-stream effort with research, strategy decisions, and operational setup.\n\n## Decomposition\n\n**T1 [RESEARCH]** — Audit your current LinkedIn profile for optimization gaps  \nDone when: 5–10 specific improvements identified (headline, about section, experience formatting, featured content, CTA setup)\n\n**T2 [DECISION]** — Define your content pillars and positioning  \nDone when: 2–3 core topics chosen that align wi"
+    },
+    {
+      "id": "decomp-006",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Output correctly decomposes the prompt into 7 atomic, grounded tasks with type classifications and stated dependencies. All four rubric criteria pass. The work is immediately usable, though the task-type taxonomy diverges slightly from the rubric's suggested types, and dependencies are noted informally rather than in a structured format.",
+      "pass_fail": {
+        "extracts all atomic tasks — minimum 6 distinct tasks": true,
+        "classifies each task by type": true,
+        "no hallucinated tasks not present in the prompt": true,
+        "ordering/dependency between tasks is noted": true
+      },
+      "output_preview": "# Prompt Decomposition — Pricing Audit & A/B Test\n\nYou've embedded 6–7 discrete tasks here. Let me break them down and flag what needs user input before proceeding.\n\n## COMPLETION CHECKLIST\n\n```\n[ ] T1 [RESEARCH]  — Competitor pricing analysis (tier structure, pricing, annual discounts)\n[ ] T2 [RESEARCH]  — [BLOCKED] Internal pricing audit (need current data from you)\n[ ] T3 [DECISION]  — Tier strategy (drop to 2 tiers vs. reposition middle) — awaiting T1 + T2 input\n[ ] T4 [OUTPUT]    — Annual d"
+    },
+    {
+      "id": "decomp-007",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "Output meets 2 of 4 rubric criteria. It correctly extracts 7 tasks and notes ordering/dependencies, but fails on classification (uses wrong category scheme) and adds a task (T7) not in the original prompt. Useful skeleton but technically non-compliant with the specification.",
+      "pass_fail": {
+        "extracts all atomic tasks — minimum 5 distinct tasks": true,
+        "classifies each task by type (communications/internal/legal/investor-relations/PR)": false,
+        "no hallucinated tasks not present in the prompt": false,
+        "ordering/dependency between tasks is noted": true
+      },
+      "output_preview": "COMPLETION CHECKLIST\n\n```\n[ ] T1 [RESEARCH]   — Read and assess the negative article; identify specific claims\n[ ] T2 [DECISION]   — Confirm response strategy (public vs. silent, format, tone)\n[ ] T3 [ACTION]     — Draft public response (blog post / statement / social reply)\n[ ] T4 [ACTION]     — Create internal CS briefing with talking points and FAQs\n[ ] T5 [DECISION]   — Assess whether privacy policy updates are required\n[ ] T6 [ACTION]     — Draft investor communication (email / call script)"
+    },
+    {
+      "id": "decomp-008",
+      "score": 8,
+      "status": "PASS",
+      "summary": "Excellent decomposition that satisfies all rubric criteria. Output structures 8 atomic tasks with explicit dependencies and clear type classification. Exceeds requirements by providing 'Done when' definitions, a decision framework for the bootcamp question, and a completion checklist—all of which increase actionability without scope creep.",
+      "pass_fail": {
+        "extracts all atomic tasks — minimum 6 distinct tasks": true,
+        "classifies each task by type (skills-gap/portfolio/networking/application/interview-prep/decision)": true,
+        "no hallucinated tasks not present in the prompt": true,
+        "ordering/dependency between tasks is noted": true
+      },
+      "output_preview": "I'll decompose this multi-part career transition prompt into atomic tasks and flag the decision points.\n\n## DECOMPOSITION\n\n**T1 [RESEARCH]** — Identify PM skill gaps from finance background\n- Depends on: none\n- Done when: Clear list of what transfers vs. what's new (e.g., SQL, qualitative research, product strategy frameworks)\n\n**T2 [DECISION]** — Bootcamp vs. self-directed learning\n- Depends on: T1 (need skill gaps first)\n- Done when: User chooses; I recommend based on timeline, budget, learnin"
+    }
+  ]
+}

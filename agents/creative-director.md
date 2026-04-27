@@ -9,13 +9,6 @@ version: 1.0.0
 
 # Creative Director
 
-## Metadata
-
-- **Model**: claude-sonnet-4-6
-- **Tier**: Director (top-tier orchestrator)
-- **Tools**: Agent, Read, Write, Edit
-- **Invoked by**: User or upstream orchestrator for end-to-end creative campaign work
-
 ## Description
 
 Use for end-to-end creative campaign orchestration: video + copy + landing page + audit. Decomposes brief, dispatches video-director / copy-strategist / brief-author / perf-auditor in parallel, synthesizes campaign deliverable.

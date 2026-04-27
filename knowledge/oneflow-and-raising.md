@@ -207,6 +207,140 @@ OneFlow's Claude Code ecosystem is organised around composable skill/agent chain
 17. **All regulatory [ASSUMED] flags require legal verification before investor-facing use.**
 18. **DD adversarial self-review is mandatory.** After drafting, ask: "What did I miss? Where was I too optimistic? Would I invest my own money?"
 
+## OneFlow Operational Playbook (mined from Filip 2026-04-27)
+
+*Source: filipdopita-tech/claude-ecosystem-setup — expertise/outbound-sales-science.yaml, expertise/email-deliverability.yaml, expertise/crm-ghl.yaml, COST_DISCIPLINE.md, SPECIALIZATION.md*
+
+### Scale Proof Points
+- **10,067 Czech firms** processed through scraping engine v4.0 (as of 2026-04-22)
+- **503 outreach-ready leads** from single enrichment run (qualification funnel: 10,067 → 503 = 5% pass rate)
+- **26.2% reply rate** on Steakhouse WhatsApp campaign — channel matters as much as copy
+- **110+ Dubai LinkedIn leads** in GoHighLevel A/B test with 4 variants (fund, RE, HNWI, generic)
+
+### Pipeline Stages
+`Sourced → Enriched → Queued → Contacted → Replied → Qualified → Meeting → Closed`
+
+GHL CRM tracks each stage via webhook triggers. Contact creation fires on email send; stage advance fires on reply or bounce detection. Sync cycle: every 15 minutes via `ghl_sync.py`.
+
+### ARES API Integration Patterns
+ARES (Czech business registry, 100% CZ company coverage, free) is the mandatory baseline enrichment layer before any other data source.
+
+**Enrichment waterfall:**
+1. **ARES** — IČO (company ID), DIČ (VAT), company name, address, právní forma (legal form), founding date. 100% CZ coverage, zero cost.
+2. **Apollo** — Contact details, email, LinkedIn. ~70% hit rate on companies with 50+ employees; fails on small entities.
+3. **Hunter.io** — Email fallback when Apollo misses.
+4. **SMTP verify gate** — Final gate before any contact enters outreach queue.
+5. **Supplemental sources:** ISIR (insolvency register), CÚZK (cadastre/property), Justice.cz (court proceedings), Veřejný rejstřík (UBO/liens).
+
+**GHL custom fields for Czech contacts:**
+- `IČO` (company registration number) — primary deduplication key alongside email
+- `DIČ` (VAT number)
+- `Právní forma` (legal entity type: s.r.o., a.s., OSVČ, etc.)
+- `ARES checks` (enrichment timestamp + data version)
+- `Emitent Score` (6-dimension composite)
+- `A/B variant` (outreach test assignment)
+
+### Czech Regulatory Compliance: ZoOÚ + GDPR
+
+**ZoOÚ** (Zákon o ochraně osobních údajů — Czech personal data protection law, implementing GDPR) applies to all Czech B2B outreach involving natural persons (including named directors/contacts at companies).
+
+**GDPR consent timing for B2B cold outreach:**
+- **Legitimate interest** (čl. 6(1)(f) GDPR) is the applicable lawful basis for B2B cold outreach to corporate email addresses (name@firma.cz), provided there is a genuine business relevance connection.
+- **Explicit consent** is required for outreach to personal email addresses (gmail, seznam) and for follow-up marketing after the initial contact.
+- **Opt-out must be immediate and permanent.** Any unsubscribe request = removal from all future sequences, logged with timestamp. Retention of opt-out records: minimum 3 years.
+- **Data retention for contacts who never replied:** Maximum 12 months from last contact attempt before mandatory deletion or re-consent.
+
+**ZoOÚ/GDPR hard stops in outreach tool:**
+- Unsubscribe link in every email (not just final sequence email)
+- Reply "STOP" detection in WhatsApp sequences
+- LinkedIn DM opt-out handling via manual tag in GHL
+
+**ÚOOÚ** (Czech data protection authority) can fine up to 4% of global annual turnover or €20M for GDPR violations — same ceiling as EU-wide GDPR enforcement.
+
+### Subject Line + Opener Templates That Drove 26.2% Reply Rate
+
+**WhatsApp format (Steakhouse campaign):** Short, specific, personal hook. Max 80 words. No pitch in opener — ask or observation only.
+
+**Email subject line rules (from outbound-sales-science.yaml):**
+- Tracked in `outreach_sent.ab_variant` DB field — always A/B on subject
+- Curiosity gap + specificity outperforms generic benefit statements
+- Banned in subjects: "exkluzivní nabídka", "příležitost", "investice"
+- Works: Company-specific reference ("Váš projekt X + konkrétní otázka")
+- Works: ROI proof as subject ("Ze 67 000 Kč na 10 000 000 Kč — jak?")
+
+**Day 3 "Re:" template logic:**
+- Thread subject = same as Day 0 (continuity signal)
+- Body opens with new angle, not repetition of Day 0 pitch
+- 80 words max — mobile reading assumption
+- CTA: alternative question ("nebo by Vás zajímal jiný pohled na X?")
+
+**Day 21 "breaking up" template (highest reply rate in sequence):**
+- Signals removal from list
+- Leaves a specific door open ("kdyby se situace změnila...")
+- No pitch, no ask, no summary of previous emails
+- 50 words max
+
+**Czech opener bans (flags spam filters AND Czech readers):**
+- "Dovoluji si" → immediate trust destruction
+- "Rád bych Vám představil" → generic template signal
+- "Pokud byste měl chvilku" → low-confidence frame
+- "Mám pro Vás exkluzivní nabídku" → regulatory risk (CNB monitors guaranteed-yield marketing)
+
+**Proven opener structure:**
+Specific observation about recipient/company + direct value claim with number + single soft question. No throat-clearing.
+
+### Follow-Up Cadence Rules
+
+| Day | Format | Max Length | CTA Type | Rationale |
+|-----|--------|-----------|----------|-----------|
+| 0 | Personalized curiosity | 120 words | Soft (question) | Hook only, no link in email 1 |
+| 3 | "Re:" threaded | 80 words | Alternative angle | New info, not repetition |
+| 7 | Social proof + case study | 150 words | Medium CTA | Proof-focused |
+| 14 | Direct question | 60 words | Direct | Minimal friction |
+| 21 | "Breaking up" | 50 words | Reengagement | Consistently highest reply rate |
+
+**Between-touch rules:**
+- No same-day follow-up on any channel
+- LinkedIn connection request and cold email should not run simultaneously to same contact (overlap = spam signal)
+- If contact opens email 3+ times without replying → elevate to LinkedIn DM, do not send email 4 yet
+
+### Deliverability Lessons (Proofpoint Blocking Incident)
+
+**What happened:** Primary Flash VPS IP `173.212.220.67` hit Proofpoint PDR blocklist. 554 error on all sends. Czech backup IP `89.221.212.203` remained clean.
+
+**Immediate actions:**
+1. Switch all active sending to `89.221.212.203` immediately
+2. Submit Proofpoint delisting: https://support.proofpoint.com/dnsbl-lookup.cfm (24–72 hr processing)
+3. Do NOT send from blocked IP during delisting — each attempt resets the clock
+
+**Prevention stack:**
+- **SPF:** Mandatory `-all` hard fail. `~all` soft fail is insufficient — blocks are less aggressive but deliverability suffers.
+- **DKIM:** 2048-bit minimum. Rotate every 6 months on a calendar reminder.
+- **DMARC progression:** Start `p=none` → after 2 weeks `p=quarantine;pct=10` → after 2 more weeks `p=quarantine;pct=100` → after 4 weeks `p=reject;pct=100`. Never jump to reject from none.
+- **Czech ISP monitoring:** Run 2x daily cron against local blacklist for the `89.221.212.203` IP range
+- **Google Postmaster Tools:** Domain reputation scores independently of SendGrid — check weekly, not just on incident
+
+**Warmup progression:**
+`20 emails/day → 50 → 100 → 200+` over 4 weeks. "Consistent frequency beats burst patterns" — Gmail penalizes irregular volume spikes.
+
+**A/B/C domain rotation:**
+- Domain A: High-priority outreach (established reputation)
+- Domain B: Test sequences and variants
+- Domain C: Warmup only — never send cold to non-warmup contacts from C
+
+**Halt thresholds (auto-pause triggers):**
+| Metric | Threshold | Action |
+|--------|-----------|--------|
+| Bounce rate | >3% (deepmine) / >4% (oneflow-and-raising) | HALT |
+| Spam rate | >0.1% (deepmine) / >0.3% (oneflow-and-raising) | HALT |
+| Acceptance rate drop | <15% | Auto-throttle (50→20 daily) |
+| Acceptance rate recovery | ≥20% | Resume normal volume |
+
+*Note: deeper mine shows tighter thresholds (3%/0.1%) than initial oneflow-and-raising.md (4%/0.3%). Use the tighter thresholds — they reflect actual operational config.*
+
+### LinkedIn Automation Status (2026-04-22)
+LinkedIn automation was down as of last confirmed scan. Safe daily connection limit: **50 connections/day** without Sales Navigator (detection risk >100/day). Session management: keepalive every 6 hours; JSESSIONID rotation; randomized delays 1–3 seconds.
+
 ## Sources
 
 All content compiled from the following raw files in `filipdopita-tech/claude-ecosystem-setup` (main branch):

@@ -42,18 +42,32 @@ process.stdin.on('end', () => {
 
   if (isExpensiveType && isOpusOrUnset) {
     const timestamp = new Date().toISOString();
-    const currentModel = model === '' ? '(not set — defaults to workspace model)' : model;
-    const msg = `[ADVISORY] ${timestamp} | subagent_type=${subagentType} | model=${currentModel}`;
+    const currentModel = model === '' ? '(not set — defaults to parent = Opus on main thread)' : model;
+    const isUnset = model === '';
+    const severity = isUnset ? 'BLOCKED' : 'ADVISORY';
+    const msg = `[${severity}] ${timestamp} | subagent_type=${subagentType} | model=${currentModel}`;
 
-    // Log to file
     try { fs.appendFileSync(LOG_FILE, msg + '\n'); } catch {}
 
-    // Advisory to stderr — exit 0 (non-blocking)
+    if (isUnset) {
+      // BLOCK: missing model is a silent cost leak (363 violations in 16 sessions)
+      process.stderr.write(
+        `\n[model-routing-guard] BLOCKED: subagent_type="${subagentType}" launched without explicit model parameter.\n` +
+        `  This silently inherits parent model (= Opus on main thread) and burns budget.\n` +
+        `  Per CLAUDE.md routing rules:\n` +
+        `    - Default: model: "sonnet" (covers 95% of delegated work)\n` +
+        `    - Mechanical (grep, count, list, web fetch): model: "haiku"\n` +
+        `    - Plans / critical code / high-stakes synthesis: model: "opus" (justify inline)\n` +
+        `  Re-launch with explicit model parameter.\n` +
+        `  Logged to: ${LOG_FILE}\n\n`
+      );
+      process.exit(2);
+    }
+
+    // Explicit opus = advisory only (user may have justified it)
     process.stderr.write(
-      `\n[model-routing-guard] ADVISORY: subagent_type="${subagentType}" may run on Opus.\n` +
-      `  Current model: ${currentModel}\n` +
-      `  Research/audit on Opus burns context — delegate to cheaper model per CLAUDE.md.\n` +
-      `  Suggestion: set model: "sonnet" (judgment) or model: "haiku" (mechanical tasks).\n` +
+      `\n[model-routing-guard] ADVISORY: subagent_type="${subagentType}" running on Opus.\n` +
+      `  Acceptable for plans / critical code / high-stakes synthesis.\n` +
       `  Logged to: ${LOG_FILE}\n\n`
     );
   }

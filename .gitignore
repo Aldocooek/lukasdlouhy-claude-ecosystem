@@ -1,0 +1,66 @@
+# Logs
+*.log
+logs/
+*.log.*
+
+# Environment & Secrets
+.env
+.env.*
+*.env
+mcp-keys.env
+master.env
+credentials.json
+
+# SSH & Crypto Keys
+id_rsa*
+id_ed25519*
+*.pem
+*.key
+*.pub
+
+# Claude Code Private / Cache
+projects/
+memory/
+sessions/
+cache/
+telemetry/
+settings.local.json
+
+# Editor & OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.sublime-project
+.sublime-workspace
+
+# Node & Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build Artifacts
+dist/
+build/
+*.tgz
+*.tar.gz
+
+# Disabled Files
+*.disabled
+
+# Backups
+*.backup
+.backup-*/
+~*
+
+# System
+Thumbs.db
+.AppleDouble
+.LSOverride
+._*
+
+# Git
+.git/
+.gitkeep (exception — kept for empty dirs)

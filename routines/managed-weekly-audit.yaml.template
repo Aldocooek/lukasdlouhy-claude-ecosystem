@@ -1,0 +1,92 @@
+# managed-weekly-audit.yaml.template
+#
+# Managed Agents variant of weekly-audit.yaml.
+# Migrates the weekly ecosystem audit from a Claude Code CronCreate session
+# to a durable Anthropic Managed Agent session.
+#
+# ACTIVATION:
+#   1. Run scripts/managed-agents-prereqs.sh and verify all checks pass.
+#   2. Rename this file: mv managed-weekly-audit.yaml.template managed-weekly-audit.yaml
+#   3. Schedule via: /schedule managed-weekly-audit.yaml
+#
+# REQUIRES: anthropic SDK >= 0.92.0 and ANTHROPIC_API_KEY with Managed Agents access.
+# COST NOTE: Session token budget set to 40000 (Sonnet 4.6). Adjust budget_tokens if audits
+#            consistently hit the cap — check Console cost page after first 3 runs.
+#
+# WHY OVER weekly-audit.yaml:
+#   - Context does not fill: server-side session state, not in-context
+#   - Survives network interruptions: session resumes on reconnect
+#   - Credential isolation: GitHub token stored in Vault, not in hook environment
+#   - Managed memory (beta): baseline grades persist across sessions without disk files
+
+routine:
+  name: managed-weekly-ecosystem-audit
+  description: >
+    Runs a full ecosystem audit every Monday at 09:00 Prague time via
+    Anthropic Managed Agents. The agent reviews all skills, agents, hooks,
+    and commands for quality, usage, and drift. Opens at most 3 PRs for
+    high-value, low-risk improvements. All PRs require human review.
+
+schedule:
+  cron: "0 9 * * MON"
+  timezone: "Europe/Prague"
+
+agent:
+  # This routine invokes the managed-agent-bridge, which in turn creates
+  # a Managed Agents session on the Anthropic platform.
+  model: sonnet
+  prompt: |
+    Dispatch the weekly ecosystem audit to Anthropic Managed Agents via the bridge.
+
+    Run: /managed Run a full ecosystem audit of the Claude Code ecosystem at
+    ~/Desktop/lukasdlouhy-claude-ecosystem. Audit all skills, agents, commands,
+    hooks, and routines. Grade each component A/B/C/D/F. Save the report to
+    audits/<ISO-date>-managed-audit.md. If there are C/D-grade components,
+    open up to 3 refactor PRs with gh. Never auto-merge. Post a summary with
+    grade distribution and any PR links.
+
+    After /managed returns:
+    1. Log the session ID to ~/.claude/managed-sessions.log
+    2. Post the summary to this conversation
+
+  max_iterations: 5
+  tools_allowed:
+    - Agent
+    - Bash
+
+managed_agents_config:
+  # Parameters passed to managed-agent-bridge
+  task_type: audit
+  model: claude-sonnet-4-6
+  budget_tokens: 40000
+  required_tools:
+    - file_operations
+    - web_search
+  toolsets:
+    - type: agent_toolset_20260401
+      config:
+        tools:
+          - file_operations
+          - web_search
+  # Uncomment to add GitHub MCP for PR creation:
+  # - type: mcp
+  #   name: github
+  #   url: https://api.githubcopilot.com/mcp/
+  #   config:
+  #     tools:
+  #       - create_pull_request
+  #       - list_repos
+
+notifications:
+  on_complete: true
+  on_error: true
+
+risk_controls:
+  max_prs_per_run: 3
+  auto_merge: false
+  never_touch:
+    - "~/.claude/sessions-archive/"
+    - "~/.claude/memory.db"
+    - "~/.claude/CLAUDE.md"
+    - "~/.claude/projects/"
+  backup_before_edit: true

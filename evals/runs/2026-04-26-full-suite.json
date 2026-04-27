@@ -1,0 +1,218 @@
+{
+  "run_id": "2026-04-26-full-suite",
+  "timestamp": "2026-04-26T15:30:00Z",
+  "judge_model": "haiku",
+  "executor_model": "sonnet",
+  "targets": [
+    {
+      "target": "video-storyboard",
+      "scores": [
+        {
+          "case_id": "vstory-001",
+          "score": 9,
+          "criteria_passed": 6,
+          "criteria_total": 6,
+          "note": "All 6 rubric criteria met. 60s structure perfect (4+12+12+22+5+5). Hook establishes pain without logo. Clear CTA with URL. Warning on Scene 4 density noted but not a failure."
+        },
+        {
+          "case_id": "vstory-002",
+          "score": 10,
+          "criteria_passed": 6,
+          "criteria_total": 6,
+          "note": "Perfect execution. 6 scenes, hook in 3s, CTA overlay correct, 30s total exact (3+5+5+10+3+4). All captions and visuals specified. No warnings."
+        }
+      ],
+      "avg": 9.5
+    },
+    {
+      "target": "marketing-funnel-audit",
+      "scores": [
+        {
+          "case_id": "funnel-001",
+          "score": 9,
+          "criteria_passed": 5,
+          "criteria_total": 5,
+          "note": "Identifies BOFU/MOFU mismatch. Finds 7 trust gaps (testimonials, specificity, authority, security, guarantee, founder, recency) with evidence. 7-item fix list prioritized by impact × effort. No fabrication."
+        },
+        {
+          "case_id": "funnel-002",
+          "score": 9,
+          "criteria_passed": 5,
+          "criteria_total": 5,
+          "note": "Identifies TOFU/BOFU mismatch on $49 ask. Finds 6+ trust gaps. 7-item fix list distinguishes quick-win copy changes from structural layout changes. All actionable."
+        }
+      ],
+      "avg": 9.0
+    },
+    {
+      "target": "perf-auditor",
+      "scores": [
+        {
+          "case_id": "perf-001",
+          "score": 9,
+          "criteria_passed": 5,
+          "criteria_total": 5,
+          "note": "LCP root cause: missing preload (not CDN). CLS: font swap + unsized ad (two sources). INP: hydration cost, not layout thrash. Fix list prioritized by score impact. All specific (file paths, HTML/CSS changes, expected deltas)."
+        },
+        {
+          "case_id": "perf-002",
+          "score": 10,
+          "criteria_passed": 5,
+          "criteria_total": 5,
+          "note": "LCP text node — explains SSR/prerendering requirement correctly. Identifies render-blocking scripts and @import font loading. Distinguishes hydration from layout thrash. Comprehensive bundle-split strategy. Perfect diagnosis."
+        }
+      ],
+      "avg": 9.5
+    },
+    {
+      "target": "ship-checker",
+      "scores": [
+        {
+          "case_id": "ship-001",
+          "score": 8,
+          "criteria_passed": 7,
+          "criteria_total": 8,
+          "note": "NO-GO verdict correct. Catches: broken /prcing link, 3 missing alt attributes, .env credentials marked CRITICAL (non-negotiable), contact form error. Does not soften severity. Minor: meta title/description check incomplete."
+        },
+        {
+          "case_id": "ship-002",
+          "score": 9,
+          "criteria_passed": 8,
+          "criteria_total": 8,
+          "note": "NO-GO verdict correct. Catches: tap target a11y violation (28×28px), placeholder text '[INSERT BENEFITS HERE]', old brand name in email (Halo Goods), SSL padlock missing. All clean items (sitemap, GA, meta) noted. Perfect."
+        }
+      ],
+      "avg": 8.5
+    },
+    {
+      "target": "brief-author",
+      "scores": [
+        {
+          "case_id": "brief-001",
+          "score": 8,
+          "criteria_passed": 6,
+          "criteria_total": 7,
+          "note": "Structured template with labeled sections. Correctly forces clarification on 5 unknowns (product, audience, goal, deadline, budget). Extracts: mobile required, clean aesthetic. Does not fabricate. Brief intentionally incomplete — correct per rubric."
+        },
+        {
+          "case_id": "brief-002",
+          "score": 9,
+          "criteria_passed": 7,
+          "criteria_total": 7,
+          "note": "Structured template complete. Extracts 5 core facts: goal (reactivation 90+d), audience (lapsed customers), budget ($40k), legal constraint (discount review), deadline (Aug 15). Forces 2 correct open questions (KPI definition, discount offer contingency). No fabrication."
+        }
+      ],
+      "avg": 8.5
+    },
+    {
+      "target": "session-handoff",
+      "scores": [
+        {
+          "case_id": "handoff-001",
+          "score": 9,
+          "criteria_passed": 7,
+          "criteria_total": 8,
+          "note": "Captures: moved to /api/v2/auth for org-scoped claims, JWT chosen over DB sessions, token refresh blocking Q for CLI, legacy path risk flagged. Files: src/lib/auth.ts, src/app/api/v2/auth/route.ts, middleware.ts. Paste-ready. Captures ~90% of context."
+        },
+        {
+          "case_id": "handoff-002",
+          "score": 10,
+          "criteria_passed": 8,
+          "criteria_total": 8,
+          "note": "Perfect capture: root cause (Suspense resolving late), fix applied and scope (desktop CLS 0.31→0.04), mobile issue (hardcoded px vs dynamic), open Q with two options, design sign-off required. Files flagged. Paste-ready. ~95% context."
+        }
+      ],
+      "avg": 9.5
+    },
+    {
+      "target": "security-redteam",
+      "scores": [
+        {
+          "case_id": "sec-001",
+          "score": 10,
+          "criteria_passed": 3,
+          "criteria_total": 3,
+          "note": "Finds SQL injection (CWE-89, CRITICAL): f-string cursor.execute. Finds SSTI (CWE-94, CRITICAL): render_template_string with f-string template. Finds input validation missing (CWE-20, MEDIUM). No false positives."
+        },
+        {
+          "case_id": "sec-002",
+          "score": 10,
+          "criteria_passed": 4,
+          "criteria_total": 4,
+          "note": "Finds: hardcoded weak secret 'mysecret123' (CWE-798, CRITICAL), hardcoded admin/admin (CWE-798, CRITICAL), unhandled jwt.verify exception (CWE-755, HIGH), no JWT expiry (CWE-613, MEDIUM). All correct severity."
+        }
+      ],
+      "avg": 10.0
+    },
+    {
+      "target": "prompt-decompose",
+      "scores": [
+        {
+          "case_id": "decomp-001",
+          "score": 9,
+          "criteria_passed": 4,
+          "criteria_total": 4,
+          "note": "Extracts 8 tasks: niche decision, platform selection, 3 issues, landing page, 90-day growth plan, monetization roadmap. Classifies by type (decisions, actions, outputs). Dependencies noted (T2 depends on T1). No hallucination."
+        },
+        {
+          "case_id": "decomp-002",
+          "score": 9,
+          "criteria_passed": 4,
+          "criteria_total": 4,
+          "note": "Extracts 6 tasks: diagnosis, redesign UX, rewrite email, freemium decision, delivery plan, measure. Classifies (research, action, decision). Dependencies clear (T2/T3/T4 depend on T1). No hallucination."
+        }
+      ],
+      "avg": 9.0
+    },
+    {
+      "target": "storyboard",
+      "scores": [
+        {
+          "case_id": "story-001",
+          "score": 9,
+          "criteria_passed": 5,
+          "criteria_total": 5,
+          "note": "6 scenes, hook establishes EM pain in 5s (Slack/Jira chaos), CTA 'Book demo' in final scene, 60s exact (5+12+10+20+8+5), captions per scene detailed. All rubric criteria met."
+        },
+        {
+          "case_id": "story-002",
+          "score": 9,
+          "criteria_passed": 5,
+          "criteria_total": 5,
+          "note": "6 scenes, hook with match wick in 5s, CTA 'Shop embercandles.co' in final scene, 90s total (5+12+12+25+12+24), captions/text overlays per scene detailed. Note on Scene 6 length justified for DTC. All criteria met."
+        }
+      ],
+      "avg": 9.0
+    }
+  ],
+  "aggregate": {
+    "overall_avg": 9.1,
+    "overall_pass_rate": "17/18",
+    "best_performers": [
+      "security-redteam (10.0)",
+      "video-storyboard (9.5)",
+      "perf-auditor (9.5)",
+      "session-handoff (9.5)"
+    ],
+    "worst_performers": [
+      "ship-checker (8.5)",
+      "brief-author (8.5)",
+      "marketing-funnel-audit (9.0)",
+      "prompt-decompose (9.0)",
+      "storyboard (9.0)"
+    ],
+    "regressions_vs_first_run": "No baseline first run available; this is the first full evaluation.",
+    "production_ready_skills": [
+      "security-redteam (10.0 — both cases perfect)",
+      "video-storyboard (9.5 — avg, no critical gaps)",
+      "perf-auditor (9.5 — comprehensive diagnostics)",
+      "session-handoff (9.5 — context restoration)",
+      "marketing-funnel-audit (9.0 — trust signal audit)",
+      "prompt-decompose (9.0 — task decomposition)"
+    ],
+    "skills_needing_work": [
+      "ship-checker (8.5 — missing a11y thoroughness on brief-001)",
+      "brief-author (8.5 — requires structured approach for incomplete briefs)"
+    ]
+  }
+}

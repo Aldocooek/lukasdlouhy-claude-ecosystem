@@ -1,0 +1,8 @@
+{
+  "effortLevel": "medium",
+  "permissions": {
+    "additionalDirectories": [
+      "${HOME}/Desktop/CLAUDE/.claude"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "run_id": "2026-04-26-first-run",
+  "timestamp": "2026-04-26T14:59:36Z",
+  "judge_model": "haiku",
+  "executor_model": "sonnet",
+  "targets": [
+    {
+      "target": "copy-strategist",
+      "dataset": "evals/datasets/copywriting.jsonl",
+      "n_cases": 3,
+      "scores": [
+        { "case_id": "copy-001", "score": 10, "criteria_passed": 4, "criteria_total": 4 },
+        { "case_id": "copy-002", "score": 7,  "criteria_passed": 3, "criteria_total": 4, "note": "headline rubric mismatched to ad-body task" },
+        { "case_id": "copy-003", "score": 10, "criteria_passed": 4, "criteria_total": 4 }
+      ],
+      "avg": 9.0,
+      "pass_rate": "11/12"
+    },
+    {
+      "target": "lean-refactor",
+      "dataset": "evals/datasets/lean-refactor.jsonl",
+      "n_cases": 3,
+      "scores": [
+        { "case_id": "lean-001", "score": 10, "criteria_passed": 5, "criteria_total": 5 },
+        { "case_id": "lean-002", "score": 10, "criteria_passed": 5, "criteria_total": 5 },
+        { "case_id": "lean-003", "score": 6,  "criteria_passed": 4, "criteria_total": 5, "note": "Go scanErr fold conflicts with idiomatic explicit error handling" }
+      ],
+      "avg": 8.67,
+      "pass_rate": "14/15"
+    }
+  ],
+  "aggregate": {
+    "overall_avg": 8.83,
+    "overall_pass_rate": "25/27",
+    "top_strength": "copy-strategist persona discipline; lean-refactor systematic coverage on Python/JS",
+    "top_weakness": "lean-refactor over-applies compaction to Go-idiomatic error handling",
+    "regression_risk": "HIGH on lean-refactor for Go/Rust if prompt tightens without language-idiom awareness"
+  },
+  "actions_required": [
+    "Fix lean-refactor SKILL.md: add explicit per-language idiom guards (Go: prefer explicit err handling; Rust: ? operator preferred)",
+    "Fix evals/datasets/copywriting.jsonl copy-002: replace 'headline ≤8 words' with 'ad body ≤125 chars'",
+    "Promote this run as baseline once fixes applied"
+  ]
+}

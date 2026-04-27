@@ -1,0 +1,125 @@
+domain: gsap-animation
+keywords: [gsap, scrolltrigger, animation, scroll-linked, timeline, greensock]
+last_updated: 2026-04-26
+confidence: high
+
+core_api:
+  gsap.to:
+    sig: "gsap.to(target, { duration, ease, ...props, onComplete })"
+    notes: animates FROM current state TO values; target = selector|element|array
+  gsap.from:
+    sig: "gsap.from(target, { duration, ease, ...props })"
+    notes: animates FROM values TO current state; common for entrance animations
+  gsap.fromTo:
+    sig: "gsap.fromTo(target, { fromProps }, { toProps, duration })"
+    notes: explicit start+end; use when current state is unknown (safe in SSR)
+  gsap.timeline:
+    sig: "const tl = gsap.timeline({ defaults: { ease, duration }, paused: true })"
+    methods:
+      - "tl.to(el, props, positionParam)"  # positionParam: '+=0.2', '<', '<0.1', absolute number
+      - "tl.add(label, position)"
+      - "tl.seek(labelOrTime)"
+      - "tl.play() / pause() / reverse() / kill()"
+    notes: position param '<' = start with prev; '+=0.2' = 0.2s after prev ends
+  matchMedia:
+    sig: |
+      const mm = gsap.matchMedia()
+      mm.add('(min-width: 768px)', () => {
+        // setup desktop animations; return cleanup fn optional
+      })
+    notes: preferred over CSS media queries for JS animations; auto-reverts on breakpoint change
+
+scrolltrigger_patterns:
+  basic_pin:
+    code: |
+      ScrollTrigger.create({
+        trigger: '.section',
+        start: 'top top',
+        end: '+=500',
+        pin: true,
+        anticipatePin: 1  # prevents jump on fast scroll
+      })
+  scrub_animation:
+    code: |
+      gsap.to('.element', {
+        x: 500,
+        scrollTrigger: {
+          trigger: '.section',
+          start: 'top center',
+          end: 'bottom top',
+          scrub: 1,  # 1 = 1s lag (smoother than scrub:true)
+        }
+      })
+    notes: scrub:true = instant follow; scrub:N = N-second lerp lag
+  markers_debug:
+    code: "ScrollTrigger.defaults({ markers: process.env.NODE_ENV === 'development' })"
+    notes: never ship markers to prod; they shift layout
+  refresh_on_resize:
+    code: "ScrollTrigger.addEventListener('refreshInit', () => { /* recalc heights */ })"
+    notes: dynamic content (images loading) causes wrong calculations — call ScrollTrigger.refresh() after images load
+  horizontal_scroll:
+    code: |
+      gsap.to('.panels', {
+        x: () => -(panels.scrollWidth - window.innerWidth),
+        ease: 'none',
+        scrollTrigger: { trigger: '.container', pin: true, scrub: 1, end: () => '+=' + panels.scrollWidth }
+      })
+
+react_integration:
+  useGSAP:
+    package: "@gsap/react"
+    pattern: |
+      import { useGSAP } from '@gsap/react'
+      const comp = useRef()
+      useGSAP(() => {
+        gsap.to('.box', { x: 100 })
+        // ScrollTrigger.create(...)
+        // no cleanup needed — context auto-reverts
+      }, { scope: comp })  # scope scopes selectors to comp.current
+    notes: replaces useEffect+gsap.context; handles StrictMode double-invoke correctly
+  manual_context:
+    when: outside components or in older codebases
+    pattern: |
+      const ctx = gsap.context(() => {
+        gsap.to('.box', { x: 100 })
+      }, containerRef)
+      return () => ctx.revert()
+  ref_patterns:
+    elements: "const el = useRef(); gsap.to(el.current, ...)"
+    multiple: "const els = useRef([]); els.current[i] = node (via callback ref)"
+    queryselector: "avoid document.querySelector in React — use scope instead"
+
+performance_traps:
+  will_change_overuse:
+    issue: "will-change: transform on many elements = dedicated GPU layers → memory pressure"
+    fix: add/remove dynamically via onStart/onComplete, or use gsap's lazy:true default
+  layout_thrashing:
+    issue: reading offsetHeight inside animation loop forces synchronous reflow
+    fix: read all measurements before animation starts; use ResizeObserver
+  transform_vs_position:
+    rule: ALWAYS animate transform (x,y,scale,rotation) not top/left/width/height
+    reason: transform = compositor thread; position props = main thread reflow
+  overloaded_timelines:
+    issue: single timeline with 200+ tweens is hard to debug and slow to seek
+    fix: split into labeled sub-timelines; use tl.add(subTl, position)
+  scrolltrigger_count:
+    issue: >50 ScrollTriggers on one page causes slow refresh
+    fix: kill triggers when component unmounts; batch via ScrollTrigger.batch()
+
+framework_conflicts:
+  nextjs_ssr:
+    issue: GSAP accesses window/document at import time in some plugins
+    fix: |
+      // dynamic import for ScrollTrigger
+      useEffect(() => {
+        import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+          gsap.registerPlugin(ScrollTrigger)
+        })
+      }, [])
+    alternative: 'use client' directive + register at module level in client components
+  strict_mode_double_invoke:
+    issue: React 18 StrictMode runs effects twice → double animations
+    fix: useGSAP handles this; with useEffect use ctx.revert() in cleanup
+  app_router_navigation:
+    issue: page transitions leave orphaned ScrollTriggers on route change
+    fix: return cleanup from useGSAP or call ScrollTrigger.killAll() in router events

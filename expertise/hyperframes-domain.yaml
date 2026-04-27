@@ -1,0 +1,98 @@
+domain: hyperframes
+keywords: [hyperframes, hyperframes-cli, html-to-video, heygen-oss, hf]
+last_updated: 2026-04-26
+confidence: high  # based on OSS repo analysis + project memory
+
+cli_commands:
+  init:
+    usage: "hyperframes init [project-name]"
+    notes: scaffolds composition.json + assets/ + scenes/ dir structure
+  lint:
+    usage: "hyperframes lint [composition.json]"
+    notes: validates scene refs, asset paths, timeline gaps; run before render to avoid wasted compute
+  preview:
+    usage: "hyperframes preview --scene <id> --port 3000"
+    notes: hot-reload browser preview; NO TTS/voice synthesis; zero API cost; use for layout iteration
+  render:
+    usage: "hyperframes render --composition composition.json --output out.mp4"
+    flags:
+      --scene: render single scene only (partial render, saves cost)
+      --quality: low|medium|high (default medium)
+      --no-cache: force re-render all frames (expensive — avoid unless asset changed)
+      --format: mp4|webm|gif
+    notes: triggers HeyGen API calls; every run costs — lint + preview first
+  transcribe:
+    usage: "hyperframes transcribe --audio <file> --out captions.json"
+    notes: Whisper-backed; outputs timestamped JSON for caption overlay
+  tts:
+    usage: "hyperframes tts --script script.txt --voice <voice-id> --out audio.mp3"
+    notes: HeyGen TTS API; voice-id from `hyperframes voices list`; cache output — regenerating same text costs again
+  doctor:
+    usage: "hyperframes doctor"
+    notes: checks API key validity, ffmpeg install, node version, asset dir permissions
+  benchmark:
+    usage: "hyperframes benchmark --scene <id> --iterations 3"
+    notes: measures render time per scene; useful to identify bottleneck scenes before full render
+
+composition_anatomy:
+  root_structure: |
+    {
+      "version": "1.x",
+      "meta": { "title", "fps": 30, "width": 1080, "height": 1920 },
+      "assets": { "id": { "type": "image|video|audio|font", "src": "assets/..." } },
+      "scenes": [ ... ],
+      "timeline": { "scenes": [{ "sceneId", "start", "duration" }] }
+    }
+  scene:
+    fields: [id, duration, layers, background]
+    layers_order: bottom-to-top (index 0 = back)
+    layer_types: [html, image, video, text, audio, avatar]
+  html_layer:
+    notes: renders via headless Chromium; CSS animations captured frame-by-frame
+    gotcha: external fonts must be in assets/ or base64-inlined — network calls blocked during capture
+  timeline:
+    notes: scenes are sequenced; gaps = black frames; overlaps = blend (use sparingly, expensive)
+
+common_failures:
+  token_burn_from_rerenders:
+    cause: running `render` without `--scene` during iteration
+    fix: always use `--scene <id>` until composition is finalized; full render only at publish
+  missing_assets:
+    cause: relative paths break when CWD changes; src refs case-sensitive on Linux runners
+    fix: use `hyperframes lint` — catches missing refs before API call
+  audio_sync_drift:
+    cause: TTS duration != scene duration; timeline not updated after TTS regeneration
+    fix: after `tts`, run `hyperframes sync-duration --scene <id>` or manually update timeline.duration
+  font_not_loading:
+    cause: Google Fonts URLs blocked in headless render context
+    fix: download .woff2 to assets/, reference as local path in CSS @font-face
+  avatar_lip_sync_off:
+    cause: audio file resampled; HeyGen expects 16kHz mono WAV for lip-sync
+    fix: ffmpeg -ar 16000 -ac 1 input.mp3 output.wav before passing to avatar layer
+
+cost_profile:
+  preview: $0 — local only, no API
+  tts_per_char: ~$0.000015 (HeyGen TTS tier); 500-word script ≈ $0.05
+  render_per_second: varies by quality; medium 1080p ≈ $0.02–0.05/sec of output video
+  avatar_premium: 3–5× base render cost; minimize avatar scene duration
+  full_1min_video_estimate: $1.50–$4.00 depending on avatar usage
+  when_to_use_preview_vs_render:
+    preview: layout, timing, text content, color — all iteration
+    render: only when preview-approved; never render to "check" something
+
+optimization_patterns:
+  partial_render:
+    pattern: "hyperframes render --scene intro,cta --output partial.mp4"
+    use_when: only specific scenes changed
+  asset_reuse:
+    pattern: define asset once in assets{}, reference by id in multiple scenes
+    antipattern: duplicate asset files with different names = cache miss
+  cache_hits:
+    notes: hyperframes caches rendered frames by scene hash; changing unrelated scenes doesn't invalidate
+    gotcha: --no-cache nukes everything; use only when asset file content changed without filename change
+  tts_cache:
+    pattern: commit tts audio outputs to repo; only regenerate when script changes
+    tool: "hyperframes tts --cache-key \"$(md5 script.txt)\" ..."
+  html_layer_perf:
+    notes: complex CSS (backdrop-filter, heavy shadows) multiplies frame capture time
+    fix: pre-render CSS-heavy layers as image sequence, use image layer instead

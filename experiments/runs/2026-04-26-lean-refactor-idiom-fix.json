@@ -1,0 +1,70 @@
+{
+  "experiment_id": "lean-refactor-idiom-fix-2026-04-26",
+  "skill": "lean-refactor",
+  "control": "pre-idiom-guards",
+  "variant": "post-idiom-guards",
+  "language_focus": "Go",
+  "n_cases": 3,
+  "scores": [
+    {
+      "case_id": "go-001",
+      "description": "function with separate err/scanErr (original lean-003 scenario: rows.Scan with named scanErr)",
+      "control": {
+        "idiom_preserved": "FAIL",
+        "legitimate_compaction": "PASS",
+        "over_compaction_avoided": "FAIL",
+        "score": 5,
+        "notes": "Folded scanErr into if-initializer form, shadowing outer err. Correctly removed WHAT comment. Core idiom violation."
+      },
+      "variant": {
+        "idiom_preserved": "PASS",
+        "legitimate_compaction": "PASS",
+        "over_compaction_avoided": "PASS",
+        "score": 9,
+        "notes": "Emitted IDIOM CONFLICT block for scanErr fold, kept explicit assignment. Removed WHAT comment. One point off for no REFUSAL SUMMARY section (minor)."
+      }
+    },
+    {
+      "case_id": "go-002",
+      "description": "function with explicit error wrapping via fmt.Errorf — wrappedErr single-use var and parseErr distinct error var",
+      "control": {
+        "idiom_preserved": "FAIL",
+        "legitimate_compaction": "PASS",
+        "over_compaction_avoided": "FAIL",
+        "score": 6,
+        "notes": "Correctly inlined wrappedErr (genuinely adds nothing). But also folded parseErr into if-initializer, discarding the distinct named error variable context."
+      },
+      "variant": {
+        "idiom_preserved": "PASS",
+        "legitimate_compaction": "PASS",
+        "over_compaction_avoided": "PASS",
+        "score": 9,
+        "notes": "Correctly inlined wrappedErr (legitimate compaction). Emitted IDIOM CONFLICT for parseErr fold, preserved it. Correct discrimination between the two cases."
+      }
+    },
+    {
+      "case_id": "go-003",
+      "description": "function with deliberate var x int = 0 defaults used as struct field documentation",
+      "control": {
+        "idiom_preserved": "FAIL",
+        "legitimate_compaction": "PASS",
+        "over_compaction_avoided": "FAIL",
+        "score": 5,
+        "notes": "Stripped var count/errors zero-init vars, inlined c return var, removed WHAT comment. Result is shorter but stripped documentary intent from explicit zeros. Over-compacted."
+      },
+      "variant": {
+        "idiom_preserved": "PASS",
+        "legitimate_compaction": "PASS",
+        "over_compaction_avoided": "PASS",
+        "score": 8,
+        "notes": "Removed only the WHAT comment. Flagged var-stripping and c-inlining as MANUAL rather than auto-applying. Conservative but correct. One point off because inlining c is genuinely safe and variant was slightly over-cautious in not applying it."
+      }
+    }
+  ],
+  "deltas": [4, 3, 3],
+  "mean_delta": 3.33,
+  "control_mean": 5.33,
+  "variant_mean": 8.67,
+  "verdict": "WINNER",
+  "conclusion": "The idiom-guard addition produced a consistent and substantial improvement across all three Go test cases. The core failure mode of the control was indiscriminate application of the inline-var rule to named error variables — a pattern that is common in Go (scanErr, parseErr, closeErr) precisely because distinct names preserve error context in stack traces and logs. The variant correctly blocked these folds via the IDIOM CONFLICT mechanism while still applying the rule where it was legitimately safe (wrappedErr in go-002, where the variable name was a pure alias with no documentary value). The variant also handled the explicit-zero-default case conservatively, deferring to MANUAL rather than stripping vars that serve as field-initialization documentation. Mean delta is +3.33 points (5.33 control vs 8.67 variant), driven by two FAIL-to-PASS flips on idiom preservation and over-compaction avoidance per case. No regression observed: the variant never scored lower than the control on any case. The idiom-guard fix should be retained."
+}

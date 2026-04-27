@@ -1,0 +1,94 @@
+domain: video-production
+keywords: [video, reels, shorts, tiktok, captions, motion-design, short-form, hook]
+last_updated: 2026-04-26
+confidence: high
+
+aspect_ratios:
+  9_16:
+    use: TikTok, IG Reels, YT Shorts, Stories
+    res: 1080×1920
+    safe_zone: keep text/faces in center 80% — UI chrome eats top+bottom ~15%
+    notes: default for all short-form; if unsure, shoot/export 9:16
+  1_1:
+    use: IG feed posts, LinkedIn, Twitter/X in-feed
+    res: 1080×1080
+    notes: less immersive, better for static-heavy content; captions need larger font
+  16_9:
+    use: YT long-form, LinkedIn native video, presentations
+    res: 1920×1080
+    notes: poor for mobile-first; avoid for Reels/TikTok repurposing without reframe
+
+hook_patterns:
+  first_3_seconds:
+    rule: no intro logos, no "hey guys", no slow zoom — cut to the tension immediately
+    patterns:
+      contrast_hook: "show end result first, then explain how"
+      question_hook: "on-screen text question that creates an info gap"
+      pattern_interrupt: "unexpected visual/sound in frame 1 — breaks scroll reflex"
+      bold_claim: "'This doubled my conversions' — specificity > vagueness"
+  retention_curve:
+    0_3s: hook — stop the scroll
+    3_10s: setup — establish the stakes/promise
+    10_end: deliver — value or narrative payoff
+    reengagement: insert a mini-hook at 40-50% mark for algorithm boost
+  caption_as_hook:
+    notes: 85%+ of Reels watched muted; opening caption = headline; make it standalone
+  b_roll_pacing:
+    rule: cut every 2-3s max for fast-paced content; never >5s on a static talking-head shot
+
+caption_specs:
+  mobile_font_sizes:
+    minimum: 32px at 1080px width (scales to ~readable on 375px phone)
+    optimal: 48-64px for primary captions
+    style: bold or extrabold weight; thin fonts fail contrast on varied backgrounds
+  color_contrast:
+    rule: WCAG AA minimum 4.5:1; for video use white + black shadow or white on dark band
+    kinetic_text: use stroke/outline not just drop shadow — shadow alone fails on light BG
+  kinetic_typography:
+    word_pop: highlight each word as spoken (CapCut auto-caption style) — boosts retention
+    hold_duration: minimum 300ms per word or it's unreadable
+    positioning: vertical center or lower-third; never top-third (UI chrome)
+  platform_font_safe_area:
+    tiktok: bottom 20% = UI; top 8% = status bar
+    reels: bottom 25% = engagement bar; keep text above 30% from bottom
+    shorts: bottom 20% safe to avoid subscribe button overlay
+
+codec_export:
+  h264:
+    use: universal delivery — web, social, email, broadest player compat
+    settings: CRF 18-23 for quality; baseline profile for max compat; 2-pass for fixed bitrate
+    bitrate_1080p: 8-16 Mbps for social upload (platforms re-encode anyway)
+  h265_hevc:
+    use: archival, smaller files where compat guaranteed (Apple ecosystem, modern devices)
+    advantage: ~50% smaller at same quality vs H.264
+    gotcha: not supported in all web browsers (no Firefox HEVC without plugin)
+  prores:
+    use: editing master, handoff to colorist, intermediate between tools
+    flavors:
+      proxy: 45 Mbps — offline edit only
+      422: 147 Mbps — standard delivery master
+      4444: 330 Mbps — with alpha channel (motion graphics handoff)
+    notes: never upload ProRes to social — file size absurd, platforms can't use it
+  gif:
+    max_fps: 15fps (24+ wastes size with no quality gain)
+    max_colors: 256 palette; dithering adds apparent quality
+    use: meme/reaction, email (no video support), legacy web widgets
+
+platform_specs:
+  instagram_reels:
+    max_length: 90 seconds (as of mid-2025)
+    resolution: 1080×1920 preferred; min 500px wide
+    bitrate: upload at 3.5–5 Mbps H.264; IG re-encodes to ~1.5 Mbps
+    audio: AAC, 44.1kHz stereo
+    file_size: max 4GB
+  tiktok:
+    max_length: 10 minutes (but algorithm favors <60s for discovery)
+    resolution: 1080×1920; up to 4K accepted
+    bitrate: 4–8 Mbps recommended upload
+    audio: AAC; TikTok applies its own loudness normalization (-14 LUFS)
+    watermark: TikTok watermarks exports — use tiktok.com/upload not app save for clean
+  youtube_shorts:
+    max_length: 60 seconds (must be <60s to appear in Shorts feed)
+    resolution: 1080×1920
+    bitrate: YT recommends 8 Mbps for 1080p
+    notes: YT Shorts uses same algorithm as long-form — metadata/SEO matters more than other platforms

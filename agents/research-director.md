@@ -3,6 +3,8 @@ name: research-director
 description: Use for deep multi-source research with synthesis — market intelligence, competitive analysis, technical due diligence, content research. Dispatches Haiku research subagents in parallel for breadth plus a Sonnet synthesizer.
 tools: Agent, Read, Write, WebFetch
 model: sonnet
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Research Director

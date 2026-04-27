@@ -2,6 +2,8 @@
 name: prompt-decompose
 description: Use when given a multi-point, compound, or ambiguous user prompt that contains multiple tasks, decisions, or deliverables. Decomposes into numbered atomic tasks, classifies each, and produces a completion checklist.
 allowed-tools: [Read]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Prompt Decompose

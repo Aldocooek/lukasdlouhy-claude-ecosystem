@@ -2,6 +2,8 @@
 name: competitor-screenshot
 description: Automated competitor landing page capture at multiple viewports. Triggers on competitor analysis, screenshot competitors, landing page comparison. Generates browser screenshots in 3 viewports, saves to timestamped directory, optional HTML gallery.
 allowed-tools: [Bash, Read, Write]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Competitor Screenshot

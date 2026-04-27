@@ -1,0 +1,42 @@
+name: Lint Rules
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check rules are non-empty
+        run: |
+          fail=0
+          for f in rules/*.md; do
+            if [ ! -s "$f" ]; then
+              echo "EMPTY: $f"
+              fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Validate cross-references in rules point to real files
+        run: |
+          fail=0
+          for rule in rules/*.md; do
+            while IFS= read -r ref; do
+              ref="${ref%%#*}"
+              [ -z "$ref" ] && continue
+              if [[ "$ref" == /* ]]; then
+                target="$ref"
+              else
+                target="$(dirname "$rule")/$ref"
+              fi
+              if [ ! -e "$target" ]; then
+                echo "BROKEN REF in $rule: $ref"
+                fail=1
+              fi
+            done < <(grep -oP '\[.*?\]\(\K[^)]+' "$rule" | grep -v '^http' | grep -v '^mailto')
+          done
+          exit $fail

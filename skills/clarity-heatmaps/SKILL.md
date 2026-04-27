@@ -2,6 +2,8 @@
 name: clarity-heatmaps
 description: Use when adding heatmaps, session recordings, or rage-click detection to a landing page. Microsoft Clarity is free with no caps — heatmaps + session replay + AI-powered behavior analysis (Clarity Copilot). Triggers on "heatmap", "session recording", "session replay", "rage click", "Clarity", "user behavior".
 allowed-tools: [Read, Edit, Write]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Microsoft Clarity — Free Heatmaps + Session Replay

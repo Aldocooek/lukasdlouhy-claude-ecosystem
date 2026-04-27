@@ -2,6 +2,8 @@
 name: monitor-deploy
 description: Use when the user wants live deploy notifications streamed into chat. Triggers on "watch deploy", "monitor deploy", "stream deploy", "notify on deploy", "watch vercel deploy", "watch npm publish", "watch gh release". Spawns the deploy command in background, attaches Monitor to stdout, alerts on success/failure markers.
 allowed-tools: [Bash, Monitor, Read]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Monitor Deploy

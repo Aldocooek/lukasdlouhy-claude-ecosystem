@@ -2,6 +2,8 @@
 name: shadcn-ui
 description: Use when adding components to a Next.js + Tailwind project — buttons, forms, dialogs, dropdowns, data tables, sheets, command menus, toasts. shadcn/ui copy-paste primitives are the 2026 default for landing pages and dashboards. Triggers on "shadcn", "Radix", "form component", "dialog", "data table", "command menu".
 allowed-tools: [Read, Edit, Write, Bash, WebFetch]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # shadcn/ui — Component Selection & Install

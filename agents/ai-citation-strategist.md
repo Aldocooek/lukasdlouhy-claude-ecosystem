@@ -3,6 +3,8 @@ name: ai-citation-strategist
 description: AI SEO specialist. Audits brand visibility in ChatGPT, Claude, Gemini, Perplexity. Identifies why competitors receive citations instead of you and proposes fixes. Answer Engine Optimization (AEO) + Generative Engine Optimization (GEO).
 tools: ["Read", "Write", "Edit", "Grep", "Glob", "WebFetch", "WebSearch"]
 model: sonnet
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 <!-- Adapted from filipdopita-tech/claude-ecosystem-setup, MIT-style cherry-pick -->
 

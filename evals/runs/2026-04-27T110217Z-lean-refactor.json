@@ -1,0 +1,137 @@
+{
+  "run_id": "2026-04-27T110217Z-lean-refactor",
+  "target": "lean-refactor",
+  "dataset": "evals/datasets/lean-refactor.jsonl",
+  "judge_model": "haiku",
+  "timestamp": "2026-04-27T110217Z",
+  "aggregate": {
+    "mean_score": 6.25,
+    "pass_count": 7,
+    "fail_count": 1,
+    "case_count": 8,
+    "pass_rate_pct": 87.5,
+    "baseline_mean": null,
+    "delta": null,
+    "regression": false
+  },
+  "cases": [
+    {
+      "id": "lean-001",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Strong output meeting all five criteria with specific evidence and organized analysis. Provides both aggressive (3-line) and moderate (8-line) refactoring options with clear trade-offs, demonstrating good judgment about readability versus compression. Functionality verification confirms logic equivalence.",
+      "pass_fail": {
+        "identifies ≥75% of compaction opportunities": true,
+        "lists single-use variables that can be inlined": true,
+        "identifies redundant comments that restate code": true,
+        "identifies comparison to True (is_premium == True)": true,
+        "doesn't break functionality": true
+      },
+      "output_preview": "Reading the function to identify compaction opportunities.\n\n## Findings\n\nThis Python function has significant weight from single-use variables and comment bloat. Since this is a pure function with no side effects, inlining is safe.\n\n### Proposal\n\n```\nFILE: calculate_discount\n\n[COMMENT BLOAT] Lines 1, 6, 12, 21, 24, 27\n- # Check if the customer is a premium customer\n- # Calculate the base discount rate\n- # Check if quantity discount applies\n- # Calculate total discount\n- # Apply the discount to t"
+    },
+    {
+      "id": "lean-002",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Comprehensive identification of all major compaction opportunities with two working refactors (practical and idiomatic). Well-structured explanation and correct logic. Minor flaw: line number citations are inaccurate, but the actual refactored code and recommendations are sound.",
+      "pass_fail": {
+        "identifies ≥75% of compaction opportunities": true,
+        "identifies for loop replaceable with .filter().map()": true,
+        "identifies single-use variables that can be inlined": true,
+        "identifies redundant comments": true,
+        "doesn't break functionality": true
+      },
+      "output_preview": "# Lean Refactor Review\n\nReading the code... JavaScript, vanilla, application code. Can be aggressive.\n\n## Findings\n\n### [COMMENT BLOAT] — 7 WHAT comments\n\nLines 2, 5, 7, 10, 20, 22, 28, 32 all describe what the code does, not why. Delete all.\n\n### [REDUNDANT NULL GUARD] — Line 18\n\n```js\nif (isActive === true) {\n```\n\nComparing a boolean to `true` is redundant. Should be `if (isActive) {`. But `isActive` itself is unnecessary — see below.\n\n### [INLINE VAR + SIMPLIFY] — Lines 10–18\n\n```js\nlet curre"
+    },
+    {
+      "id": "lean-003",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Competent analysis that meets 5 of 6 rubric criteria and correctly identifies three major compaction opportunities. Fails to recognize err/scanErr naming as a compaction target and instead argues to preserve it, directly contradicting a stated rubric requirement.",
+      "pass_fail": {
+        "identifies ≥75% of compaction opportunities": true,
+        "identifies queryString as inlineable single-use var": true,
+        "identifies comparison to false (hasRows == false)": true,
+        "identifies redundant comments": true,
+        "identifies separate err variable names (err vs scanErr) as unidiomatic": false,
+        "doesn't break functionality — refactored logic must be equivalent": true
+      },
+      "output_preview": "Reading the function now.\n\nThis Go function has significant comment bloat and a few simplification opportunities. Here's the proposal:\n\n```\nFILE: GetUserByEmail (snippet)\n\n[COMMENT BLOAT] Lines 2, 4, 6, 10, 12, 16, 18, 22\nThese are WHAT comments describing the code itself, not WHY it's structured this way.\nDelete:\n- \"Create the SQL query string\"\n- \"Execute the query against the database\"\n- \"Return nil and the error\"\n- \"Make sure we close the rows when done\" (defer intent is self-explanatory in G"
+    },
+    {
+      "id": "lean-004",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Well-structured output with clear sections and correct refactoring. Identifies 5 of 6 criteria; the missed criterion is that mutable instance state (self.is_valid, self.error_message) could be converted to local variables and returned, which would address the broader design issue rather than just removing redundant assignments to it.",
+      "pass_fail": {
+        "identifies ≥75% of compaction opportunities": true,
+        "identifies mutable state that could be local variables": false,
+        "identifies redundant self.is_valid = False assignments": true,
+        "identifies email_address == None vs `is None`": true,
+        "identifies has_at_symbol as inlineable": true,
+        "doesn't break functionality — refactored logic must be equivalent": true
+      },
+      "output_preview": "Reading the class to identify refactoring opportunities.\n\n```python\nclass EmailValidator:\n    def __init__(self):\n        # Store validation state\n        self.is_valid = False\n        self.error_message = ''\n    \n    def validate(self, email_address):\n        # Reset validation state before validating\n        self.is_valid = False\n        self.error_message = ''\n        \n        # Check if email is empty\n        if email_address == '' or email_address == None:\n            self.is_valid = False\n"
+    },
+    {
+      "id": "lean-005",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Comprehensive analysis that identifies all major compaction opportunities with clear explanations and correct refactorings. Demonstrates judgment by justifying why single-use constants should be kept despite being technically redundant. All functional equivalences hold.",
+      "pass_fail": {
+        "identifies ≥75% of compaction opportunities": true,
+        "identifies STANDARD_MULTIPLIER constant used once trivially": true,
+        "identifies destination else-if branches all returning 0 (only 'international' differs)": true,
+        "identifies commented-out dead code block": true,
+        "identifies comparison isExpress === true": true,
+        "doesn't break functionality — refactored logic must be equivalent": true
+      },
+      "output_preview": "# Lean Refactor Analysis\n\nReading the function and scanning for weight:\n\n**Language:** TypeScript\n**Type:** Application code (business logic)\n**Test coverage:** Not visible\n\n---\n\n## Findings\n\n```\n[COMMENT BLOAT] Lines 2–7, 11, 14, 26, 30\n- // Base rate per kg\n- // Multiplier for express shipping\n- // Default multiplier\n- // Calculate the weight cost\n- // Determine the destination surcharge\n- // Apply the appropriate multiplier\n- // Calculate the final cost\n\nThese are WHAT comments describing wha"
+    },
+    {
+      "id": "lean-006",
+      "score": 4,
+      "status": "FAIL",
+      "summary": "Output demonstrates competence in identifying and removing obvious bloat (comments, flags, redundant comparisons) and producing working refactored code, but fails on two explicitly-named refactoring patterns in the rubric (nil checks and string interpolation) and falls short of the 75% identification threshold at ~67%.",
+      "pass_fail": {
+        "identifies ≥75% of compaction opportunities": false,
+        "identifies nil checks replaceable with .present? or truthy check": false,
+        "identifies string concatenation replaceable with interpolation or .join": false,
+        "identifies boolean flag variables as inlineable": true,
+        "identifies explicit return as unnecessary in Ruby": true,
+        "doesn't break functionality — refactored logic must be equivalent": true
+      },
+      "output_preview": "Reading the Ruby method to identify bloat.\n\n**Language:** Ruby (application code)  \n**Observations:** 5 WHAT comments, intermediate boolean flags, accumulator pattern with initial assignment, redundant `== true` comparisons.\n\n---\n\n## Findings\n\n### [COMMENT BLOAT] — All comments describe what the code does, not why\n\nLine 2: `# Start with an empty formatted name` — the assignment speaks for itself  \nLine 5: `# Check if we have a first name` — the condition speaks for itself  \nLine 10: `# Check if "
+    },
+    {
+      "id": "lean-007",
+      "score": 6,
+      "status": "WARN",
+      "summary": "Strong output with excellent structure and practical refactoring advice. Misses one criterion: the `= x + 1` pattern is removed as dead code but never explicitly identified as a style opportunity that should use `+=` instead. Five of six criteria pass cleanly; the refactored code is functionally equivalent and production-ready.",
+      "pass_fail": {
+        "identifies ≥75% of compaction opportunities": true,
+        "identifies has_id/has_name/has_email as inlineable": true,
+        "identifies field extraction as inlineable": true,
+        "identifies += over = x + 1 pattern": false,
+        "identifies dict() then assignment vs dict literal": true,
+        "doesn't break functionality": true
+      },
+      "output_preview": "FILE: transform_records.py\n\n---\n\n**[COMMENT BLOAT]** Lines 2, 4, 8, 13, 17, 21\nAll WHAT comments — code is self-documenting. Remove:\n```python\n- # Initialize output list\n- # Count how many records we process for logging\n- # Check if record has required fields\n- # Skip records missing required fields\n- # Extract fields from record\n- # Create new transformed record\n```\n\n**[DEAD CODE]** Lines 5–6, 15, 32\n`processed_count` and `skipped_count` are incremented but never used — not returned, not logged"
+    },
+    {
+      "id": "lean-008",
+      "score": 7,
+      "status": "PASS",
+      "summary": "Comprehensive and well-organized analysis that identifies all rubric criteria with specific code evidence, proper Swift idioms, and a quantitative summary (38% reduction). Meets all requirements with professional execution suitable for production code review.",
+      "pass_fail": {
+        "identifies ≥75% of compaction opportunities": true,
+        "identifies minimumLength/passwordLength/isTooShort chain as inlineable": true,
+        "identifies for loops over characters replaceable with .contains(where:)": true,
+        "identifies comparison to true/false boolean": true,
+        "identifies validationResult as inlineable into return": true,
+        "doesn't break functionality — refactored logic must be equivalent": true
+      },
+      "output_preview": "Reading the Swift function for compaction opportunities.\n\n**[COMMENT BLOAT]** Lines 4, 30\n\n```swift\n- // Create array to hold error messages\n  var errorMessages: [String] = []\n```\nPure WHAT comment. Delete.\n\n```swift\n- // Determine if valid\n  let isValid = errorMessages.isEmpty\n```\nPure WHAT comment. Delete. The section headers (lines 8, 13, 23) are borderline but aid semantic organization—keep.\n\n---\n\n**[INLINE VAR]** Lines 6–8\n\n```swift\n- let minimumLength = 8\n- let passwordLength = password.co"
+    }
+  ]
+}

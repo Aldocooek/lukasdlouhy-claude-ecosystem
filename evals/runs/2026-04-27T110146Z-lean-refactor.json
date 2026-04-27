@@ -1,0 +1,18 @@
+{
+  "run_id": "2026-04-27T110146Z-lean-refactor",
+  "target": "lean-refactor",
+  "dataset": "evals/datasets/lean-refactor.jsonl",
+  "judge_model": "haiku",
+  "timestamp": "2026-04-27T110146Z",
+  "aggregate": {
+    "mean_score": 0,
+    "pass_count": 0,
+    "fail_count": 0,
+    "case_count": 8,
+    "pass_rate_pct": 0,
+    "baseline_mean": null,
+    "delta": null,
+    "regression": false
+  },
+  "cases": []
+}

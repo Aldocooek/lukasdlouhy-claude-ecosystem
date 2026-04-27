@@ -2,6 +2,8 @@
 name: landing-patterns-2026
 description: Use when designing or refactoring a marketing landing page hero, features section, social proof, pricing, or CTA. Covers 2026 high-conversion patterns — bento grid, sticky scroll storytelling, AI-matched social proof, kinetic typography, pricing toggles, friction-free demo. Triggers on "landing page", "hero section", "bento grid", "social proof", "pricing section", "marketing site", "above the fold".
 allowed-tools: [Read, Edit, Write]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Landing Page Patterns — 2026 High-Conversion Toolkit

@@ -2,6 +2,8 @@
 name: monitor-build
 description: Use when the user wants live build notifications streamed into chat. Triggers on "watch build", "monitor build", "stream build", "notify on build", "watch npm build", "watch docker build", "watch swift build". Spawns the build command in background, attaches Monitor, surfaces progress, error lines, and completion.
 allowed-tools: [Bash, Monitor, Read]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Monitor Build

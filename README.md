@@ -113,6 +113,37 @@ lukasdlouhy-claude-ecosystem/
     └── form-validation.qa.md
 ```
 
+## Installation
+
+```bash
+git clone https://github.com/lukasdlouhy/claude-ecosystem.git
+cd lukasdlouhy-claude-ecosystem
+bash install.sh
+```
+
+The installer symlinks `skills/`, `agents/`, `commands/`, and `hooks/` into `~/.claude/`, copies `settings.json.template` and `CLAUDE.md`, marks all hooks executable, and validates the result.
+
+### Flags
+
+| Flag | Description |
+|---|---|
+| `--dry-run` | Print every action that would happen; make no changes |
+| `--no-backup` | Skip the timestamped backup of existing `~/.claude/` files |
+| `-y` / `--yes` | Auto-confirm destructive overwrite prompts |
+| `--force` | Overwrite `settings.json` even if it already exists |
+| `--help` | Show all flags and exit codes |
+
+### Behavior
+
+- **Idempotent** — re-running is a no-op if everything is already in place.
+- **Backup** — existing files are archived to `~/.claude.backups/YYYY-MM-DD-HHMMSS/` before any overwrite (disable with `--no-backup`).
+- **Rollback** — if any step fails after the backup is taken, the installer restores prior state and exits 3.
+- **Validation** — after install, checks `claude` CLI in PATH, skills count > 0, settings.json is valid JSON, and smoke-tests `git-safety.sh`.
+
+### Exit codes
+
+`0` success · `1` user aborted · `2` validation failure · `3` mid-install failure (rollback fired) · `4` missing prerequisites
+
 ## Quick Start (10 commands)
 
 ```bash
@@ -192,6 +223,20 @@ See **[TOP_001_PERCENT_GUIDE.md](./docs/TOP_001_PERCENT_GUIDE.md)** for 15-step 
 
 Thanks to **Filip Dopita** ([@filipdopita-tech](https://github.com/filipdopita-tech)) for the peer protocol template and proof-of-concept.
 
+## CI
+
+Self-CI runs on every push and pull request via GitHub Actions in [`.github/workflows/`](./.github/workflows/):
+
+| Workflow | What it checks |
+|---|---|
+| [`lint-skills.yml`](./.github/workflows/lint-skills.yml) | YAML frontmatter, required fields, kebab-case name = dirname, ≥30 lines, no broken links |
+| [`lint-agents.yml`](./.github/workflows/lint-agents.yml) | YAML frontmatter, required fields (name/description/model), model in {haiku,sonnet,opus}, ≥50 lines |
+| [`lint-hooks.yml`](./.github/workflows/lint-hooks.yml) | shellcheck on `.sh` files, `node --check` on `.js` files, executable bit on all hooks |
+| [`lint-rules.yml`](./.github/workflows/lint-rules.yml) | Non-empty rules, cross-references point to real files |
+| [`eval-regression.yml`](./.github/workflows/eval-regression.yml) | Runs evals on modified datasets (PR only, requires `ANTHROPIC_API_KEY` secret — skips gracefully if missing) |
+
+The `ci/` subdirectory is a **separate template library** — reusable workflow templates for users to deploy to their own projects. It does not run on this repo.
+
 ## License
 
 MIT. Copy, fork, adapt freely. Attribution appreciated.
@@ -200,4 +245,4 @@ MIT. Copy, fork, adapt freely. Attribution appreciated.
 
 **Questions?** Open an issue. See [COLLABORATION.md](./COLLABORATION.md) to cherry-pick items or share your ecosystem.
 
-Last updated: 2026-04-26
+Last updated: 2026-04-27

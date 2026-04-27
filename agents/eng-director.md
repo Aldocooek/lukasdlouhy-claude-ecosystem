@@ -3,6 +3,8 @@ name: eng-director
 description: Use for end-to-end technical feature delivery — architecture, implementation plan, security review, performance audit, ship gate. Orchestrates perf-auditor + ship-checker and may delegate implementation work.
 tools: Agent, Read, Write, Edit, Bash
 model: sonnet
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Engineering Director

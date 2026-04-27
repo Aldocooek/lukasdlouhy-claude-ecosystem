@@ -1,0 +1,47 @@
+name: Lint Agents
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-agents:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate agent frontmatter and size
+        run: |
+          fail=0
+          valid_models="haiku sonnet opus"
+          for agent in agents/*.md; do
+            name=$(basename "$agent" .md)
+            [ "$name" = "README" ] && continue
+            [ "$name" = "SECURITY-PIPELINE" ] && continue
+
+            lines=$(wc -l < "$agent")
+            if [ "$lines" -lt 50 ]; then
+              echo "STUB ($lines lines): $agent"
+              fail=1
+            fi
+
+            if ! grep -q "^---" "$agent"; then
+              echo "NO FRONTMATTER: $agent"
+              fail=1
+              continue
+            fi
+
+            for field in name description model; do
+              if ! awk '/^---/{p++} p==1{print} p==2{exit}' "$agent" | grep -q "^${field}:"; then
+                echo "MISSING $field: $agent"
+                fail=1
+              fi
+            done
+
+            model=$(awk '/^---/{p++} p==1 && /^model:/{print $2; exit} p==2{exit}' "$agent")
+            if ! echo "$valid_models" | grep -qw "$model"; then
+              echo "INVALID MODEL '$model': $agent (must be haiku|sonnet|opus)"
+              fail=1
+            fi
+          done
+          exit $fail

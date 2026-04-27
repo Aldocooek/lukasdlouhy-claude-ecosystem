@@ -3,6 +3,8 @@ name: team-coordinator
 description: Use to orchestrate multi-agent teams. Decomposes task, dispatches via native Agent Teams (or fallback to parallel Agent), merges results. Sonnet meta-agent — sits above the director tier when team-level coordination is needed across multiple directors.
 tools: Agent, Read, Write, Bash
 model: sonnet
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Team Coordinator

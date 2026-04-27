@@ -15,6 +15,8 @@ allowed-tools:
   - Write
   - Edit
   - Bash
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Remotion Best Practices

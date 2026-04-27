@@ -238,7 +238,11 @@ else
   MEAN_SCORE="0"
   echo "WARNING: No cases processed." >&2
 fi
-PASS_RATE="$(echo "scale=1; $PASS_COUNT * 100 / ($CASE_COUNT > 0 ? $CASE_COUNT : 1)" | bc)"
+if [[ "$CASE_COUNT" -gt 0 ]]; then
+  PASS_RATE="$(echo "scale=1; $PASS_COUNT * 100 / $CASE_COUNT" | bc)"
+else
+  PASS_RATE="0"
+fi
 
 echo ""
 echo "  SUMMARY"
@@ -287,6 +291,7 @@ jq -n \
   --argjson baseline_mean "$(echo "$BASELINE_MEAN" | jq -R 'if . == "null" then null else tonumber end')" \
   --argjson delta "$(echo "$DELTA" | jq -R 'if . == "null" then null else tonumber end')" \
   --argjson regression "$REGRESSION" \
+  --argjson pass_rate "$PASS_RATE" \
   '{
     run_id: $run_id,
     target: $target,
@@ -298,7 +303,7 @@ jq -n \
       pass_count: $pass_count,
       fail_count: $fail_count,
       case_count: $case_count,
-      pass_rate_pct: ($pass_count * 100 / ($case_count > 0 | if . then $case_count else 1 end)),
+      pass_rate_pct: $pass_rate,
       baseline_mean: $baseline_mean,
       delta: $delta,
       regression: $regression

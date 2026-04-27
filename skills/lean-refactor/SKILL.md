@@ -2,6 +2,8 @@
 name: lean-refactor
 description: Use when reviewing code for bloat, dead code, over-engineering, or redundancy. Identifies WHAT comments to delete, single-use vars to inline, redundant null guards, dead code, and backwards-compat shims. Produces a diff-style proposal.
 allowed-tools: [Read, Edit, Bash]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Lean Refactor

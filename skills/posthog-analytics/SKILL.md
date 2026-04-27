@@ -2,6 +2,8 @@
 name: posthog-analytics
 description: Query product events, funnels, and feature flags via PostHog API. Triggers on analytics, events, PostHog, funnel, conversion rate, feature flag. Covers HogQL, retention cohorts, and marketing metrics for creator and SaaS workflows.
 allowed-tools: [Bash, Read]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # PostHog Analytics

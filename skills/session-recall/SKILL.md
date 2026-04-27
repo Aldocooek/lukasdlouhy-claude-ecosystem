@@ -14,6 +14,8 @@ triggers:
 allowed-tools:
   - Bash
   - Read
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Session Recall Skill

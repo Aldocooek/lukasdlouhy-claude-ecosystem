@@ -9,6 +9,8 @@ allowed-tools:
   - Read
   - Write
   - Bash
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 <!-- Adapted from filipdopita-tech/claude-ecosystem-setup, MIT-style cherry-pick -->
 

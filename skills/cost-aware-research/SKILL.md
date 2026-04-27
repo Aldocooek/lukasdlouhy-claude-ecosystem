@@ -2,6 +2,8 @@
 name: cost-aware-research
 description: Use when about to do web research, multi-file grep, codebase exploration, or any audit task. Enforces model routing rules — delegates expensive research to Haiku or Sonnet subagents to prevent token burn in the main (Opus/Sonnet) context.
 allowed-tools: [Bash]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Cost-Aware Research

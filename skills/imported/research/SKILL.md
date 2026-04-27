@@ -1,6 +1,8 @@
 ---
 name: research  
 description: "Comprehensive research grounded in web data with explicit citations. Use when you need multi-source synthesis—comparisons, current events, market analysis, detailed reports. "
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 # Research Skill
 

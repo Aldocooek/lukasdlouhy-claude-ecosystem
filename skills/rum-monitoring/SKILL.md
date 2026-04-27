@@ -2,6 +2,8 @@
 name: rum-monitoring
 description: Use when setting up Real User Monitoring (RUM) for landing pages — Vercel Speed Insights, Sentry browser performance, INP / CLS / LCP tracking, distributed tracing for slow pages. Lighthouse is lab data; RUM is production. Triggers on "RUM", "real user", "speed insights", "Sentry browser", "INP", "core web vitals production", "Vercel observability".
 allowed-tools: [Read, Edit, Write, Bash, WebFetch]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # RUM Monitoring — Real-User Performance Tracking

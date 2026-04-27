@@ -3,6 +3,8 @@ name: creative-director
 description: Use for end-to-end creative campaign orchestration — video + copy + landing page + audit. Decomposes brief, dispatches video-director / copy-strategist / brief-author / perf-auditor in parallel, synthesizes campaign deliverable.
 tools: Agent, Read, Write, Edit
 model: sonnet
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Creative Director

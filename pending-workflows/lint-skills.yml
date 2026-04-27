@@ -1,0 +1,73 @@
+name: Lint Skills
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check SKILL.md files exist and have frontmatter
+        run: |
+          fail=0
+          for dir in skills/*/; do
+            name=$(basename "$dir")
+            skill="$dir/SKILL.md"
+            if [ ! -f "$skill" ]; then
+              echo "MISSING: $skill"
+              fail=1
+              continue
+            fi
+
+            lines=$(wc -l < "$skill")
+            if [ "$lines" -lt 30 ]; then
+              echo "STUB ($lines lines): $skill"
+              fail=1
+            fi
+
+            if ! grep -q "^---" "$skill"; then
+              echo "NO FRONTMATTER: $skill"
+              fail=1
+              continue
+            fi
+
+            if ! awk '/^---/{p++} p==1{print} p==2{exit}' "$skill" | grep -q "^name:"; then
+              echo "MISSING name: $skill"
+              fail=1
+            fi
+
+            if ! awk '/^---/{p++} p==1{print} p==2{exit}' "$skill" | grep -q "^description:"; then
+              echo "MISSING description: $skill"
+              fail=1
+            fi
+
+            fm_name=$(awk '/^---/{p++} p==1 && /^name:/{print $2; exit} p==2{exit}' "$skill")
+            if [ "$fm_name" != "$name" ]; then
+              echo "NAME MISMATCH: $skill — frontmatter name='$fm_name' dirname='$name'"
+              fail=1
+            fi
+
+            if ! echo "$name" | grep -qE '^[a-z0-9]+(-[a-z0-9]+)*$'; then
+              echo "NOT KEBAB-CASE: $name"
+              fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Check for broken markdown links
+        run: |
+          fail=0
+          for skill in skills/*/SKILL.md; do
+            while IFS= read -r link; do
+              target="${link#./}"
+              dir=$(dirname "$skill")
+              if [[ "$link" != http* ]] && [ ! -e "$dir/$target" ] && [ ! -e "$link" ]; then
+                echo "BROKEN LINK in $skill: $link"
+                fail=1
+              fi
+            done < <(grep -oP '\[.*?\]\(\K[^)]+' "$skill" | grep -v '^http')
+          done
+          exit $fail

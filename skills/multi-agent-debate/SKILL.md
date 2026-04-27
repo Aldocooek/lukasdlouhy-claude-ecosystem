@@ -2,6 +2,8 @@
 name: multi-agent-debate
 description: Use when a high-stakes decision benefits from adversarial review before committing. Spawns two opposing Sonnet subagents plus a Sonnet judge that scores and rules. Triggers on "debate this", "adversarial review", "should I X or Y", "second opinion on", "stress test this decision", "make the case for and against".
 allowed-tools: [Bash]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Multi-Agent Debate

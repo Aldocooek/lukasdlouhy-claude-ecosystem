@@ -2,6 +2,8 @@
 name: hyperframes-debug
 description: Use when a HyperFrames render fails, produces garbled output, has audio desync, or costs unexpected tokens due to re-renders. Diagnoses missing assets, timeline math errors, and render pipeline failures.
 allowed-tools: [Read, Bash, Edit]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # HyperFrames Debug

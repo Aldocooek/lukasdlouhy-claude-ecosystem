@@ -2,6 +2,8 @@
 name: brand-dna-extractor
 description: Use when reverse-engineering brand voice from existing content artifacts into a reusable BRAND_VOICE.md profile. Output is consumed by ig-content-creator, mythos-narrator, and content-batch. Triggers on "extract brand voice", "brand DNA", "voice profile", "tone of voice analysis", "what's our voice", "analyze our copy".
 allowed-tools: [Read, Write, Bash]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Brand DNA Extractor

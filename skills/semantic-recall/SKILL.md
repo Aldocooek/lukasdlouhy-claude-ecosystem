@@ -16,6 +16,8 @@ triggers:
   - "look up what we discussed"
 tools:
   - Bash
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Semantic Recall Skill

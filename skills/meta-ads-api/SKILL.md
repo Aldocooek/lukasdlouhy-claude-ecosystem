@@ -1,6 +1,8 @@
 ---
 name: meta-ads-api
 description: Operational knowledge for Meta Marketing API / Facebook Graph API — token generation preconditions, creative enrichment endpoints, rate limits, App Review traps, common failure modes. Use BEFORE telling user to do Meta Business Manager / token / API tasks so you can predict approval blockers upfront instead of stepping through 5 sequential errors. Triggers on: meta_ads_*, Meta Business Manager, system user, ads_read, ads_management, Graph API, Marketing API, ad creative, ad enrichment.
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Meta Marketing API — Operational Knowledge

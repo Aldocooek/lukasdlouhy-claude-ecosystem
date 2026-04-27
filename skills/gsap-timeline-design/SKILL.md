@@ -2,6 +2,8 @@
 name: gsap-timeline-design
 description: Use when designing a GSAP animation — sticky scroll story, loading reveal, hero entrance, scroll-triggered section, or any timeline with scrub/pin/trigger config. Produces a GSAP plan plus React integration code.
 allowed-tools: [Read, Edit, Write, Bash]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # GSAP Timeline Design

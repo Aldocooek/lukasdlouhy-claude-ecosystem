@@ -1,0 +1,47 @@
+name: Lint Hooks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-hooks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install shellcheck
+        run: sudo apt-get install -y shellcheck
+
+      - name: shellcheck all .sh hooks
+        run: |
+          fail=0
+          for f in hooks/*.sh; do
+            if ! shellcheck "$f"; then
+              fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Syntax check all .js hooks
+        run: |
+          fail=0
+          for f in hooks/*.js; do
+            if ! node --check "$f" 2>&1; then
+              echo "SYNTAX ERROR: $f"
+              fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Verify all hooks are executable
+        run: |
+          fail=0
+          for f in hooks/*.sh hooks/*.js; do
+            [ -f "$f" ] || continue
+            if [ ! -x "$f" ]; then
+              echo "NOT EXECUTABLE: $f"
+              fail=1
+            fi
+          done
+          exit $fail

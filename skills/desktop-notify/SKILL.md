@@ -2,6 +2,8 @@
 name: desktop-notify
 description: Desktop notifications when long tasks complete. Triggers on notify when done, ping me when. Uses macOS osascript for native notifications, falls back to echo on other platforms. Configurable sound and threshold.
 allowed-tools: [Bash]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Desktop Notify

@@ -2,6 +2,8 @@
 name: monitor-render
 description: Use when the user wants to watch a HyperFrames render in progress and receive per-frame notifications in chat. Triggers on "watch render", "monitor render", "stream render progress", "notify on render". Spawns render in background, attaches Monitor to its stdout, surfaces frame completions, encoding start, and output path.
 allowed-tools: [Bash, Monitor, Skill, Read]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Monitor Render

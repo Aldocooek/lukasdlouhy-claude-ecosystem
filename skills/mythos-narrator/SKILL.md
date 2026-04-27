@@ -2,6 +2,8 @@
 name: mythos-narrator
 description: Use when turning a project, feature, or product update into a narrative artifact. Produces three length-calibrated story versions from raw facts using a 4-act structure. Triggers on "narrate launch", "founder update", "internal memo", "story for X", "what's the story of this feature", "write a launch post".
 allowed-tools: [Read, Write, Bash]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Mythos Narrator

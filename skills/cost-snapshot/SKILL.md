@@ -5,6 +5,8 @@ description: |
   model used, and tool call counts. Use when user asks about costs, token burn,
   "how much did this cost", or when running a /retro.
 allowed-tools: [Bash, Read]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Cost Snapshot Skill

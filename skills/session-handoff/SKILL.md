@@ -2,6 +2,8 @@
 name: session-handoff
 description: Use when the context window is getting full, a session is ending, or before running /clear. Produces a structured handoff document covering current state, decisions made, open questions, next actions, and critical file paths — optimized for paste-back after /clear.
 allowed-tools: [Read, Bash]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Session Handoff

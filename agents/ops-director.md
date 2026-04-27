@@ -3,6 +3,8 @@ name: ops-director
 description: Use for operational tasks — scheduled checks, deployment gates, recurring audits, observability setup, cost monitoring orchestration. Coordinates across hooks, CI, and scheduling.
 tools: Agent, Bash, Read
 model: haiku
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Ops Director

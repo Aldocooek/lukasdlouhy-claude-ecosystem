@@ -2,6 +2,8 @@
 name: playwright-content-qa
 description: Automated visual QA, regression testing, and accessibility checks for landing pages and creator content pages. Triggers on QA landing page, visual regression, page audit, Playwright QA. Covers smoke tests, responsive checks, performance metrics, and accessibility tree.
 allowed-tools: [Bash, Read, Write]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Playwright Content QA

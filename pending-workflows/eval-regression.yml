@@ -1,0 +1,49 @@
+name: Eval Regression
+
+on:
+  pull_request:
+
+jobs:
+  eval-regression:
+    runs-on: ubuntu-latest
+    if: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Find modified datasets
+        id: datasets
+        run: |
+          changed=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep '^evals/' | grep -v '/$' || true)
+          echo "files=$changed" >> "$GITHUB_OUTPUT"
+
+      - name: Run evals on modified datasets
+        if: steps.datasets.outputs.files != ''
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -f evals/runner ]; then
+            echo "${{ steps.datasets.outputs.files }}" | xargs -I{} evals/runner {}
+          elif [ -f evals/runner.sh ]; then
+            echo "${{ steps.datasets.outputs.files }}" | xargs -I{} bash evals/runner.sh {}
+          else
+            echo "No eval runner found at evals/runner or evals/runner.sh — skipping"
+          fi
+
+      - name: Comment results on PR
+        if: steps.datasets.outputs.files != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Eval regression run completed. Check the **eval-regression** job logs for results.'
+            })

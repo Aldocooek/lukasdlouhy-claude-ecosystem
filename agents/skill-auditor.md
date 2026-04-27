@@ -10,6 +10,8 @@ tools:
   - Read
   - Bash
   - WebFetch
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Skill Auditor Agent

@@ -2,6 +2,8 @@
 name: marketing-funnel-audit
 description: Use when auditing a landing page, funnel, or marketing flow for conversion issues. Identifies TOFU/MOFU/BOFU mismatches, missing trust signals, friction points, and copy-clarity problems. Outputs a prioritized fix list.
 allowed-tools: [Read, Bash]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Marketing Funnel Audit

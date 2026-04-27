@@ -2,6 +2,8 @@
 name: video-storyboard
 description: Use when turning a script, product description, or brief into a structured video storyboard. Produces a 6-scene table with hook, problem, solution, demo, social proof, and CTA — including duration, visual direction, voiceover, and caption.
 allowed-tools: [Read]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Video Storyboard

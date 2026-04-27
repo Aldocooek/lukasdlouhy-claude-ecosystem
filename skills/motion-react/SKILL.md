@@ -2,6 +2,8 @@
 name: motion-react
 description: Use when designing React component animations beyond what GSAP timelines cover — declarative entrance/exit, layout animations, gesture-driven interactions, page transitions. Covers Motion (formerly Framer Motion), View Transitions API, and CSS Scroll-Driven Animations. Triggers on "motion", "framer motion", "view transitions", "page transition", "layout animation", "spring animation", "gesture".
 allowed-tools: [Read, Edit, Write, Bash]
+last-updated: 2026-04-27
+version: 1.0.0
 ---
 
 # Motion / View Transitions / CSS Scroll — React Animation Beyond GSAP

@@ -4,5 +4,158 @@
     "additionalDirectories": [
       "${HOME}/Desktop/CLAUDE/.claude"
     ]
-  }
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/hook-profile-loader.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/git-safety.sh"
+          },
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/cost-aware-security-gate.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/security-guard.sh"
+          },
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/pre-write-secrets-scan.sh"
+          },
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/tdd-guard.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/security-guard.sh"
+          },
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/tdd-guard.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/autonomy-guard.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/model-routing-guard.js"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/auto-formatter.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/auto-index-on-archive.sh"
+          },
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/circuit-breaker.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/context-bloat-pruner.sh"
+          },
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/cost-circuit-breaker.js"
+          },
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/velocity-monitor.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/prompt-completeness-inject.sh"
+          },
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/quality-gate-inject.sh"
+          },
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/session-counter.sh"
+          },
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/session-length-guard.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/notify-on-long-task.sh"
+          },
+          {
+            "type": "command",
+            "command": "${HOME}/Desktop/lukasdlouhy-claude-ecosystem/hooks/post-tool-batch.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "_optional_hooks_note": "gitleaks-guard.sh requires the 'gitleaks' binary. To enable: add it to PreToolUse with matcher 'Bash' and matcher 'Write'. See hooks/gitleaks-guard.sh header for details."
 }

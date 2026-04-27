@@ -1,0 +1,8 @@
+{
+  "dataset": "marketing-funnel-audit",
+  "baseline_score": 0,
+  "baseline_pass_rate": 0,
+  "model": "claude-haiku-4-5",
+  "created": "2026-04-27T00:00:00Z",
+  "note": "Placeholder. Run evals/runner/run-eval.sh to generate real baseline."
+}

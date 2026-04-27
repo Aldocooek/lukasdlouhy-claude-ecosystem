@@ -26,7 +26,7 @@ A curated collection of Claude Code rules, hooks, skills, and expertise configs 
 ```
 User Request
   ├─ Plugin Package (.claude-plugin/plugin.json)
-  │   ├─ 10 skills
+  │   ├─ 33 skills
   │   ├─ 5 agents
   │   ├─ 4 commands
   │   └─ 4 hooks
@@ -66,7 +66,6 @@ lukasdlouhy-claude-ecosystem/
 │   ├── screenshot-competitors.sh
 │   └── responsive-audit.sh
 ├── agents/
-│   └── SWARM_PATTERNS.md
 ├── commands/
 │   ├── swarm.md
 │   └── eval-status.md
@@ -162,7 +161,7 @@ open http://localhost:3000/d/claude-code-prod
 8. **Zero-config telemetry** — Cloud: export CLAUDE_CODE_OTEL_ENDPOINT + key. Local: docker compose up.
 9. **Headless batch patterns** — Five use cases (audit, skill eval, cost report, CI/CD, batch generation) with cron schedules.
 10. **Comprehensive documentation** — Plugin publishing, operational excellence, swarm patterns, headless mode, cost estimates.
-11. **Eval framework with live baselines** — Multi-skill evaluation, regression detection, A/B prompt variants. First run: 8.83 avg, 92.6% pass rate.
+11. **Eval framework with live baselines** — Multi-skill evaluation, regression detection, A/B prompt variants.
 12. **Content pipeline integrations** — ElevenLabs voice synthesis, Replicate image generation, PostHog analytics tracking.
 13. **Browser automation QA** — Competitor screenshot suite, form-fill testing, responsive design validation with Playwright.
 14. **Long-task notifications** — Desktop alerts + Slack webhook for >30s skill execution (video generation progress updates).
@@ -185,7 +184,7 @@ See **[TOP_001_PERCENT_GUIDE.md](./docs/TOP_001_PERCENT_GUIDE.md)** for 15-step 
 
 1. **Read the guides** — Start with [TOP_001_PERCENT_GUIDE.md](./docs/TOP_001_PERCENT_GUIDE.md) for setup
 2. **Start telemetry** — `cd telemetry && docker compose up -d`
-3. **Test patterns** — Try map-reduce or debate from [SWARM_PATTERNS.md](./agents/SWARM_PATTERNS.md)
+3. **Test patterns** — Try map-reduce or debate from [SWARM_PATTERNS.md](./docs/SWARM_PATTERNS.md)
 4. **Schedule jobs** — Add cron entry from [HEADLESS_MODE.md](./docs/HEADLESS_MODE.md)
 5. **Release version** — Follow [PLUGIN_PUBLISHING.md](./docs/PLUGIN_PUBLISHING.md) to tag and deploy
 

@@ -159,7 +159,7 @@ ${CASE_INPUT}"
     echo "      Invoking claude -p (headless)..."
   fi
 
-  ACTUAL_OUTPUT="$(echo "$FULL_PROMPT" | claude -p --model claude-haiku-4-5-20251001 2>/dev/null)" || {
+  ACTUAL_OUTPUT="$(echo "$FULL_PROMPT" | claude -p --model "${EVAL_MODEL:-claude-haiku-4-5}" 2>/dev/null)" || {
     INVOKE_ERROR="claude invocation failed (exit $?)"
     ACTUAL_OUTPUT="[INVOCATION FAILED: $INVOKE_ERROR]"
   }

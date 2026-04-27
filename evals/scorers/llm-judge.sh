@@ -37,7 +37,7 @@ fi
 
 # Resolve model string to claude model ID
 case "$MODEL" in
-  haiku)   CLAUDE_MODEL="claude-haiku-4-5-20251001" ;;
+  haiku)   CLAUDE_MODEL="${EVAL_MODEL:-claude-haiku-4-5}" ;;
   sonnet)  CLAUDE_MODEL="claude-sonnet-4-6" ;;
   opus)    CLAUDE_MODEL="claude-opus-4-5" ;;
   *)       CLAUDE_MODEL="$MODEL" ;;

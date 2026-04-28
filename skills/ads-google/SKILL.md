@@ -777,40 +777,6 @@ For accounts serving multiple markets:
 
 ---
 
-## 22. Industry-Specific Google Ads Benchmarks
-
-(industry standard 2024-2026; WordStream 2024 Google Ads benchmarks, Disruptive Advertising data)
-
-### US Market — Search Campaigns
-| Industry | CTR | CPC (USD) | Conversion Rate | CPA (USD) |
-|----------|-----|-----------|-----------------|-----------|
-| E-commerce fashion | 2.1% | $1.20-2.50 | 2.5-4% | $30-70 |
-| SaaS B2B | 3.2% | $8-25 | 3-8% | $100-400 |
-| SaaS B2C | 2.8% | $3-9 | 4-10% | $30-120 |
-| Fintech | 2.5% | $10-35 | 2-5% | $200-600 |
-| Education | 3.5% | $4-12 | 5-12% | $35-150 |
-| Healthcare | 2.7% | $5-18 | 3-7% | $80-300 |
-| Local services | 5.2% | $3-12 | 8-15% | $20-80 |
-| Legal | 3.8% | $30-100 | 2-5% | $600-2500 |
-
-### EU Market (EUR) — Search Campaigns
-| Industry | CTR | CPC (EUR) | CPA (EUR) |
-|----------|-----|-----------|-----------|
-| E-commerce | 1.8% | €0.60-1.80 | €20-60 |
-| SaaS B2B | 2.9% | €5-18 | €70-280 |
-| SaaS B2C | 2.5% | €2-7 | €20-90 |
-| Fintech | 2.2% | €6-22 | €150-500 |
-| Education | 3.1% | €2-8 | €25-110 |
-| Local services | 4.5% | €1.50-6 | €15-60 |
-
-### Czech Market Specifics
-- Google CPCs in CZ: 30-50% lower than EU average across most industries
-- Exception: legal and fintech — CZ market CPCs approach Western EU levels due to small advertiser pool with high bids
-- Czech Google market share: ~80-85% of search (remaining: Seznam.cz, Bing)
-- Seznam.cz note: seznam.cz Sklik platform for Czech-only campaigns; CPCs 20-40% lower than Google CZ but audience quality similar. Run parallel if budget permits.
-
----
-
 ## 23. Common Quality Issues + Rejection Reasons
 
 (industry standard 2024-2026, Google Ads policies)

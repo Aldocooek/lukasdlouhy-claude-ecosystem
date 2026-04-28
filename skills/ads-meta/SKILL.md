@@ -630,44 +630,6 @@ Example: "Losing €1,000+/month to Meta ad waste? Our audit finds it in 24 hour
 
 ---
 
-## 22. Industry-Specific CPM, CPC, CPA Benchmarks
-
-(industry standard 2024-2026; Wordstream Meta benchmarks, AdEspresso 2024 report, Revealbot data)
-
-### US Market
-| Industry | CPM (USD) | CPC (USD) | CPA (USD) | CTR | ROAS target |
-|----------|-----------|-----------|-----------|-----|-------------|
-| E-commerce fashion | $15-25 | $0.80-1.50 | $25-60 | 1.5-2.5% | 3-5x |
-| SaaS B2B | $35-70 | $3.00-8.00 | $80-250 | 0.5-1.2% | 3:1 LTV/CAC |
-| SaaS B2C | $20-40 | $1.50-4.00 | $20-80 | 1.0-2.0% | 4-8x |
-| Fintech | $30-60 | $2.50-6.00 | $50-200 | 0.8-1.5% | 3-5x |
-| Education/online courses | $18-35 | $1.20-3.50 | $30-120 | 1.2-2.0% | 3-6x |
-| Healthcare | $20-45 | $1.80-5.00 | $40-180 | 0.8-1.5% | N/A (lead value) |
-| Local services | $12-22 | $0.70-2.00 | $15-50 | 1.5-3.0% | N/A (lead value) |
-
-### EU Market (EUR)
-| Industry | CPM (EUR) | CPC (EUR) | CPA (EUR) | CTR |
-|----------|-----------|-----------|-----------|-----|
-| E-commerce fashion | €8-18 | €0.50-1.20 | €15-50 | 1.2-2.2% |
-| SaaS B2B | €20-50 | €2.00-6.00 | €60-200 | 0.4-1.0% |
-| SaaS B2C | €12-28 | €1.00-3.00 | €15-60 | 0.9-1.8% |
-| Fintech | €18-45 | €1.80-5.00 | €40-150 | 0.7-1.3% |
-| Education | €10-22 | €0.80-2.50 | €20-90 | 1.0-1.8% |
-| Healthcare | €12-30 | €1.20-3.50 | €30-130 | 0.7-1.3% |
-| Local services | €6-14 | €0.40-1.40 | €10-40 | 1.2-2.5% |
-
-### Czech/Slovak Market (CZK-equiv, approximate EUR conversion at 25 CZK/EUR)
-| Industry | CPM (EUR eq.) | CPC (EUR eq.) | Notes |
-|----------|--------------|--------------|-------|
-| E-commerce | €4-12 | €0.30-0.80 | Lower CPMs than EU avg; smaller auction competition |
-| B2B SaaS | €10-30 | €1.00-4.00 | Small market; audience saturation faster |
-| Fintech | €8-20 | €0.80-2.50 | ČNB compliance required; limits creative |
-| Local services | €3-8 | €0.20-0.60 | Most competitive CPA efficiency in portfolio |
-
-**Key caveats:** CPM benchmarks assume automated placements, account history >6 months, EMQ ≥6.5. New accounts and restricted niches will see 30-60% premium.
-
----
-
 ## 23. Common Meta Ad Rejections — Policy Depth
 
 (Meta Advertising Policies, updated 2024-2026)

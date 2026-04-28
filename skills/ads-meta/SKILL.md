@@ -293,7 +293,48 @@ Meta removed the 20% text rule for images in 2021. Images with heavy text are st
 
 ---
 
-## 10. Czech-Specific Considerations
+## 10. Bidding Phase Progression (Adam — paid-ads)
+
+Sequential phases tied to conversion volume — never skip phases:
+
+| Phase | Trigger | Bid Strategy | Purpose |
+|-------|---------|-------------|---------|
+| Phase 1 — Initial | Account launch | Manual CPC or cost caps | Gather baseline data; no algorithmic signal yet |
+| Phase 2 — Accumulation | 0–50 conversions | Stay manual; optimize creatives + audiences | Build statistical base; premature automation kills accounts |
+| Phase 3 — Automation | 50+ conversions/month | Switch to automated (Advantage+ or target CPA/ROAS) | Algorithm has enough signal; anchored to historical performance |
+| Phase 4 — Refinement | Post-automation | Monitor, adjust targets incrementally (±10–15%) | Fine-tune; stay within ±20–30% budget changes to avoid learning reset |
+
+**Never switch bid strategies during peak-traffic windows** (Q4, holidays) — learning phase reset during peak = wasted budget.
+
+## 11. Ad Creative Hook Angles — 8 Core Patterns (Adam — ad-creative)
+
+| Angle | Template | Example |
+|-------|----------|---------|
+| **Pain Point** | "Stop [pain]" or "[Action] without [friction]" | "Stop wasting time on manual reports" |
+| **Outcome** | "Achieve [result] in [timeframe]" | "Ship code 3× faster in 14 days" |
+| **Social Proof** | "Join [number]+ [audience] who..." | "Join 10,000+ teams using..." |
+| **Curiosity** | "The [descriptor] secret [audience] use" | "The one Meta setting top brands never share" |
+| **Comparison** | "Unlike [competitor], we [benefit]" | "We offer what agencies don't" |
+| **Urgency** | "Limited: get [offer] [constraint]" | "First 500 signups get free access" |
+| **Identity** | "Built for [specific role/segment]" | "Made for growth marketers only" |
+| **Contrarian** | "Why [common practice] doesn't work" | "Manual creative testing costs more than it earns" |
+
+Generation workflow: define 3–5 distinct angles → generate variations per angle (word choice, tone, structure) → validate against character limits → analyze top performers → extend winners + test 1–2 unexplored angles.
+
+## 12. Ad Fatigue Thresholds & Frequency Management (Adam — paid-ads)
+
+| Retargeting Stage | Audience Window | Frequency Cap | Action at Breach |
+|-------------------|-----------------|---------------|-----------------|
+| Hot retargeting | 1–7 days | 4–7× daily acceptable | Test new creative angle; do not kill — high-value audience |
+| Warm retargeting | 7–30 days | 3–5× per week | Rotate creative; refresh hook |
+| Cold retargeting | 30–90 days | 1–2× per week | Kill and rebuild if CTR falling |
+| Cold prospecting | N/A | Optimal 2–4× total | Kill or refresh at 5×+ cold |
+
+**Fatigue diagnostic:** frequency 3.5×+ on cold audiences → CPM rises, CTR falls (diminishing returns begin). At 5×+ cold: kill or refresh creative immediately.
+
+**Learning phase discipline:** Never make structural changes (budget >20%, audience, creative, bid) during learning phase. Each change resets the 50-conversion clock.
+
+## 13. Czech-Specific Considerations
 
 - Financial ads: ČNB compliance mandatory; risk disclaimer required for investment products
 - Consumer protection: ZoOR §2 — no misleading claims, no fake urgency
@@ -301,3 +342,22 @@ Meta removed the 20% text rule for images in 2021. Images with heavy text are st
 - Payment methods in ad creative: Czech market responds to local payment method imagery (Česká spořitelna, Komercní banka logos as trust signals)
 - Carousel and collection ads: Czech e-commerce responds well to price-point clarity; show CZK price in ad copy
 - Peak season: Czech e-commerce peaks Nov-Dec (Christmas), Valentine's Day, summer (June-July for outdoor/lifestyle)
+
+---
+
+## 14. Lookalike Audience Seed Quality (Adam — paid-ads)
+
+Build lookalikes **from best customers by lifetime value, NOT by volume**. Seeding with a large list of low-intent customers dilutes the model — Meta's LAL algorithm mirrors the seed quality directly.
+
+Seed hierarchy (best to worst):
+1. Top-LTV customers (purchasers with highest lifetime spend)
+2. Repeat purchasers
+3. Qualified leads (not all leads)
+4. All purchasers
+5. All website visitors (weakest — do not use as primary seed)
+
+**Exclusion rules (apply every campaign):**
+- Existing customers — exclude unless upsell-focused
+- Recent converters — 7–14 day lookback exclusion window
+- Bounced visitors — <10 seconds on-site
+- Irrelevant page visitors — careers, support, about sections

@@ -711,4 +711,114 @@ Most to least credible for Czech market audiences:
 
 ---
 
-*Sources: Hopkins (1923), Ogilvy (1963), Sugarman (1998), Halbert (The Boron Letters), Hormozi (2021), Brunson (2017), Schwartz (1966), Kahneman & Tversky (1979), Cialdini (1984), Loewenstein (1994), Zajonc (1968), Filip Dopita ecosystem (2026), Adam Kropáček ecosystem (2026), Meta internal data (industry-reported), ConversionXL/CXL research.*
+---
+
+## 14. Marketing Psychology — Mental Models (Adam — marketing-psychology)
+
+Foundational thinking patterns applied to ad strategy:
+
+**First Principles (Descartes / Musk application)**
+Break any marketing problem to component facts; reason up from there rather than by analogy. "Everyone in our niche runs awareness campaigns" is analogy-reasoning. First principles: who knows us? Why don't they buy? What's the actual friction? Solve the actual friction.
+
+**Jobs to Be Done (Christensen)**
+People don't buy products — they hire them to accomplish a job. The job has functional, social, and emotional dimensions. Ad copy that addresses the job-to-be-done outperforms feature-list copy because it speaks to motivation, not specification.
+Application: interview buyers ("what were you trying to accomplish when you hired this product?"); use their exact language in ad copy.
+
+**Inversion (Charlie Munger)**
+Instead of asking "how do we make great ads?", ask "what makes ads fail?" — then eliminate those. Prevents assumption-following and forces constraint-based thinking.
+Ad inversion checklist: What's the weakest hook point? Where does the funnel lose most people? What would cause this campaign to fail by month 2?
+
+**Systems Thinking (Forrester/Senge)**
+Ads operate in feedback loops. A campaign that works creates demand → demand creates revenue → revenue enables more budget → budget enables scale → scale increases CPMs → CPMs compress ROAS. Model the whole system, not just one node. Build for steady-state, not peak spike.
+
+**Growth Flywheels (Bezos/Parker)**
+Reinvestment compounds growth. Structure: more ad spend → more customers → more reviews/social proof → better conversion rate → lower effective CAC → more margin to spend on ads → cycle repeats. Design campaigns to feed the flywheel, not just drive one-time conversion.
+
+**Viral Mechanics (Earned vs Paid)**
+Earned distribution (shares, word-of-mouth) amplifies paid distribution. Identify which creative generates shares, not just clicks. Shareable content has: high surprise factor, strong identity signal (viewer shares to signal who they are), or genuine utility (viewer shares to help someone they know). Blend paid + earned in creative strategy.
+
+---
+
+## 15. Pricing Psychology — Mechanisms (Adam — marketing-psychology)
+
+**Charm Pricing**
+$29 vs $30: left-digit anchoring. The first digit dominates perception — $29 reads as "twenty-something," not "thirty." Effect size: 20-30% preference lift in controlled pricing studies. Apply to any price ending: €97, €197, €497, €2,970.
+
+**Price Anchoring**
+The first price seen sets the reference frame for all evaluation. Mechanism: Tversky & Kahneman (1974) — initial number anchors all subsequent judgment.
+Application hierarchy:
+1. Show total value stack before price: "Total value: €3,400 → Today: €997"
+2. Show higher-tier plan first; lower-tier appears more reasonable
+3. Annual plan before monthly — monthly price looks smaller against annual reference
+
+**Decoy Effect (Asymmetric Dominance — Ariely)**
+A third option (the decoy) makes one of two original options clearly superior. Classic structure:
+- Small: €9/month (1 user, 5GB)
+- Medium: €25/month (10 users, 50GB) ← decoy
+- Large: €27/month (unlimited users, 100GB) ← target
+
+The decoy (Medium) makes Large look like obvious value. Effect: 73-87% of users select the target option when decoy is present vs 50-50 without it (Ariely, Predictably Irrational, 2008).
+Ad application: show pricing table in ads; design tiers so Medium looks bad relative to Large.
+
+**Mental Accounting (Thaler)**
+People maintain separate mental "budgets" for different spending categories. $200 "for entertainment" feels different from $200 "for software." Frame your product's cost against the right mental account.
+Examples: "Less than your monthly coffee spend" (trivializes via small-category comparison), "A fraction of what an agency charges" (reframes the relevant comparison class), "3% of your expected ROAS improvement" (ROI frame).
+
+**Payment Timing (Prelec & Loewenstein)**
+Pain of payment is highest when it coincides with consumption. Subscription payment decouples pain from use — monthly feels smaller than annual lump sum even if annual is discounted. For high-ticket: installments reduce perceived pain even when total cost is higher.
+
+---
+
+## 16. Outbound Sequence Timing — Send Windows (Filip — outbound transferable)
+
+**Cold Email Send Schedule (Mon–Fri only):**
+- Run 1: 10:00 UTC
+- Run 2: 15:00 UTC
+- Daily throttle audit: 08:00 UTC (check bounce rate, spam rate before sending)
+
+**Why these windows:** Inbox competition lowest mid-morning and mid-afternoon. Avoid: Monday 08:00 (inbox flush), Friday afternoon (decision-making drops), weekends (B2B reads on weekday).
+
+**5-Email Cold Sequence Timing:**
+| Email | Day | Word cap | Tone |
+|-------|-----|----------|------|
+| 1 | Day 0 | 120 words | Personalization + curiosity, soft CTA |
+| 2 | Day 3 | 80 words | Re: threading, alternative angle |
+| 3 | Day 7 | 150 words | Fresh insight + case study, medium CTA |
+| 4 | Day 14 | 60 words | Direct single question |
+| 5 | Day 21 | 50 words | Break-up message, door open |
+
+**Auto-pause thresholds (Filip — outbound transferable):**
+| Metric | Threshold | Action |
+|--------|-----------|--------|
+| Acceptance rate | <15% | Throttle to 20/day |
+| Bounce rate | >3% | Auto-pause |
+| Spam rate | >0.1% | Immediate pause |
+| Target reply rate | >3% | Success benchmark |
+| Reset trigger | Acceptance ≥20% | Restore 50/day volume |
+
+**A/B test minimum:** 100 contacts per variant before drawing conclusions.
+
+---
+
+## 17. Czech Regulatory Dates — DORA / MiCA / AML (Filip — outbound transferable)
+
+For financial product advertising targeting regulated entities or retail investors in the Czech market:
+
+| Regulation | Effective Date | Scope |
+|------------|---------------|-------|
+| **DORA** (Digital Operational Resilience Act, EU 2022/2554) | January 17, 2025 | Digital operational resilience for financial entities — affects fintech ad claims about system reliability |
+| **MiCA** (Markets in Crypto-Assets Regulation, EU 2023/1114) | December 30, 2024 | Crypto-asset advertising: mandatory disclosures, no guaranteed return claims |
+| **AML Rules** (6th AML Directive transposition, CZ implementation) | May 1, 2024 | Anti-money laundering; affects KYC messaging and onboarding ad flows |
+| **ECSP** (EU 2020/1503 — crowdfunding) | November 10, 2023 | Platforms >€5M/year require ČNB license; ad claims must reference regulatory status |
+
+**Ad copy implication:** Fintech and investment ads must not claim guaranteed returns, must disclose regulatory status, and must include risk warnings. "Past performance does not guarantee future results" is mandatory for investment product ads in CZ.
+
+**Czech market context (Filip — outbound transferable):**
+- 200,000+ P2P investors active in Czech market
+- 4 ECSPR-licensed Czech crowdfunding platforms (as of 2026)
+- 43 banks + 54 investment firms + 75 OCPs under ČNB supervision
+- ČNB repo rate: 3.50% (May 2025 — affects investment product positioning vs. benchmark)
+
+---
+
+*Sources: Hopkins (1923), Ogilvy (1963), Sugarman (1998), Halbert (The Boron Letters), Hormozi (2021), Brunson (2017), Schwartz (1966), Kahneman & Tversky (1979), Ariely (2008), Thaler & Sunstein (2008), Cialdini (1984), Loewenstein (1994), Zajonc (1968), Filip Dopita ecosystem (2026), Adam Kropáček ecosystem (2026), Meta internal data (industry-reported), ConversionXL/CXL research.*

@@ -307,7 +307,69 @@ For B2B with long sales cycles: import CRM deal stages as offline conversions.
 
 ---
 
-## 8. Czech / CZ Market Notes
+## 8. Smart Bidding Learning Phase — 50-Conversion Rule (Adam — paid-ads)
+
+The 50-conversion threshold is the hard prerequisite for reliable automated bidding — applies to both tCPA and tROAS:
+
+- **Below 50 conv/month:** Smart Bidding has insufficient signal. tCPA targets will oscillate; algorithm makes random-walk decisions. Stay on Manual CPC or Maximize Clicks.
+- **At 50 conv/month:** Switch to Target CPA or Maximize Conversions. Anchor initial tCPA target at 10–20% above historical actual CPA (give the algorithm room).
+- **At 100+ conv/month:** Graduate to Target ROAS or Maximize Conversion Value for value-based optimization.
+- **Per campaign, not account:** A campaign needs its own 50 conversions — account-level volume doesn't substitute.
+
+**Learning phase protection:** After switching bid strategy, the algorithm enters a learning period (typically 7–14 days). Do NOT change bids, budgets (>20%), or audience during this window. Changes reset learning.
+
+**Budget scaling rule (Adam — paid-ads):** Increase budget maximum 20–30% at a time; wait 3–5 days between changes to allow convergence. Never double a budget at once — it resets learning and the algorithm overspends in a volatile window.
+
+## 9. Value-Based Bidding Architecture (Adam — paid-ads)
+
+Use value-based bidding (Maximize Conversion Value / tROAS) when conversions have different revenue values:
+
+**Setup requirements:**
+- Conversion actions must pass a `value` parameter (purchase value, lead score, LTV estimate)
+- For B2B with long cycles: use proxy values (qualified lead = €100, SQLed lead = €500, closed = €5,000) and import via Offline Conversion Import
+- Google optimizes toward the signals that predict downstream revenue, not just form fills
+
+**Customer Match as primary audience signal:**
+1. Upload first-party customer list (email hashes) as Customer Match
+2. Set bid adjustments or use as Smart Bidding signal
+3. For tROAS: Customer Match lists of high-LTV customers steer the algorithm toward similar users
+
+**Value-based signal hierarchy for PMax (priority order):**
+1. Customer Match (existing high-LTV buyers)
+2. Website converters with value data (remarketing + purchase value)
+3. In-market audiences (Google's intent modeling)
+4. Custom audiences (keyword or URL based)
+
+## 10. Audience Architecture — Search + PMax (Adam — paid-ads)
+
+### Search Campaigns: Audience Layering (Observation mode first)
+- Add all relevant audiences in **Observation** mode first — collects bid modifier data without restricting reach
+- After 30+ days: identify which audiences convert at lower CPA → apply positive bid adjustments (10–30%)
+- Typical high-value segments: Customer Match, In-market (your category), Remarketing (14-day website visitors)
+
+### PMax: Audience Signals as Seeds, Not Constraints
+PMax uses audience signals as starting hints — it expands beyond them. Feed the highest-quality signals:
+1. Customer Match list (existing purchasers / emails)
+2. Website remarketing tag audiences (all visitors, converters separated)
+3. In-market audiences matching your product category
+4. Custom intent audiences based on high-converting search terms
+
+**Brand term cannibalization:** PMax will absorb cheap brand traffic and inflate reported ROAS without earning non-brand conversions. Add brand terms as campaign-level negative keywords in PMax, or run a separate brand Search campaign with explicit brand keyword protection.
+
+## 11. Negative Keyword Sculpting — PMax + Search Cross-Campaign (Adam — paid-ads)
+
+### PMax Negative Keywords (limited but critical)
+- PMax does not support standard negative keyword lists — use account-level negative keyword lists (Shared Library)
+- Apply immediately: competitor brand names (unless running competitor campaigns), irrelevant product categories, job/career terms, "free" + category
+- Search Themes (2024 feature): add keyword themes to guide intent for niche products; functions as positive signal, not negatives
+
+### Search Cross-Campaign Sculpting
+- **Brand vs Non-Brand isolation:** Brand terms as exact negatives on non-brand campaigns; non-brand as negative phrase on brand campaigns
+- **Zero-conversion queries:** Any search term spending 2× target CPA with zero conversions → add as exact negative
+- **Cannibalization audit:** Check Search Terms report weekly; queries appearing in both brand and non-brand = add as exact negative on non-brand
+- **Match type negative hierarchy:** Phrase negatives cover more surface area than exact negatives — use phrase for category-level exclusions, exact for specific high-value query protection
+
+## 12. Czech / CZ Market Notes (original section 8)
 
 - Google's Czech market coverage: strong for commercial and research queries; less dominant for social-native audiences (Meta wins there)
 - Czech language ads: Use Czech diacritics correctly — "nejlepší," "zákazníků." Google Ads spell-check does not catch CZ errors.
